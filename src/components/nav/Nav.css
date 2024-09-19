@@ -1,0 +1,98 @@
+#navbar {
+    width: 100%;
+    background-color: #C0C0C0;
+    box-shadow: inset 1px 2px 0px #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 30px;
+}
+#start-button {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    background-color: #C0C0C0;
+    border-top: 1px solid #DFDFDF;
+    border-left: 1px solid #DFDFDF;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+}
+#start-button-outer-border {
+    border: 1px solid blueviolet;
+    position: absolute;
+    bottom: 1px;
+    left: 2px;
+    width: 4em;
+    height: 80%;
+    background-color: #C0C0C0;
+    border-top: 1px solid #FFFFFF;
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
+#start-button-outer-border:active {
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-bottom: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+}
+
+#start-button:active {
+    background-color: #FFFFFF;
+    border-right: 1px solid #DFDFDF;
+    border-bottom: 1px solid #DFDFDF;
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+}
+#start {
+    position: absolute;
+    bottom: -17px;
+    left: 20px;
+    font-size: 130%;
+}
+#time-parent {
+    width: 3.5em;
+    position: absolute;
+    height: 70%;
+    bottom: 3px;
+    right: 5px;
+    padding: 0 0 0 2em;
+    margin: 0;
+    border-right: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+    box-shadow: inset 2px 2px 0px #868A8E;
+}
+
+#current-time {
+    position: absolute;
+    bottom: -16px;
+    right: 4px;
+}
+#start-img {
+    height: 1px;
+    width: auto;
+}
+@media (max-width: 800px) {
+    #navbar {
+        height: 10vh;
+    }
+    #start-button-outer-border {
+        bottom: 8px;
+        left: 5px;
+    }
+    #start {
+        bottom: 5px;
+        left: 12px;
+    }
+    #time-parent {
+        bottom: 10px;
+    }
+    #current-time {
+        bottom: 3px;
+        right: 8px;
+    }
+}

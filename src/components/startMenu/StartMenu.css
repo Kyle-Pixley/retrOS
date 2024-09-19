@@ -1,0 +1,85 @@
+#start-menu {
+    position: absolute;
+    bottom: 22px;
+    left: 1px;
+    display: flex;
+    border-left: 1px solid black;
+    padding: 0;
+    width: 15%;
+    height: 900%;
+}
+#start-name {
+    width: 15%;
+    background-color: #808080;
+    display: flex;
+    justify-content: center;
+    padding: 4px 3px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#start-name-text {
+    writing-mode: sideways-lr;
+    text-orientation: sideways;
+    text-align: center;
+    font-size: 2.2vw;
+    padding: 10px;
+    color: #c0c0c0;
+}
+
+#start-options {
+    background-color: #c0c0c0;
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    border: 1px solid black;
+
+}
+.start-li {
+    display: flex;
+    align-items: center;
+    padding-left: 7px;
+}
+
+.start-li:hover {
+    background-color: #01007f;
+    color: #c0c0c0;
+    cursor: default;
+}
+
+#about-me,
+#resume,
+#hobbies,
+#contact-info {
+    height: 15%;
+}
+
+#calculator-image {
+    width: 20%;
+    height: 70%;
+    text-align: center;
+    padding-right: .5em;
+}
+#resume-image {
+    height: 80%;
+    padding-right: 5px;
+    margin: 0;
+}
+#hobbies-image {
+    height: 80%;
+    padding-right: 5px;
+}
+#contact-info-image {
+    height: 80%;
+}
+
+@media (max-width: 800px) {
+    #start-menu {
+        width: 60vw;
+        height: 40vh;
+        bottom: 60px;
+    }
+    #start-name-text {
+        font-size: 10vw;
+    }
+}
