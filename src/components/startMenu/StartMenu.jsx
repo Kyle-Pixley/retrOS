@@ -5,11 +5,12 @@ import './StartMenu.css';
 
 // todo maybe redesign the layout so when start menu is closed it does'nt close the windows also 
 
-function StartMenu({ calculatorComponent, setCalculatorComponent, setStartMenu }) {
+function StartMenu({ calculatorComponent, setCalculatorComponent, setStartMenu, navCalculatorButton, setNavCalculatorButton }) {
 
     const displayCalculatorComponent = () => {
-        setCalculatorComponent(!calculatorComponent)
+        setCalculatorComponent(true);
         setStartMenu(false);
+        setNavCalculatorButton(true);
     };
 
   return (
