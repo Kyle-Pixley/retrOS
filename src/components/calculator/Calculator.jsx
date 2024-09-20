@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import CalculatorImage from '../../assets/calculator.webp';
 import './Calculator.css';
 
-function calculator({ setCalculatorComponent }) {
+function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
 
     const [ position, setPosition ] = useState({x: 100, y: 100 });
     const [ move, setMove ] = useState(false);
@@ -41,6 +41,15 @@ function calculator({ setCalculatorComponent }) {
         top: position.y
     }
 
+    const handleXButton = () => {
+        setCalculatorComponent(false);
+        setNavCalculatorButton(false);
+    }
+
+    const handleMinimizeButton = () => {
+        setCalculatorComponent(false);
+    }
+
   return (
 
     <div id='outside-border'
@@ -56,10 +65,11 @@ function calculator({ setCalculatorComponent }) {
                     <p id='calculator-top-bar-text'>Calculator</p>
                 </div>
                 <div id='top-bar-button-parent'>
-                    <button className='top-bar-button'>_</button>
+                    <button className='top-bar-button'
+                            onClick={handleMinimizeButton}>_</button>
                     <button className='top-bar-button'></button>
                     <button className='top-bar-button'
-                            onClick={() => setCalculatorComponent(false)}
+                            onClick={handleXButton}
                             >X</button>
                 </div>
 

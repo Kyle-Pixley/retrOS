@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import CalculatorImage from '../../assets/calculator.webp';
 import "./Nav.css";
 import StartMenu from '../startMenu/StartMenu.jsx';
 
-function Nav({ calculatorComponent, setCalculatorComponent }) {
+function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton }) {
 
-    const [ currentTime, setCurrentTime ] = useState('')
-    const [ startMenu, setStartMenu ] = useState(false)
+    const [ currentTime, setCurrentTime ] = useState('');
 
     // gets the time
     useEffect(() => {
@@ -16,8 +16,13 @@ function Nav({ calculatorComponent, setCalculatorComponent }) {
         return () => clearInterval(interval)
     },[])
    
-    const displayStartMenu = () => {
+    const displayStartMenu = e => {
+        e.stopPropagation();
         setStartMenu(!startMenu)
+    }
+
+    const handleNavCalculatorButton = () => {
+        setCalculatorComponent(!calculatorComponent)
     }
 
 
@@ -26,16 +31,26 @@ function Nav({ calculatorComponent, setCalculatorComponent }) {
     <div id='navbar'>
         <div id='navbar-button-parent'>
 
-            <div id='start-button-outer-border'>
-                <button id='start-button' onClick={displayStartMenu}>
-                    <p id='start'>Start</p>
+            <div className='button-outer-border'>
+                <button className='nav-buttons' ref={navStartButtonRef} onClick={displayStartMenu}>
+                    <p className='nav-button-texts'>Start</p>
                 </button>
             </div>
-            { calculatorComponent ? <button>hello</button> : null}
+            { navCalculatorButton ? 
+                (
+                    <div className='button-outer-border'>
+                        <button 
+                            onClick={handleNavCalculatorButton}
+                            id='calculator-nav-button' 
+                            className='nav-buttons'>  
+                                <img id='calculator-nav-image' src={CalculatorImage}/>
+                                <p className='nav-button-texts'>Calculator</p>
+                        </button> 
+                    </div>) : null
+                }
 
         </div>
-                {startMenu && <StartMenu calculatorComponent={calculatorComponent} setCalculatorComponent={setCalculatorComponent} setStartMenu={setStartMenu} />}
-
+                {startMenu && <StartMenu calculatorComponent={calculatorComponent} setCalculatorComponent={setCalculatorComponent} setStartMenu={setStartMenu} navCalculatorButton={navCalculatorButton} setNavCalculatorButton={setNavCalculatorButton}/>}
 
         <div id='time-parent'>
             <div id='time'><p id='current-time'>{ currentTime }</p></div>

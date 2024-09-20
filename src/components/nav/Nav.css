@@ -20,54 +20,47 @@
     height: 87%;
     padding-bottom: 2px;
 }
-#start {
-    height: 100%;
-    margin: 10px 0;
+#calculator-nav-image {
+    height: 20px;
+    width: 20px;
+    margin: 4px 8px 4px 0;
 }
-#start-button {
-    text-align: center;
-    bottom: 0px;
-    width: 100%;
-    padding: 0;
-    margin: 0;
+.nav-button-texts {
+    height: 100%;
+    margin: 4px 0;
+    font-size: 130%;
+}
+.nav-buttons {
+    width: fit-content;
+    min-width: 100px;
+    padding: 0 6px;
     height: 100%;
     background-color: #C0C0C0;
     border-top: 1px solid #DFDFDF;
     border-left: 1px solid #DFDFDF;
     border-right: 2px solid #808080;
     border-bottom: 2px solid #808080;
+    display: flex;
 }
-#start-button-outer-border {
-    border: 1px solid blueviolet;
-    width: 5em;
+.button-outer-border {
     height: 100%;
     margin-right: 2px;
-    background-color: #C0C0C0;
-    border-top: 1px solid #FFFFFF;
-    border-left: 1px solid #FFFFFF;
-    border-right: 1px solid #000000;
-    border-bottom: 1px solid #000000;
+    margin-top: 2px;
 }
 
-#start-button-outer-border:active {
+.button-outer-border:active {
     border-top: 1px solid #000000;
     border-left: 1px solid #000000;
     border-bottom: 1px solid #FFFFFF;
     border-right: 1px solid #FFFFFF;
 }
 
-#start-button:active {
+.nav-buttons:active {
     background-color: #FFFFFF;
     border-right: 1px solid #DFDFDF;
     border-bottom: 1px solid #DFDFDF;
     border-top: 1px solid #808080;
     border-left: 1px solid #808080;
-}
-#start {
-    position: absolute;
-    bottom: -17px;
-    left: 20px;
-    font-size: 130%;
 }
 #time-parent {
     width: 3.5em;
