@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import CalculatorImage from '../../assets/calculator.webp';
-import './calculator.css';
+import './Calculator.css';
 
-function calculator() {
+function calculator({ setCalculatorComponent }) {
 
     const [ position, setPosition ] = useState({x: 100, y: 100 });
     const [ move, setMove ] = useState(false);
@@ -51,8 +51,18 @@ function calculator() {
         
         <div id='calculator-parent'>
             <div id='top-bar' ref={topBar}>
-                <img src={CalculatorImage} id='calculator-image'/>
-                <p id='calculator-window-text'></p>
+                <div style={{display: 'flex', width: 'fit-content'}}>
+                    <img src={CalculatorImage} id='calculator-image'/>
+                    <p id='calculator-top-bar-text'>Calculator</p>
+                </div>
+                <div id='top-bar-button-parent'>
+                    <button className='top-bar-button'>_</button>
+                    <button className='top-bar-button'></button>
+                    <button className='top-bar-button'
+                            onClick={() => setCalculatorComponent(false)}
+                            >X</button>
+                </div>
+
             </div>
         </div>
     </div>

@@ -5,10 +5,27 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    height: 30px;
+    height: 34px;
+    display: flex;
+}
+#navbar-button-parent {
+    display: flex;
+    width: fit-content;
+    /* border: 1px solid red; */
+    position: absolute;
+    bottom: 0px;
+    padding: 0;
+    padding-left: 3px;
+    margin: 0 0 1px 0;
+    height: 87%;
+    padding-bottom: 2px;
+}
+#start {
+    height: 100%;
+    margin: 10px 0;
 }
 #start-button {
-    position: absolute;
+    text-align: center;
     bottom: 0px;
     width: 100%;
     padding: 0;
@@ -22,11 +39,9 @@
 }
 #start-button-outer-border {
     border: 1px solid blueviolet;
-    position: absolute;
-    bottom: 1px;
-    left: 2px;
-    width: 4em;
-    height: 80%;
+    width: 5em;
+    height: 100%;
+    margin-right: 2px;
     background-color: #C0C0C0;
     border-top: 1px solid #FFFFFF;
     border-left: 1px solid #FFFFFF;
