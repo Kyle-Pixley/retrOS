@@ -67,7 +67,9 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
                 <div id='top-bar-button-parent'>
                     <button className='top-bar-button'
                             onClick={handleMinimizeButton}>_</button>
-                    <button className='top-bar-button'></button>
+                    <button className='top-bar-button'>
+                        <div id='fullscreen-button-square'></div>
+                    </button>
                     <button className='top-bar-button'
                             onClick={handleXButton}
                             >X</button>

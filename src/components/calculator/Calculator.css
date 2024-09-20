@@ -63,6 +63,14 @@
 .top-bar-button:active {
     box-shadow: inset .5px .5px .5px black, .5px .5px .5px white;
 }
+#fullscreen-button-square {
+    height: 50%;
+    margin: auto;
+    aspect-ratio: 1 / 1;
+    border: 1px solid black;
+    box-shadow: 1px 1px 0px black, inset 1px 1px 0px black;
+    /* todo needs work */
+}
 #calculator-window-text {
     color: #c0c0c0;
     padding: 0px, 5px;

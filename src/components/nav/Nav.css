@@ -35,13 +35,25 @@
     min-width: 100px;
     padding: 0 6px;
     height: 100%;
+    
+    display: flex;
+}
+
+.button-in {
+    background-color: #FFFFFF;
+    border-right: 1px solid #DFDFDF;
+    border-bottom: 1px solid #DFDFDF;
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+}
+.button-out {
     background-color: #C0C0C0;
     border-top: 1px solid #DFDFDF;
     border-left: 1px solid #DFDFDF;
     border-right: 2px solid #808080;
     border-bottom: 2px solid #808080;
-    display: flex;
 }
+
 .button-outer-border {
     height: 100%;
     margin-right: 2px;

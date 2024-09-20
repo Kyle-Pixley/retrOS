@@ -32,17 +32,21 @@ function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartM
         <div id='navbar-button-parent'>
 
             <div className='button-outer-border'>
-                <button className='nav-buttons' ref={navStartButtonRef} onClick={displayStartMenu}>
-                    <p className='nav-button-texts'>Start</p>
+                <button 
+                    className={`nav-buttons ${startMenu ? 'button-in' : 'button-out'}`} 
+                    ref={navStartButtonRef} 
+                    onClick={displayStartMenu}>
+                        <p className='nav-button-texts'>Start</p>
                 </button>
             </div>
+
             { navCalculatorButton ? 
                 (
                     <div className='button-outer-border'>
                         <button 
                             onClick={handleNavCalculatorButton}
                             id='calculator-nav-button' 
-                            className='nav-buttons'>  
+                            className={`nav-buttons ${calculatorComponent ? 'button-in' : 'button-out'}`}>
                                 <img id='calculator-nav-image' src={CalculatorImage}/>
                                 <p className='nav-button-texts'>Calculator</p>
                         </button> 
