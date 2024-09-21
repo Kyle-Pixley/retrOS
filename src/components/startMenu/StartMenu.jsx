@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CalculatorImage from '../../assets/calculator.webp';
+import CalculatorImage from '../../assets/calculator.png';
 import Calculator from '../calculator/Calculator.jsx';
 import './StartMenu.css';
 

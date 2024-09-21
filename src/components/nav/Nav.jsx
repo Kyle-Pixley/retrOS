@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CalculatorImage from '../../assets/calculator.webp';
+import CalculatorImage from '../../assets/calculator.png';
 import "./Nav.css";
 import StartMenu from '../startMenu/StartMenu.jsx';
 
