@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import CalculatorImage from '../../assets/calculator.webp';
+import CalculatorLogic from './calculatorLogic/CalculatorLogic';
+import CalculatorImage from '../../assets/calculator.png';
 import './Calculator.css';
 
 function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
@@ -7,8 +8,9 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
     const [ position, setPosition ] = useState({x: 100, y: 100 });
     const [ move, setMove ] = useState(false);
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
-    // const [ zIndex, setZIndex ] = useState(0);
     const topBar = useRef(null);
+    const [ calculatorComponentMaximized, setCalculatorComponentMaximized ] = useState(false);
+    
 
     const mouseStart = e => {
         const isTopBarClicked = topBar.current && topBar.current.contains(e.target)
@@ -37,8 +39,10 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
     };
 
     const divStyle = {
-        left: position.x,
-        top: position.y
+        left: calculatorComponentMaximized ? 0 : position.x ,
+        top: calculatorComponentMaximized ? 0 : position.y,
+        width: calculatorComponentMaximized ? '100%' : '25vw',
+        height: calculatorComponentMaximized ? 'calc(100% - 40px)' : '30vw',
     }
 
     const handleXButton = () => {
@@ -46,11 +50,15 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
         setNavCalculatorButton(false);
     }
 
+    const handleMaximizeButton = () => {
+        setCalculatorComponentMaximized(!calculatorComponentMaximized);
+    }
+
     const handleMinimizeButton = () => {
         setCalculatorComponent(false);
     }
 
-  return (
+    return (
 
     <div id='outside-border'
         style={divStyle}
@@ -61,21 +69,28 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
         <div id='calculator-parent'>
             <div id='top-bar' ref={topBar}>
                 <div style={{display: 'flex', width: 'fit-content'}}>
+
                     <img src={CalculatorImage} id='calculator-image'/>
+
                     <p id='calculator-top-bar-text'>Calculator</p>
                 </div>
                 <div id='top-bar-button-parent'>
                     <button className='top-bar-button'
                             onClick={handleMinimizeButton}>_</button>
-                    <button className='top-bar-button'>
+
+                    <button className='top-bar-button' onClick={() => handleMaximizeButton()}>
                         <div id='fullscreen-button-square'></div>
                     </button>
+
                     <button className='top-bar-button'
                             onClick={handleXButton}
                             >X</button>
                 </div>
 
             </div>
+
+            <CalculatorLogic />
+
         </div>
     </div>
   )

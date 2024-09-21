@@ -38,8 +38,11 @@
     padding-right: 1px;
 }
 #calculator-image {
-    height: 99%;
-    aspect-ratio: 1 / 1;
+    margin: auto -18px;
+    /* border: 1px solid red; */
+    width: 20px;
+
+    object-fit: contain;
 }
 #calculator-top-bar-text {
     color: white;
@@ -65,10 +68,11 @@
 }
 #fullscreen-button-square {
     height: 50%;
-    margin: auto;
+    margin-left: 1px ;
     aspect-ratio: 1 / 1;
     border: 1px solid black;
-    box-shadow: 1px 1px 0px black, inset 1px 1px 0px black;
+    /* box-shadow: 1px 1px 0px black, inset 1px 1px 0px black; */
+    border-top: 2px solid black;
     /* todo needs work */
 }
 #calculator-window-text {
