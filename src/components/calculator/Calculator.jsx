@@ -68,9 +68,9 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
         
         <div id='calculator-parent'>
             <div id='top-bar' ref={topBar}>
-                <div style={{display: 'flex', width: 'fit-content'}}>
+                <div id='image-text-parent'>
 
-                    <img src={CalculatorImage} id='calculator-image'/>
+                    <img src={CalculatorImage} id='calculator-top-bar-image'/>
 
                     <p id='calculator-top-bar-text'>Calculator</p>
                 </div>

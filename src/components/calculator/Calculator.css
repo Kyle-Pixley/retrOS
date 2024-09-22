@@ -37,11 +37,14 @@
     justify-content: space-between;
     padding-right: 1px;
 }
-#calculator-image {
-    margin: auto -18px;
-    /* border: 1px solid red; */
-    width: 20px;
-
+#image-text-parent {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+}
+#calculator-top-bar-image {
+    height: 22px;
+    margin: auto 8px;
     object-fit: contain;
 }
 #calculator-top-bar-text {
