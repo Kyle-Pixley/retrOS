@@ -68,9 +68,9 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
         
         <div id='calculator-parent'>
             <div id='top-bar' ref={topBar}>
-                <div style={{display: 'flex', width: 'fit-content'}}>
+                <div id='image-text-parent'>
 
-                    <img src={CalculatorImage} id='calculator-image'/>
+                    <img src={CalculatorImage} id='calculator-top-bar-image'/>
 
                     <p id='calculator-top-bar-text'>Calculator</p>
                 </div>
@@ -78,7 +78,7 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
                     <button className='top-bar-button'
                             onClick={handleMinimizeButton}>_</button>
 
-                    <button className='top-bar-button' onClick={() => handleMaximizeButton()}>
+                    <button id='calculator-maximize-button' className='top-bar-button' onClick={() => handleMaximizeButton()} disabled>
                         <div id='fullscreen-button-square'></div>
                     </button>
 
