@@ -78,7 +78,7 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
                     <button className='top-bar-button'
                             onClick={handleMinimizeButton}>_</button>
 
-                    <button className='top-bar-button' onClick={() => handleMaximizeButton()}>
+                    <button id='calculator-maximize-button' className='top-bar-button' onClick={() => handleMaximizeButton()} disabled>
                         <div id='fullscreen-button-square'></div>
                     </button>
 

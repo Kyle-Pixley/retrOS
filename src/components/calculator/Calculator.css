@@ -73,12 +73,15 @@
     height: 50%;
     margin-left: 1px ;
     aspect-ratio: 1 / 1;
-    border: 1px solid black;
+    border: 1px solid darkgray;
     /* box-shadow: 1px 1px 0px black, inset 1px 1px 0px black; */
-    border-top: 2px solid black;
+    border-top: 2px solid darkgray;
     /* todo needs work */
 }
 #calculator-window-text {
     color: #c0c0c0;
     padding: 0px, 5px;
+}
+#calculator-maximize-button {
+
 }
