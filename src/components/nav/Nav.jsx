@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import CalculatorImage from '../../assets/calculator.png';
+import MyComputerImage from '../../assets/my-computer-icon.png';
 import "./Nav.css";
 import StartMenu from '../startMenu/StartMenu.jsx';
 
-function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton }) {
+function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton, myComputerComponent, setMyComputerComponent, navMyComputerButton, setNavMyComputerButton }) {
 
     const [ currentTime, setCurrentTime ] = useState('');
 
@@ -25,6 +26,10 @@ function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartM
         setCalculatorComponent(!calculatorComponent)
     }
 
+    const handleNavMyComputerButton = () => {
+        setMyComputerComponent(!myComputerComponent)
+    }
+
 
   return (
     <>
@@ -40,8 +45,7 @@ function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartM
                 </button>
             </div>
 
-            { navCalculatorButton ? 
-                (
+            { navCalculatorButton ? (
                     <div className='button-outer-border'>
                         <button 
                             onClick={handleNavCalculatorButton}
@@ -50,8 +54,19 @@ function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartM
                                 <img id='calculator-nav-image' src={CalculatorImage}/>
                                 <p className='nav-button-texts'>Calculator</p>
                         </button> 
-                    </div>) : null
-                }
+                    </div>) : null}
+
+            { navMyComputerButton ? (
+                <div className='button-outer-border'>
+                    <button 
+                        onClick={handleNavMyComputerButton}
+                        id='my-computer-nav-button'
+                        className={`nav-buttons ${myComputerComponent ? 'button-in' : 'button-out'}`}>
+                            <img id='my-computer-nav-image'
+                            src={MyComputerImage}/>
+                            <p className='nav-button-texts'>My Computer</p>
+                        </button>
+                        </div>) : null}
 
         </div>
                 {startMenu && <StartMenu calculatorComponent={calculatorComponent} setCalculatorComponent={setCalculatorComponent} setStartMenu={setStartMenu} navCalculatorButton={navCalculatorButton} setNavCalculatorButton={setNavCalculatorButton}/>}
