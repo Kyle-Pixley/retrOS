@@ -11,7 +11,6 @@
 #navbar-button-parent {
     display: flex;
     width: fit-content;
-    /* border: 1px solid red; */
     position: absolute;
     bottom: 0px;
     padding: 0;
@@ -35,8 +34,13 @@
     min-width: 100px;
     padding: 0 6px;
     height: 100%;
-    
     display: flex;
+}
+#my-computer-nav-button {
+    max-width: 11.6em;
+}
+#my-computer-nav-image {
+    margin-right: 6px;
 }
 
 .button-in {

@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import './CalculatorLogic.css';
 
-function CalculatorLogic() {
-
-    const [ calculatorInput, setCalculatorInput ] = useState('');
-    const [ calculatorResult, setCalculatorResult ] = useState('');
+function CalculatorLogic({ calculatorInput, setCalculatorInput, calculatorResult, setCalculatorResult}) {
 
     const handleCalculatorButtonClick = (value) => {
         if ( value === '=') {
@@ -40,4 +37,4 @@ function CalculatorLogic() {
   )
 }
 
-export default CalculatorLogic
+export default CalculatorLogic;
