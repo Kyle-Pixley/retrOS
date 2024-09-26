@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import MyComputerImage from '../../assets/my-computer-icon.png';
+import MyComputerFiles from './myComputerFiles/MyComputerFiles';
 import './MyComputer.css';
 
 function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition}) {
@@ -37,8 +38,8 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
     const divStyle = {
         left: myComputerComponentMaximized ? 0 : myComputerPosition.x ,
         top: myComputerComponentMaximized ? 0 : myComputerPosition.y,
-        width: myComputerComponentMaximized ? '100%' : '25vw',
-        height: myComputerComponentMaximized ? 'calc(100% - 40px)' : '30vw',
+        width: myComputerComponentMaximized ? '100%' : '35vw',
+        height: myComputerComponentMaximized ? 'calc(100% - 40px)' : '25vw',
     }
 
     const handleXButton = () => {
@@ -83,6 +84,7 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
                             >X</button>
                 </div>
             </div>
+            <MyComputerFiles />
         </div>
     </div>
   )
