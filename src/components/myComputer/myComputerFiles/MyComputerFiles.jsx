@@ -9,4 +9,4 @@ function MyComputerFiles() {
   )
 }
 
-export default MyComputerFiles
+export default MyComputerFiles;

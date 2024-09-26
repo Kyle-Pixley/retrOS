@@ -11,11 +11,15 @@ function App() {
   const [ navCalculatorButton, setNavCalculatorButton ] = useState(false);
   const [ calculatorPosition, setCalculatorPosition ] = useState({x: 100, y: 100});
   const [ calculatorInput, setCalculatorInput ] = useState('');
-    const [ calculatorResult, setCalculatorResult ] = useState('');
+  const [ calculatorResult, setCalculatorResult ] = useState('');
+  const [ calculatorZIndex, setCalculatorZIndex ] = useState(0);
 
     const [ myComputerComponent, setMyComputerComponent ] = useState(false);
     const [ navMyComputerButton, setNavMyComputerButton ] = useState(false);
     const [ myComputerPosition, setMyComputerPosition ] = useState({ x: 150, y:150 });
+    const [ myComputerZIndex, setMyComputerZIndex ] = useState(0);
+
+  const [ componentsZIndexArray, setComponentsZIndexArray ] = useState([ calculatorZIndex, myComputerZIndex ]);
 
   const [ startMenu, setStartMenu ] = useState(false);
   const navStartButtonRef = useRef(null);
@@ -66,13 +70,21 @@ function App() {
         calculatorInput={calculatorInput}
         setCalculatorInput={setCalculatorInput}
         calculatorResult={calculatorResult}
-        setCalculatorResult={setCalculatorResult}/> }
+        setCalculatorResult={setCalculatorResult}
+        calculatorZIndex={calculatorZIndex}
+        setCalculatorZIndex={setCalculatorZIndex}
+        componentsZIndexArray={componentsZIndexArray}
+        setComponentsZIndexArray={setComponentsZIndexArray}/> }
 
         {myComputerComponent && <MyComputer 
         setMyComputerComponent={setMyComputerComponent}
         setNavMyComputerButton={setNavMyComputerButton} 
         myComputerPosition={myComputerPosition}
-        setMyComputerPosition={setMyComputerPosition}/>}
+        setMyComputerPosition={setMyComputerPosition}
+        myComputerZIndex={myComputerZIndex}
+        setMyComputerZIndex={setMyComputerZIndex}
+        componentsZIndexArray={componentsZIndexArray}
+        setComponentsZIndexArray={setComponentsZIndexArray}/>}
 
     </div>
   )

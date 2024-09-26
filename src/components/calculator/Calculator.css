@@ -13,8 +13,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* overflow: auto; */
-    /* resize: both; */
 }
 #calculator-parent {
     background-color: #c0c0c0;
