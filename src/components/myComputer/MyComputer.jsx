@@ -3,7 +3,7 @@ import MyComputerImage from '../../assets/my-computer-icon.png';
 import MyComputerFiles from './myComputerFiles/MyComputerFiles';
 import './MyComputer.css';
 
-function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition}) {
+function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition, myComputerZIndex, setMyComputerZIndex, componentsZIndexArray, setComponentZIndexArray }) {
 
     const [ move, setMove ] = useState(false);
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
@@ -40,6 +40,7 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
         top: myComputerComponentMaximized ? 0 : myComputerPosition.y,
         width: myComputerComponentMaximized ? '100%' : '35vw',
         height: myComputerComponentMaximized ? 'calc(100% - 40px)' : '25vw',
+        zIndex: myComputerZIndex,
     }
 
     const handleXButton = () => {
@@ -90,4 +91,4 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
   )
 }
 
-export default MyComputer
+export default MyComputer;

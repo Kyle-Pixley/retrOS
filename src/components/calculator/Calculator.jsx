@@ -3,7 +3,7 @@ import CalculatorLogic from './calculatorLogic/CalculatorLogic';
 import CalculatorImage from '../../assets/calculator.png';
 import './Calculator.css';
 
-function calculator({ setCalculatorComponent, setNavCalculatorButton, calculatorPosition, setCalculatorPosition, calculatorInput, setCalculatorInput, calculatorResult, setCalculatorResult }) {
+function calculator({ setCalculatorComponent, setNavCalculatorButton, calculatorPosition, setCalculatorPosition, calculatorInput, setCalculatorInput, calculatorResult, setCalculatorResult, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray }) {
 
 
     const [ move, setMove ] = useState(false);
@@ -41,6 +41,7 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton, calculator
         top: calculatorComponentMaximized ? 0 : calculatorPosition.y,
         width: calculatorComponentMaximized ? '100%' : '25vw',
         height: calculatorComponentMaximized ? 'calc(100% - 40px)' : '30vw',
+        zIndex: calculatorZIndex,
     }
 
     const handleXButton = () => {
@@ -59,13 +60,19 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton, calculator
         setCalculatorComponent(false);
     }
 
+    const handleClickZIndex = () => {
+        setCalculatorZIndex(calculatorZIndex + 1)
+    }
+    //todo this function needs some thinking
+
     return (
 
     <div id='outside-border'
         style={divStyle}
         onMouseDown={mouseStart}
         onMouseMove={mouseMove}
-        onMouseUp={stopMove}>
+        onMouseUp={stopMove}
+        onClick={() => handleClickZIndex()}>
         
         <div id='calculator-parent'>
             <div id='top-bar' ref={topBar}>
