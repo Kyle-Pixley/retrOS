@@ -60,6 +60,8 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton, calculator
         setCalculatorComponent(false);
     }
 
+    //todo change the z-index when component is rendered so it will render with a higher z-index than the components that are already rendered
+    //changes z-index of component based on array of z-indexes of all "windowed"(like calculator/myComputer) z-indexes that are set to an array
     const handleCalculatorZIndex = () => {
         setCalculatorZIndex(Math.max(...componentsZIndexArray) + 1);
     }

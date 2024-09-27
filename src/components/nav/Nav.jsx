@@ -4,7 +4,7 @@ import MyComputerImage from '../../assets/my-computer-icon.png';
 import "./Nav.css";
 import StartMenu from '../startMenu/StartMenu.jsx';
 
-function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton, myComputerComponent, setMyComputerComponent, navMyComputerButton, setNavMyComputerButton }) {
+function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton, myComputerComponent, setMyComputerComponent, navMyComputerButton, setNavMyComputerButton, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray, setMyComputerZIndex }) {
 
     const [ currentTime, setCurrentTime ] = useState('');
 
@@ -24,10 +24,13 @@ function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartM
 
     const handleNavCalculatorButton = () => {
         setCalculatorComponent(!calculatorComponent)
+        setCalculatorZIndex(Math.max(...componentsZIndexArray) + 1)
+        console.log(componentsZIndexArray, ' here')
     }
-
+    
     const handleNavMyComputerButton = () => {
         setMyComputerComponent(!myComputerComponent)
+        setMyComputerZIndex(Math.max(...componentsZIndexArray) + 1)
     }
 
 
