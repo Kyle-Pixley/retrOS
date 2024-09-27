@@ -57,6 +57,7 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
         setMyComputerComponent(false);
     }
 
+    //changes z-index of component based on array of z-indexes of all "windowed"(like calculator/myComputer) z-indexes that are set to an array
     const handleMyComputerZIndex = () => {
         setMyComputerZIndex(Math.max(...componentsZIndexArray) + 1)
     }

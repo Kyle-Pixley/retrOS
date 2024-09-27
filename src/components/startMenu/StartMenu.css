@@ -7,6 +7,8 @@
     padding: 0;
     width: 15%;
     height: 900%;
+    /* this is the z-index: that is not working; */
+    z-index: 100;
 }
 #start-name {
     width: 15%;
@@ -17,7 +19,6 @@
     border-top: 1px solid black;
     border-bottom: 1px solid black;
 }
-
 #start-name-text {
     writing-mode: sideways-lr;
     text-orientation: sideways;
@@ -33,20 +34,17 @@
     flex-direction: column;
     width: 85%;
     border: 1px solid black;
-
 }
 .start-li {
     display: flex;
     align-items: center;
     padding-left: 7px;
 }
-
 .start-li:hover {
     background-color: #01007f;
     color: #c0c0c0;
     cursor: default;
 }
-
 #about-me,
 #resume,
 #hobbies,

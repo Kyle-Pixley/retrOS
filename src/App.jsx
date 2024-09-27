@@ -67,6 +67,12 @@ function App() {
         startMenu={startMenu}
         setStartMenu={setStartMenu}
         navStartButtonRef={navStartButtonRef}
+
+        calculatorZIndex={calculatorZIndex}
+        setCalculatorZIndex={setCalculatorZIndex}
+        componentsZIndexArray={componentsZIndexArray}
+        setComponentsZIndexArray={setComponentsZIndexArray}
+        setMyComputerZIndex={setMyComputerZIndex}
         />
 
         {calculatorComponent && <Calculator setCalculatorComponent={setCalculatorComponent} setNavCalculatorButton={setNavCalculatorButton} 
@@ -79,7 +85,8 @@ function App() {
         calculatorZIndex={calculatorZIndex}
         setCalculatorZIndex={setCalculatorZIndex}
         componentsZIndexArray={componentsZIndexArray}
-        setComponentsZIndexArray={setComponentsZIndexArray}/> }
+        setComponentsZIndexArray={setComponentsZIndexArray}
+        /> }
 
         {myComputerComponent && <MyComputer 
         setMyComputerComponent={setMyComputerComponent}
@@ -89,7 +96,8 @@ function App() {
         myComputerZIndex={myComputerZIndex}
         setMyComputerZIndex={setMyComputerZIndex}
         componentsZIndexArray={componentsZIndexArray}
-        setComponentsZIndexArray={setComponentsZIndexArray}/>}
+        setComponentsZIndexArray={setComponentsZIndexArray}
+        />}
 
     </div>
   )
