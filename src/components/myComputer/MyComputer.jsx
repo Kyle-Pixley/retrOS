@@ -57,12 +57,17 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
         setMyComputerComponent(false);
     }
 
+    const handleMyComputerZIndex = () => {
+        setMyComputerZIndex(Math.max(...componentsZIndexArray) + 1)
+    }
+
   return (
     <div id='my-computer-outside-border'
         style={divStyle}
         onMouseDown={mouseStart}
         onMouseMove={mouseMove}
-        onMouseUp={stopMove}>
+        onMouseUp={stopMove}
+        onClick={() => handleMyComputerZIndex()}>
         
         <div id='my-computer-parent'>
             <div id='top-bar' ref={topBar}>
