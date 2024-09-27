@@ -60,10 +60,9 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton, calculator
         setCalculatorComponent(false);
     }
 
-    const handleClickZIndex = () => {
-        setCalculatorZIndex(calculatorZIndex + 1)
+    const handleCalculatorZIndex = () => {
+        setCalculatorZIndex(Math.max(...componentsZIndexArray) + 1);
     }
-    //todo this function needs some thinking
 
     return (
 
@@ -72,7 +71,7 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton, calculator
         onMouseDown={mouseStart}
         onMouseMove={mouseMove}
         onMouseUp={stopMove}
-        onClick={() => handleClickZIndex()}>
+        onClick={() => handleCalculatorZIndex()}>
         
         <div id='calculator-parent'>
             <div id='top-bar' ref={topBar}>

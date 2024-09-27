@@ -24,6 +24,11 @@ function App() {
   const [ startMenu, setStartMenu ] = useState(false);
   const navStartButtonRef = useRef(null);
 
+  //todo change dependencies when adding new window component
+  useEffect(() => {
+    setComponentsZIndexArray([ calculatorZIndex, myComputerZIndex ])
+  },[myComputerZIndex, calculatorZIndex])
+
   useEffect(() => {
     const handleClickOutsideStartButton = (e) => {
       if (navStartButtonRef.current && !navStartButtonRef.current.contains(e.target)) {
