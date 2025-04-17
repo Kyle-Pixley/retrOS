@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ComputerIcon from './assets/my-computer-icon.png';
+import CinepixIcon from './assets/cinepix-icon.png';
 import Nav from './components/nav/Nav.jsx';
 import Calculator from './components/calculator/Calculator.jsx';
 import MyComputer from './components/myComputer/MyComputer.jsx';
+import Cinepix from './components/cinepix/cinepix.jsx';
 import './App.css';
 
 function App() {
@@ -15,16 +17,20 @@ function App() {
   const [ calculatorZIndex, setCalculatorZIndex ] = useState(0);
 
     const [ myComputerComponent, setMyComputerComponent ] = useState(false);
+    const [ navCinepixButton, setNavCinepixButton ] = useState(false);
     const [ navMyComputerButton, setNavMyComputerButton ] = useState(false);
     const [ myComputerPosition, setMyComputerPosition ] = useState({ x: 150, y:150 });
     const [ myComputerZIndex, setMyComputerZIndex ] = useState(0);
+
+  const [cinepixComponent, setCinepixComponent ] = useState(false);
+  const [ cinepixPosition, setCinepixPosition ] = useState({ x: 160, y: 160 });
+  const [ cinepixZIndex, setCinepixZIndex ] = useState(0);
 
   const [ componentsZIndexArray, setComponentsZIndexArray ] = useState([ calculatorZIndex, myComputerZIndex ]);
 
   const [ startMenu, setStartMenu ] = useState(false);
   const navStartButtonRef = useRef(null);
 
-  //todo change dependencies when adding new window component
   useEffect(() => {
     setComponentsZIndexArray([ calculatorZIndex, myComputerZIndex ])
   },[myComputerZIndex, calculatorZIndex])
@@ -45,14 +51,25 @@ function App() {
     setMyComputerComponent(true);
     setNavMyComputerButton(true);
   }
+  const handleCinepixShortcutClicked = () => {
+    setCinepixComponent(true);
+    setNavCinepixButton(true);
+  }
 
   return (
     <div>
-      <div id='my-computer-shortcut-parent'>
-        <img id='my-computer-shortcut-icon' src={ComputerIcon}
+      <div className='shortcut-parent'>
+        <img className='shortcut-icon' src={ComputerIcon}
         onDoubleClick={() => handleMyComputerShortcutClick()}
         />
-        <p id='my-computer-shortcut-text'>My Computer</p>
+        <p className='shortcut-text'>My Computer</p>
+      </div>
+      <div className='shortcut-parent'>
+        <img 
+          className='shortcut-icon'
+          src={CinepixIcon}
+          onDoubleClick={() => handleCinepixShortcutClicked()}/>
+          <p className='shortcut-text'>Cinepix</p>
       </div>
 
       <Nav 
@@ -73,6 +90,12 @@ function App() {
         componentsZIndexArray={componentsZIndexArray}
         setComponentsZIndexArray={setComponentsZIndexArray}
         setMyComputerZIndex={setMyComputerZIndex}
+        cinepixComponent={cinepixComponent}
+        setCinepixComponent={setCinepixComponent}
+        navCinepixButton={navCinepixButton}
+        setNavCinepixButton={setNavCinepixButton}
+        cinepixZIndex={cinepixZIndex}
+        setCinepixZIndex={setCinepixZIndex}
         />
 
         {calculatorComponent && <Calculator setCalculatorComponent={setCalculatorComponent} setNavCalculatorButton={setNavCalculatorButton} 
@@ -98,6 +121,17 @@ function App() {
         componentsZIndexArray={componentsZIndexArray}
         setComponentsZIndexArray={setComponentsZIndexArray}
         />}
+
+        {cinepixComponent &&
+          <Cinepix 
+            setCinepixComponent={setCinepixComponent}
+            setNavCinepixButton={setNavCinepixButton}
+            cinepixPosition={cinepixPosition}
+            setCinepixPosition={setCinepixPosition}
+            cinepixZIndex={cinepixZIndex}
+            setCinepixZIndex={setCinepixZIndex}
+            componentsZIndexArray={componentsZIndexArray}
+            setComponentZIndexArray={setComponentsZIndexArray}/>}
 
     </div>
   )

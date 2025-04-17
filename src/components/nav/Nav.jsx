@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import CalculatorImage from '../../assets/calculator.png';
 import MyComputerImage from '../../assets/my-computer-icon.png';
+import CinepixImage from '../../assets/cinepix-icon.png';
 import "./Nav.css";
 import StartMenu from '../startMenu/StartMenu.jsx';
 
-function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton, myComputerComponent, setMyComputerComponent, navMyComputerButton, setNavMyComputerButton, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray, setMyComputerZIndex }) {
+function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton, myComputerComponent, setMyComputerComponent, navMyComputerButton, setNavMyComputerButton, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray, setMyComputerZIndex,
+cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex
+ }) {
 
     const [ currentTime, setCurrentTime ] = useState('');
 
@@ -31,6 +34,11 @@ function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartM
     const handleNavMyComputerButton = () => {
         setMyComputerComponent(!myComputerComponent)
         setMyComputerZIndex(Math.max(...componentsZIndexArray) + 1)
+    }
+
+    const handleNavCinepixButton = () => {
+        setCinepixComponent(!cinepixComponent);
+        setCinepixZIndex(Math.max(...componentsZIndexArray) + 1);
     }
 
 
@@ -69,7 +77,19 @@ function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartM
                             src={MyComputerImage}/>
                             <p className='nav-button-texts'>My Computer</p>
                         </button>
-                        </div>) : null}
+                        </div>) : null }
+
+            { navCinepixButton ? (
+                <div className='button-outer-border'>
+                    <button
+                        onClick={handleNavCinepixButton}
+                        id='cinepix-nav-button'
+                        className={`nav-buttons ${cinepixComponent ? 'button-in' : 'button-out'}`}>
+                            <img id='cinepix-nav-image'
+                            src={CinepixImage}/>
+                            <p className='nav-button-texts'>Cinepix</p>
+                        </button>
+                    </div>) : null }
 
         </div>
                 {startMenu && <StartMenu calculatorComponent={calculatorComponent} setCalculatorComponent={setCalculatorComponent} setStartMenu={setStartMenu} navCalculatorButton={navCalculatorButton} setNavCalculatorButton={setNavCalculatorButton}/>}
