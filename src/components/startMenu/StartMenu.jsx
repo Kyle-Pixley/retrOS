@@ -3,8 +3,6 @@ import CalculatorImage from '../../assets/calculator.png';
 import Calculator from '../calculator/Calculator.jsx';
 import './StartMenu.css';
 
-// todo maybe redesign the layout so when start menu is closed it does'nt close the windows also 
-
 function StartMenu({ calculatorComponent, setCalculatorComponent, setStartMenu, navCalculatorButton, setNavCalculatorButton }) {
 
     const displayCalculatorComponent = () => {
@@ -14,7 +12,7 @@ function StartMenu({ calculatorComponent, setCalculatorComponent, setStartMenu, 
     };
 
   return (
-    <>
+    
     <div id='start-menu'>
 
         <div id='start-name'>
@@ -36,7 +34,7 @@ function StartMenu({ calculatorComponent, setCalculatorComponent, setStartMenu, 
     
 
     </div>
-    </>
+    
   )
 }
 

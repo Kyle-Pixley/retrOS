@@ -1,0 +1,7 @@
+#my-computer-files-container {
+    margin-top: 3px;
+    width: calc(100% - 9px);
+    height: calc(100% - 40px);
+    background-color: whitesmoke;
+    box-shadow: inset 2px 2px 1px black, 2px 2px 1px white;
+}

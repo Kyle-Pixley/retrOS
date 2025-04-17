@@ -3,9 +3,9 @@ import CalculatorLogic from './calculatorLogic/CalculatorLogic';
 import CalculatorImage from '../../assets/calculator.png';
 import './Calculator.css';
 
-function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
+function calculator({ setCalculatorComponent, setNavCalculatorButton, calculatorPosition, setCalculatorPosition, calculatorInput, setCalculatorInput, calculatorResult, setCalculatorResult, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray }) {
 
-    const [ position, setPosition ] = useState({x: 100, y: 100 });
+
     const [ move, setMove ] = useState(false);
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
     const topBar = useRef(null);
@@ -17,18 +17,16 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
         if(isTopBarClicked) {
         setMove(true);
         setOffSet({
-            x: e.clientX - position.x,
-            y: e.clientY - position.y
+            x: e.clientX - calculatorPosition.x,
+            y: e.clientY - calculatorPosition.y
         })
-        // updateMaxZIndex(zIndex + 1)
-        // setZIndex((prevZIndex) => prevZIndex + 1);
         }
     };
 
     const mouseMove = e => {
         if (!move) 
         return 
-        setPosition({
+        setCalculatorPosition({
             x: e.clientX -offSet.x,
             y: e.clientY - offSet.y
         })
@@ -39,15 +37,19 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
     };
 
     const divStyle = {
-        left: calculatorComponentMaximized ? 0 : position.x ,
-        top: calculatorComponentMaximized ? 0 : position.y,
+        left: calculatorComponentMaximized ? 0 : calculatorPosition.x ,
+        top: calculatorComponentMaximized ? 0 : calculatorPosition.y,
         width: calculatorComponentMaximized ? '100%' : '25vw',
         height: calculatorComponentMaximized ? 'calc(100% - 40px)' : '30vw',
+        zIndex: calculatorZIndex,
     }
 
     const handleXButton = () => {
         setCalculatorComponent(false);
         setNavCalculatorButton(false);
+        setCalculatorPosition({ x: 100, y: 100 });
+        setCalculatorInput('');
+        setCalculatorResult('');
     }
 
     const handleMaximizeButton = () => {
@@ -58,19 +60,26 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
         setCalculatorComponent(false);
     }
 
+    //todo change the z-index when component is rendered so it will render with a higher z-index than the components that are already rendered
+    //changes z-index of component based on array of z-indexes of all "windowed"(like calculator/myComputer) z-indexes that are set to an array
+    const handleCalculatorZIndex = () => {
+        setCalculatorZIndex(Math.max(...componentsZIndexArray) + 1);
+    }
+
     return (
 
     <div id='outside-border'
         style={divStyle}
         onMouseDown={mouseStart}
         onMouseMove={mouseMove}
-        onMouseUp={stopMove}>
+        onMouseUp={stopMove}
+        onClick={() => handleCalculatorZIndex()}>
         
         <div id='calculator-parent'>
             <div id='top-bar' ref={topBar}>
-                <div style={{display: 'flex', width: 'fit-content'}}>
+                <div id='image-text-parent'>
 
-                    <img src={CalculatorImage} id='calculator-image'/>
+                    <img src={CalculatorImage} id='calculator-top-bar-image'/>
 
                     <p id='calculator-top-bar-text'>Calculator</p>
                 </div>
@@ -78,8 +87,8 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
                     <button className='top-bar-button'
                             onClick={handleMinimizeButton}>_</button>
 
-                    <button className='top-bar-button' onClick={() => handleMaximizeButton()}>
-                        <div id='fullscreen-button-square'></div>
+                    <button id='calculator-maximize-button' className='top-bar-button' onClick={() => handleMaximizeButton()} disabled>
+                        <div id='calculator-fullscreen-button-square'></div>
                     </button>
 
                     <button className='top-bar-button'
@@ -89,7 +98,11 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton }) {
 
             </div>
 
-            <CalculatorLogic />
+            <CalculatorLogic 
+            calculatorInput={calculatorInput}
+            setCalculatorInput={setCalculatorInput}
+            calculatorResult={calculatorResult}
+            setCalculatorResult={setCalculatorResult}/>
 
         </div>
     </div>
