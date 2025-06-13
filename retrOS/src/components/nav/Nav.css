@@ -1,0 +1,123 @@
+#navbar {
+    width: 100%;
+    background-color: #C0C0C0;
+    box-shadow: inset 1px 2px 0px #FFFFFF;
+    position: fixed;
+    z-index: 1000;
+    bottom: 0;
+    left: 0;
+    height: 34px;
+    display: flex;
+}
+#navbar-button-parent {
+    display: flex;
+    width: fit-content;
+    position: absolute;
+    bottom: 0px;
+    padding: 0;
+    padding-left: 3px;
+    margin: 0 0 1px 0;
+    height: 87%;
+    padding-bottom: 2px;
+}
+#calculator-nav-image {
+    height: 20px;
+    width: 20px;
+    margin: 4px 8px 4px 0;
+}
+.nav-button-texts {
+    height: 100%;
+    margin: 4px 0;
+    font-size: 130%;
+}
+.nav-buttons {
+    width: fit-content;
+    min-width: 100px;
+    padding: 0 6px;
+    height: 100%;
+    display: flex;
+}
+#my-computer-nav-button {
+    max-width: 11.6em;
+}
+#my-computer-nav-image {
+    margin-right: 6px;
+}
+
+.button-in {
+    background-color: #FFFFFF;
+    border-right: 1px solid #DFDFDF;
+    border-bottom: 1px solid #DFDFDF;
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+}
+.button-out {
+    background-color: #C0C0C0;
+    border-top: 1px solid #DFDFDF;
+    border-left: 1px solid #DFDFDF;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+}
+
+.button-outer-border {
+    height: 100%;
+    margin-right: 2px;
+    margin-top: 2px;
+}
+
+.button-outer-border:active {
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-bottom: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+}
+
+.nav-buttons:active {
+    background-color: #FFFFFF;
+    border-right: 1px solid #DFDFDF;
+    border-bottom: 1px solid #DFDFDF;
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+}
+#time-parent {
+    width: 3.5em;
+    position: absolute;
+    height: 70%;
+    bottom: 3px;
+    right: 5px;
+    padding: 0 0 0 2em;
+    margin: 0;
+    border-right: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+    box-shadow: inset 2px 2px 0px #868A8E;
+}
+
+#current-time {
+    position: absolute;
+    bottom: -16px;
+    right: 4px;
+}
+#start-img {
+    height: 1px;
+    width: auto;
+}
+@media (max-width: 800px) {
+    #navbar {
+        height: 10vh;
+    }
+    #start-button-outer-border {
+        bottom: 8px;
+        left: 5px;
+    }
+    #start {
+        bottom: 5px;
+        left: 12px;
+    }
+    #time-parent {
+        bottom: 10px;
+    }
+    #current-time {
+        bottom: 3px;
+        right: 8px;
+    }
+}
