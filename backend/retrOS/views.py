@@ -77,3 +77,29 @@ def login_user(request):
         
     else:
         return JsonResponse({'error' : 'Only POST method allowed'}, status=405)
+    
+# Finds User By Email
+@csrf_exempt
+def find_user(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            input_email = data.get('email')
+
+            if not input_email:
+                return JsonResponse({'error' : 'Please Provide an Email'}, status=400)
+            
+            try:
+                found_email = User.objects.get(email=input_email)
+            except User.DoesNotExist:
+                return JsonResponse({'error' : 'User Not Found'}, status=404)
+            
+            return JsonResponse({'message' : 'User Found', 'data' : {'username' : found_email.username, 'email' : found_email.email}}, status=201)
+        
+        except json.JSONDecodeError:
+            return JsonResponse({'error' : 'Invalid JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error' : str(e)}, status=500)
+        
+    else:
+        return JsonResponse({'error' : 'Only POST method allowed'}, status=405)
