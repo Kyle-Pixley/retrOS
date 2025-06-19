@@ -9,11 +9,35 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 import jwt
 import datetime
-from .models import User
+from .models import User, Message
 
 
 def hello_world(request):
     return JsonResponse({'message' : 'Hello from Django!'})
+
+
+## JWT DECODE 
+def decode_jwt_token(request):
+    auth_header = request.headers.get('Authorization')
+
+    if not auth_header:
+        raise Exception("Authorization header missing")
+
+    parts = auth_header.split(' ')
+    if len(parts) != 2 or parts[0] != 'Bearer':
+        raise Exception("Invalid Authorization header format")
+
+    token = parts[1]
+
+    try:
+        payload = jwt.decode(token, settings.JWT_SECRET, algorithms=[settings.JWT_ALGORITHM])
+        return payload
+    except jwt.ExpiredSignatureError:
+        raise Exception("Token expired")
+    except jwt.InvalidTokenError:
+        raise Exception("Invalid token")
+
+
 
 ## USER
 # Create new User
@@ -68,7 +92,7 @@ def login_user(request):
             }
             token = jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
             
-            return JsonResponse({'message' : 'User Logged In Successfully', 'token' : token}, status=201)
+            return JsonResponse({'message' : 'User Logged In Successfully', 'token' : token}, status=200)
             
         except json.JSONDecodeError:
             return JsonResponse({'error' : 'Invalid JSON'}, status=400)
@@ -95,6 +119,53 @@ def find_user(request):
                 return JsonResponse({'error' : 'User Not Found'}, status=404)
             
             return JsonResponse({'message' : 'User Found', 'data' : {'username' : found_email.username, 'email' : found_email.email}}, status=201)
+        
+        except json.JSONDecodeError:
+            return JsonResponse({'error' : 'Invalid JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error' : str(e)}, status=500)
+        
+    else:
+        return JsonResponse({'error' : 'Only POST method allowed'}, status=405)
+
+## MESSAGES
+# Create New Message
+@csrf_exempt
+def create_message(request):
+    if request.method == 'POST':
+        try:
+            payload = decode_jwt_token(request)
+            sender_id = payload.get('user_id')
+
+            data = json.loads(request.body)
+            receiver_id = data.get('receiver_id')
+            body = data.get('body')
+            print(receiver_id, sender_id, body)
+
+            if not receiver_id or not body:
+                return JsonResponse({'error' : 'Please Provide recever_id and message body'}, status=400)
+            
+            try: 
+                sender = User.objects.get(id=sender_id)
+                receiver = User.objects.get(id=receiver_id)
+            except User.DoesNotExist:
+                return JsonResponse({'error' : 'Invalid sender or receiver user'}, status=404)
+            
+            message = Message.objects.create(
+                sender_id=sender,
+                receiver_id=receiver,
+                body=body
+            )
+
+            return JsonResponse({
+                'message' : 'Message sent',
+                'data' : {
+                    'sender' : sender.username,
+                    'receiver' : receiver.username,
+                    'body' : message.body,
+                    'timestamp' : message.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+                }
+            }, status=201)
         
         except json.JSONDecodeError:
             return JsonResponse({'error' : 'Invalid JSON'}, status=400)

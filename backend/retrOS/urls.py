@@ -6,5 +6,6 @@ urlpatterns = [
     path('api/register/', views.register_user),
     path('api/login/', views.login_user),
     path('api/finduser/', views.find_user),
+    path('api/create_message/', views.create_message),
 ]
 

@@ -12,8 +12,9 @@ class User(models.Model):
     
 # Message Model
 class Message(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
-    reciver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recieved_messages')
+    sender_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
+    receiver_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recieved_messages')
+    #add IsRead or something like that default false then use a PUT to make true 
     body = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
