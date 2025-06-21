@@ -6,6 +6,8 @@ class User(models.Model):
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
+    friends = models.ManyToManyField('self', blank=True)
+    friend_requests = models.ManyToManyField('self', blank=True)
 
     def __str__(self):
         return self.username
@@ -14,7 +16,7 @@ class User(models.Model):
 class Message(models.Model):
     sender_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
     receiver_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recieved_messages')
-    #add IsRead or something like that default false then use a PUT to make true 
+    id_read = models.BooleanField(default=False)
     body = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
