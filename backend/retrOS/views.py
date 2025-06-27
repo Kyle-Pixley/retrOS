@@ -54,7 +54,14 @@ def register_user(request):
 
             user = User.objects.create(username=username, email=email, password=hashed_password)
 
-            return JsonResponse({'message' : 'User created successfully', 'user_id' : user.id}, status=201)
+            payload = {
+                'user_id': user.id,
+                'username': user.username,
+                'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(seconds=settings.JWT_EXP_DELTA_SECONDS)
+            }
+            token = jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
+
+            return JsonResponse({'message' : 'User created successfully', 'user_id' : user.id, 'token' : token}, status=201)
         
         except KeyError:
             return JsonResponse({'error' : 'Missing required fields'}, status=400)
@@ -127,6 +134,94 @@ def find_user(request):
         
     else:
         return JsonResponse({'error' : 'Only POST method allowed'}, status=405)
+    
+    ## find user by user name
+@csrf_exempt
+def find_username(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            input_username = data.get('username')
+
+            if not input_username:
+                return JsonResponse({'error' : 'Please Provide Username'}, status=400)
+            
+            try:
+                found_username = User.objects.get(username=input_username)
+            except User.DoesNotExist:
+                return JsonResponse({'error' : 'User Not Found'}, status=404)
+            
+            return JsonResponse({'message' : 'User Found', 'data' : {'username' : found_username.username, 'username' : found_username.username}}, status=201)
+        
+        except json.JSONDecodeError:
+            return JsonResponse({'error' : 'Invalid JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error' : str(e)}, status=500)
+        
+    else:
+        return JsonResponse({'error' : 'Only POST method allowed'}, status=405)
+    
+@csrf_exempt
+def send_friend_request(request):
+    if request.method == "POST":
+        try:
+            payload = decode_jwt_token(request)
+            sender_id = payload.get('user_id')
+
+            data = json.loads(request.body)
+            receiver_id = data.get('receiver_id')
+
+            if not receiver_id:
+                return JsonResponse({'error' : 'Please provide reciever_id'}, status=400)
+            
+            try:
+                sender = User.objects.get(id=sender_id)
+                receiver = User.objects.get(id=receiver_id)
+            except User.DoesNotExist:
+                return JsonResponse({'error' : 'Invalid sender or receiver user'}, status=404)
+            
+            if sender == receiver:
+                return JsonResponse({'error' : 'Cannot send friend request to yourself'}, status=400)
+            
+            if sender in receiver.friend_requests.all():
+                return JsonResponse({'error' : 'Friend request already sent'}, status=400)
+            
+            if sender in receiver.friends.all():
+                return JsonResponse({'error' : 'User is already your friend'}, status=400)
+            
+            receiver.friend_requests.add(sender)
+            receiver.save()
+
+            return JsonResponse({'message' : 'Friend request sent'}, status=200)
+        
+        except json.JSONDecodeError:
+            return JsonResponse({'error' : 'Invalid JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error' : str(e)}, status=500)
+        
+    else: 
+        return JsonResponse({'error' : 'Only POST method allowed'}, status=405)
+    
+    # Get all the friend request sent to the user that is logged in/has a token
+@csrf_exempt
+def get_friend_requests(request):
+    if request.method == "GET":
+        try:
+            payload = decode_jwt_token(request)
+            user_id = payload.get('user_id')
+            user = User.objects.get(id=user_id)
+
+            requests = user.friend_requests.all()
+            request_data = [{'id' : u.id, 'username': u.username} for u in requests]
+
+            return JsonResponse({'friend_requests' : request_data}, status=200)
+        
+        except Exception as e:
+            return JsonResponse({'error' : str(e)}, status=500)
+        
+    else:
+        return JsonResponse({'error' : 'Only GET method allowed'}, status=405)
+    
 
 ## MESSAGES
 # Create New Message

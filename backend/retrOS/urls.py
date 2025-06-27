@@ -6,6 +6,9 @@ urlpatterns = [
     path('api/register/', views.register_user),
     path('api/login/', views.login_user),
     path('api/finduser/', views.find_user),
+    path('api/findusername/', views.find_username),
+    path('api/send_friend_request/', views.send_friend_request),
+    path('api/get_friend_requests/', views.get_friend_requests),
     path('api/create_message/', views.create_message),
 ]
 
