@@ -1,0 +1,9 @@
+#pim-login-component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#pim-login-image {
+    margin-top: 20px;
+    width: 90%;
+}

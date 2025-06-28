@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ComputerIcon from './assets/my-computer-icon.png';
 import CinepixIcon from './assets/cinepix-icon.png';
+import PimImage from './assets/pim-icon.png';
 import Nav from './components/nav/Nav.jsx';
 import Calculator from './components/calculator/Calculator.jsx';
 import MyComputer from './components/myComputer/MyComputer.jsx';
 import Cinepix from './components/cinepix/cinepix.jsx';
+import Pim from './components/pim/pim.jsx';
 import './App.css';
 
 function App() {
@@ -16,24 +18,29 @@ function App() {
   const [ calculatorResult, setCalculatorResult ] = useState('');
   const [ calculatorZIndex, setCalculatorZIndex ] = useState(0);
 
-    const [ myComputerComponent, setMyComputerComponent ] = useState(false);
-    const [ navCinepixButton, setNavCinepixButton ] = useState(false);
-    const [ navMyComputerButton, setNavMyComputerButton ] = useState(false);
-    const [ myComputerPosition, setMyComputerPosition ] = useState({ x: 150, y:150 });
-    const [ myComputerZIndex, setMyComputerZIndex ] = useState(0);
-
-  const [cinepixComponent, setCinepixComponent ] = useState(false);
+  const [ myComputerComponent, setMyComputerComponent ] = useState(false);
+  const [ navMyComputerButton, setNavMyComputerButton ] = useState(false);
+  const [ myComputerPosition, setMyComputerPosition ] = useState({ x: 150, y:150 });
+  const [ myComputerZIndex, setMyComputerZIndex ] = useState(0);
+    
+  const [ navCinepixButton, setNavCinepixButton ] = useState(false);
+  const [ cinepixComponent, setCinepixComponent ] = useState(false);
   const [ cinepixPosition, setCinepixPosition ] = useState({ x: 160, y: 160 });
   const [ cinepixZIndex, setCinepixZIndex ] = useState(0);
 
-  const [ componentsZIndexArray, setComponentsZIndexArray ] = useState([ calculatorZIndex, myComputerZIndex ]);
+  const [ pimComponent, setPimComponent ] = useState(false);
+  const [ navPimButton, setNavPimButton ] = useState(false);
+  const [ pimPosition, setPimPosition ] = useState({ x: 170, y: 100});
+  const [ pimZIndex, setPimZIndex ] = useState(0);
+
+  const [ componentsZIndexArray, setComponentsZIndexArray ] = useState([ calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex ]);
 
   const [ startMenu, setStartMenu ] = useState(false);
   const navStartButtonRef = useRef(null);
 
   useEffect(() => {
-    setComponentsZIndexArray([ calculatorZIndex, myComputerZIndex ])
-  },[myComputerZIndex, calculatorZIndex])
+    setComponentsZIndexArray([ calculatorZIndex, myComputerZIndex, cinepixZIndex ])
+  }, [myComputerZIndex, calculatorZIndex, cinepixZIndex, pimZIndex ])
 
   useEffect(() => {
     const handleClickOutsideStartButton = (e) => {
@@ -55,6 +62,10 @@ function App() {
     setCinepixComponent(true);
     setNavCinepixButton(true);
   }
+  const handlePimShortcutClicked = () => {
+    setPimComponent(true);
+    setNavPimButton(true);
+  }
 
   return (
     <div>
@@ -70,6 +81,13 @@ function App() {
           src={CinepixIcon}
           onDoubleClick={() => handleCinepixShortcutClicked()}/>
           <p className='shortcut-text'>Cinepix</p>
+      </div>
+      <div className='shortcut-parent'>
+        <img
+          className='shortcut-icon'
+          src={PimImage}
+          onDoubleClick={() => handlePimShortcutClicked()}/>
+          <p className='shortcut-text'>PIM</p>
       </div>
 
       <Nav 
@@ -96,6 +114,13 @@ function App() {
         setNavCinepixButton={setNavCinepixButton}
         cinepixZIndex={cinepixZIndex}
         setCinepixZIndex={setCinepixZIndex}
+
+        pimComponent={pimComponent}
+        setPimComponent={setPimComponent}
+        navPimButton={navPimButton}
+        setNavPimButton={setNavPimButton}
+        pimZIndex={pimZIndex}
+        setPimZIndex={setPimZIndex}
         />
 
         {calculatorComponent && <Calculator setCalculatorComponent={setCalculatorComponent} setNavCalculatorButton={setNavCalculatorButton} 
@@ -122,16 +147,25 @@ function App() {
         setComponentsZIndexArray={setComponentsZIndexArray}
         />}
 
-        {cinepixComponent &&
-          <Cinepix 
-            setCinepixComponent={setCinepixComponent}
-            setNavCinepixButton={setNavCinepixButton}
-            cinepixPosition={cinepixPosition}
-            setCinepixPosition={setCinepixPosition}
-            cinepixZIndex={cinepixZIndex}
-            setCinepixZIndex={setCinepixZIndex}
-            componentsZIndexArray={componentsZIndexArray}
-            setComponentZIndexArray={setComponentsZIndexArray}/>}
+        {cinepixComponent && <Cinepix 
+          setCinepixComponent={setCinepixComponent}
+          setNavCinepixButton={setNavCinepixButton}
+          cinepixPosition={cinepixPosition}
+          setCinepixPosition={setCinepixPosition}
+          cinepixZIndex={cinepixZIndex}
+          setCinepixZIndex={setCinepixZIndex}
+          componentsZIndexArray={componentsZIndexArray}
+          setComponentZIndexArray={setComponentsZIndexArray}/>}
+
+        {pimComponent && <Pim 
+          setPimComponent={setPimComponent}
+          setNavPimButton={setNavPimButton}
+          pimPosition={pimPosition}
+          setPimPosition={setPimPosition}
+          pimZIndex={pimZIndex}
+          setPimZIndex={setPimZIndex}
+          componentsZIndexArray={componentsZIndexArray}
+          setComponentZIndexArray={setComponentsZIndexArray}/> }
 
     </div>
   )

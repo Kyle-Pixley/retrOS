@@ -29,6 +29,7 @@
     height: 100%;
     margin: 4px 0;
     font-size: 130%;
+    margin-left: 4px;
 }
 .nav-buttons {
     width: fit-content;
