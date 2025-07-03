@@ -2,8 +2,36 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 1px solid black;
+    height: 100%;
 }
 #pim-login-image {
     margin-top: 20px;
     width: 90%;
+}
+#toggle-register-button {
+    margin: 10px auto 3px auto;
+    width: 50%;
+}
+#user-info-form {
+    border: 1px solid black;
+    height: 100%;
+    margin: 10px auto;
+    width: 50%;
+}
+#user-info-form {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+}
+.label-input-parents {
+    display: flex;
+    flex-direction: column;
+    margin: 8px auto;
+}
+.input, .label {
+    width: 100%;
+}
+#submit-form-button {
+    margin-top: 15px;
 }

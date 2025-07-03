@@ -15,7 +15,7 @@ function pimDashboard() {
     }, [])
 
   return (
-    <div>
+    <div id='pim-dashboard-component'>
         { sessionToken ? <FrontPage /> : <Login /> }
     </div>
   )
