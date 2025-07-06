@@ -43,6 +43,7 @@ def decode_jwt_token(request):
 # Create new User
 @csrf_exempt
 def register_user(request):
+    print('route hit')
     if request.method == 'POST':
         try:
             data = json.loads(request.body)

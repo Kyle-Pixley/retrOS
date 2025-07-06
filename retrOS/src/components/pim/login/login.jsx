@@ -11,6 +11,10 @@ function login() {
     email: '',
   });
 
+  const [ isError, setIsError ] = useState('');
+  const [ errorMessage, setErrorMessage ] = useState('');
+
+
   const toggleRegister = () => {
     setIsRegister(!isRegister);
   };
@@ -20,6 +24,42 @@ function login() {
       ...userInfo,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleFormSubmit = async e => {
+    e.preventDefault();
+
+    const url = isRegister 
+      ? "http://127.0.0.1:8000/api/register/"
+      : "http://127.0.0.1:8000/api/login/";
+
+    const { email, username, password } = userInfo;
+    const body = isRegister
+      ? { email, username, password }
+      : { username, password };
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: new Headers({
+          "Content-Type" : "application/json"
+        })
+      });
+
+      if(!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Invalid Login Credentials");
+      }
+
+      const data = await response.json();
+      updateLocalStorage(data.token);
+      setErrorMessage("");
+      setIsError(false);
+    } catch (err) {
+      setIsError(true);
+      setErrorMessage(err.message)
+    }
   };
 
   return (
@@ -46,6 +86,8 @@ function login() {
                       Email
                   </label>
                   <input
+                    name='email'
+                    type='email'
                     value={userInfo.email}
                     onChange={handleChange}
                     id='email-input'
@@ -62,6 +104,7 @@ function login() {
                     Screen Name
                   </label>
                 <input
+                  name='username'
                   value={userInfo.username}
                   onChange={handleChange}
                   id='username-input'
@@ -77,6 +120,8 @@ function login() {
                     Password
                   </label>
                 <input
+                  name='password'
+                  type='password'
                   value={userInfo.password}
                   onChange={handleChange}
                   id='password-input'
@@ -85,7 +130,7 @@ function login() {
               </div>
 
               <button 
-                onClick={() => handleFormSubmit()}
+                onClick={handleFormSubmit}
                 id='submit-form-button'>
                 {isRegister ? 'Register' : 'Sign On'}
               </button>
