@@ -43,6 +43,10 @@ function frontPage() {
     }
   };
 
+  const sendFriendRequest = id => {
+    console.log(id);
+  }
+
   return (
     <div>
 
@@ -56,7 +60,12 @@ function frontPage() {
         {listOfSearchedUsers ? (
           <div>
             {listOfSearchedUsers.map((user) => (
-              <p key={user.id}>{user.username}</p>
+              <div key={user.id}>
+                <p>{user.username}</p>
+                <button
+                  onClick={() => sendFriendRequest(user.id)}>
+                    Send Friend Request</button>
+              </div>
             ))}
           </div>
 

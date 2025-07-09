@@ -63,6 +63,7 @@ function login({ updateLocalStorage }) {
     }
   };
 
+
   return (
     <div id='pim-login-component'>
         <img
