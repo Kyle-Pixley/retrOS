@@ -1,9 +1,73 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './frontPage.css';
 
 function frontPage() {
+
+  const [ searchUsersInput, setSearchedUsersInput ] = useState('');
+  const [ listOfSearchedUsers, setListOfSearchedUsers ] = useState([]);
+  const [ searchTimer, setSearchTimer ] = useState(null);
+
+  const handleSearchUsersChange = e => {
+    const value = e.target.value;
+    setSearchedUsersInput(value);
+
+    if (searchTimer) clearTimeout(searchTimer);
+    setSearchTimer(setTimeout(() => {
+      if (value.trim() !=='') {
+        searchUsers(value);
+      } else {
+        setListOfSearchedUsers([]);
+      }
+    }, 300));
+  };
+
+  const searchUsers = async (username) => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/findusername/', {
+        method: "POST",
+        headers: {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify({ username })
+      });
+
+      const data = await response.json();
+      if(response.ok) {
+        setListOfSearchedUsers(data.data);
+      } else {
+        console.error("Error", data.error);
+        setListOfSearchedUsers([]);
+      }
+    } catch (err) {
+      console.error("fetch error" ,err);
+    }
+  };
+
   return (
-    <div>frontPage</div>
+    <div>
+
+      <div id='friend-search-parent'>
+        <input
+          type='text'
+          value={searchUsersInput}
+          onChange={handleSearchUsersChange}
+          placeholder='Search users'>
+        </input>
+        {listOfSearchedUsers ? (
+          <div>
+            {listOfSearchedUsers.map((user) => (
+              <p key={user.id}>{user.username}</p>
+            ))}
+          </div>
+
+        ) : null}
+      </div>
+
+
+      <div>
+        this will be a list of all your friends
+      </div>
+    </div>
   )
 }
 

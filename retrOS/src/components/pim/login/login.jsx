@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PimImage from '../../../assets/pim-image.png';
 import './login.css';
 
-function login() {
+function login({ updateLocalStorage }) {
 
   const [ isRegister, setIsRegister ] = useState(false);
   const [ userInfo, setUserInfo ] = useState({
@@ -53,6 +53,7 @@ function login() {
       }
 
       const data = await response.json();
+      console.log('This is the data', data)
       updateLocalStorage(data.token);
       setErrorMessage("");
       setIsError(false);

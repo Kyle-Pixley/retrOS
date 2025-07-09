@@ -147,12 +147,14 @@ def find_username(request):
             if not input_username:
                 return JsonResponse({'error' : 'Please Provide Username'}, status=400)
             
-            try:
-                found_username = User.objects.get(username=input_username)
-            except User.DoesNotExist:
-                return JsonResponse({'error' : 'User Not Found'}, status=404)
+            matched_users = User.objects.filter(username__icontains=input_username).order_by('username')[:5]
+
+            if not matched_users.exists():
+                return JsonResponse({'error' : 'No users found'}, status=404)
             
-            return JsonResponse({'message' : 'User Found', 'data' : {'username' : found_username.username, 'username' : found_username.username}}, status=201)
+            user_data = [{'id': user.id, 'username': user.username} for user in matched_users]
+
+            return JsonResponse({'message' : 'Users found', 'data' : user_data }, status=200)
         
         except json.JSONDecodeError:
             return JsonResponse({'error' : 'Invalid JSON'}, status=400)

@@ -14,9 +14,16 @@ function pimDashboard() {
         }
     }, [])
 
+    const updateLocalStorage = newToken => {
+      localStorage.setItem("token", newToken)
+      setSessionToken(newToken)
+    };
+
   return (
     <div id='pim-dashboard-component'>
-        { sessionToken ? <FrontPage /> : <Login /> }
+        { sessionToken 
+          ? <FrontPage /> 
+          : <Login updateLocalStorage={updateLocalStorage} /> }
     </div>
   )
 }
