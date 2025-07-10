@@ -9,29 +9,53 @@
     margin-top: 20px;
     width: 90%;
 }
-#toggle-register-button {
-    margin: 10px auto 3px auto;
-    width: 50%;
+#line-border {
+    margin-top: 12px;
+    height: 15px;
+    width: 87%;
+    box-shadow: inset 2px 2px 1px #2c2c2c, 2px 2px 1px whitesmoke;
 }
 #user-info-form {
     border: 1px solid black;
     height: 100%;
     margin: 10px auto;
-    width: 50%;
+    width: 80%;
 }
 #user-info-form {
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
+    align-items: center;
 }
 .label-input-parents {
     display: flex;
-    flex-direction: column;
     margin: 8px auto;
+    
 }
 .input, .label {
     width: 100%;
 }
-#submit-form-button {
-    margin-top: 15px;
+.input {
+    border-top: 2px solid #2c2c2c;
+    border-left: 2px solid #2c2c2c;
+    border-bottom: 2px solid gray;
+    border-right: 2px solid gray;
+    box-shadow: 2px 2px 2px white, inset 2px 2px 2px black;
+    color: white;
+    /* border: none; */
+}
+
+#register-login-button-parent {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+}
+#submit-form-button > image {
+    height: 203px;
+    width: 203px;
+    border: 2px solid black;
+}
+#toggle-register-button, #submit-form-button {
+    border: none;
+    background: none;
+    font-weight: 600;
 }

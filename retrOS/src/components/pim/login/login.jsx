@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PimImage from '../../../assets/pim-image.png';
+import TextBubbleIcon from '../../../assets/text-bubble-icon.png';
 import './login.css';
 
 function login({ updateLocalStorage }) {
@@ -70,11 +71,7 @@ function login({ updateLocalStorage }) {
             src={PimImage}
             id='pim-login-image'/>
 
-            <button
-              id='toggle-register-button' 
-              onClick={() => toggleRegister()}>
-                {isRegister ? 'Login' : 'Sign Up'}
-            </button>
+            <div id='line-border'></div>
 
             <form 
               id='user-info-form'>
@@ -93,8 +90,7 @@ function login({ updateLocalStorage }) {
                     value={userInfo.email}
                     onChange={handleChange}
                     id='email-input'
-                    className='input'>
-                  </input>
+                    className='input' />
                 </div>
 
               ) : null }
@@ -110,8 +106,7 @@ function login({ updateLocalStorage }) {
                   value={userInfo.username}
                   onChange={handleChange}
                   id='username-input'
-                  className='input'>
-                  </input>
+                  className='input' />
               </div>
 
               <div
@@ -127,15 +122,23 @@ function login({ updateLocalStorage }) {
                   value={userInfo.password}
                   onChange={handleChange}
                   id='password-input'
-                  className='input'>
-                  </input>
+                  className='input' />
               </div>
 
-              <button 
-                onClick={handleFormSubmit}
-                id='submit-form-button'>
-                {isRegister ? 'Register' : 'Sign On'}
-              </button>
+              <div id='register-login-button-parent'>
+                <button
+                  id='toggle-register-button' 
+                  onClick={() => toggleRegister()}>
+                    {isRegister ? 'Login' : 'Sign Up'}
+                </button>
+
+                <button 
+                  onClick={handleFormSubmit}
+                  id='submit-form-button'>
+                    <image src={TextBubbleIcon}/>
+                    {isRegister ? 'Register' : 'Sign On'}
+                </button>
+              </div>
 
 
             </form>

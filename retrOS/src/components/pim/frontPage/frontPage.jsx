@@ -48,7 +48,7 @@ function frontPage() {
   }
 
   return (
-    <div>
+    <div id='front-page-component'>
 
       <div id='friend-search-parent'>
         <input
