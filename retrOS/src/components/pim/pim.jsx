@@ -39,6 +39,7 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
         left: pimComponentMaximized ? 0 : pimPosition.x ,
         top: pimComponentMaximized ? 0 : pimPosition.y,
         width: pimComponentMaximized ? '100%' : '35vw',
+        minWidth: '350px',
         height: pimComponentMaximized ? 'calc(100% - 40px)' : '50vw',
         zIndex: pimZIndex,
     }

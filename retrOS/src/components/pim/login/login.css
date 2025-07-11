@@ -29,25 +29,31 @@
 .label-input-parents {
     display: flex;
     margin: 8px auto;
-    
+    align-items: center;
+    justify-content: space-evenly;
+    height: 2em;
+    width: 90%;
 }
-.input, .label {
-    width: 100%;
+.label {
+    justify-self: flex-start;
+    width: 50%;
 }
-.input {
+input {
     border-top: 2px solid #2c2c2c;
     border-left: 2px solid #2c2c2c;
     border-bottom: 2px solid gray;
     border-right: 2px solid gray;
-    box-shadow: 2px 2px 2px white, inset 2px 2px 2px black;
+    box-shadow: 1px 1px 1px white, inset 1px 1px 1px black;
     color: white;
-    /* border: none; */
+    height: 22px;
+    width: 60%;
 }
 
 #register-login-button-parent {
     width: 95%;
     display: flex;
     justify-content: space-between;
+    margin: auto 1px 20px 1px;
 }
 #submit-form-button > image {
     height: 203px;
@@ -55,7 +61,15 @@
     border: 2px solid black;
 }
 #toggle-register-button, #submit-form-button {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
     border: none;
     background: none;
     font-weight: 600;
+    text-shadow: 1px -1px 1px white ;
+}
+#toggle-register-button > img, #submit-form-button > img {
+    height: 40px;
+    width: 40px;
 }

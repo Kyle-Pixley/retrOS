@@ -16,7 +16,8 @@ function login({ updateLocalStorage }) {
   const [ errorMessage, setErrorMessage ] = useState('');
 
 
-  const toggleRegister = () => {
+  const toggleRegister = e => {
+    e.preventDefault();
     setIsRegister(!isRegister);
   };
 
@@ -128,14 +129,17 @@ function login({ updateLocalStorage }) {
               <div id='register-login-button-parent'>
                 <button
                   id='toggle-register-button' 
-                  onClick={() => toggleRegister()}>
+                  onClick={e => toggleRegister(e)}>
+                    {isRegister 
+                    ? ( null )
+                    : ( null )}
                     {isRegister ? 'Login' : 'Sign Up'}
                 </button>
 
                 <button 
                   onClick={handleFormSubmit}
                   id='submit-form-button'>
-                    <image src={TextBubbleIcon}/>
+                    <img src={TextBubbleIcon}/>
                     {isRegister ? 'Register' : 'Sign On'}
                 </button>
               </div>
