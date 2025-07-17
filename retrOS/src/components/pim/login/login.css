@@ -2,26 +2,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid black;
     height: 100%;
 }
 #pim-login-image {
     margin-top: 20px;
     width: 90%;
+    max-width: 360px;
 }
 #line-border {
     margin-top: 12px;
-    height: 15px;
+    min-height: 5px;
+    height: 5px;
+    border-radius: 2px;
     width: 87%;
     box-shadow: inset 2px 2px 1px #2c2c2c, 2px 2px 1px whitesmoke;
 }
 #user-info-form {
-    border: 1px solid black;
     height: 100%;
     margin: 10px auto;
     width: 80%;
-}
-#user-info-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,17 +47,12 @@ input {
     height: 22px;
     width: 60%;
 }
-
 #register-login-button-parent {
+    height: 70px;
     width: 95%;
     display: flex;
     justify-content: space-between;
     margin: auto 1px 20px 1px;
-}
-#submit-form-button > image {
-    height: 203px;
-    width: 203px;
-    border: 2px solid black;
 }
 #toggle-register-button, #submit-form-button {
     display:flex;
@@ -70,6 +64,14 @@ input {
     text-shadow: 1px -1px 1px white ;
 }
 #toggle-register-button > img, #submit-form-button > img {
-    height: 40px;
-    width: 40px;
+    height: 100%;
+    width: 100%;
+}
+#toggle-register-button {
+    text-indent: -22px;
+    margin-left: 2px;
+}
+#toggle-register-button, #submit-form-button {
+    /* border: 1px solid black; */
+    height: 90%;
 }

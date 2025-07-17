@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PimImage from '../../../assets/pim-image.png';
 import TextBubbleIcon from '../../../assets/text-bubble-icon.png';
+import RegisterIcon from '../../../assets/register-icon.png';
+import LoginIcon from '../../../assets/login-icon.png';
 import './login.css';
 
 function login({ updateLocalStorage }) {
@@ -133,6 +135,7 @@ function login({ updateLocalStorage }) {
                     {isRegister 
                     ? ( null )
                     : ( null )}
+                    <img src={ isRegister ? RegisterIcon : LoginIcon}/>
                     {isRegister ? 'Login' : 'Sign Up'}
                 </button>
 

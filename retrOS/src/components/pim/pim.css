@@ -15,6 +15,7 @@
     align-items: center;
     overflow: auto;
     resize: both;
+    overflow-y: hidden;
 }
 #pim-parent {
     background-color: #c0c0c0;
@@ -30,6 +31,7 @@
     background-color: #000080;
     width: 99.7%;
     margin-top: 1px;
+    min-height: 30px;
     height: 30px;
     display: flex;
     justify-content: space-between;
@@ -54,7 +56,7 @@
 #top-bar-button-parent {
     display: flex;
     width: fit-content;
-    margin-right: 21.5px;
+    margin-right: 2px;
 }
 .top-bar-button {
     background-color: gray;

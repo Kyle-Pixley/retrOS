@@ -9,6 +9,8 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
     const topBar = useRef(null);
     const [ pimComponentMaximized, setPimComponentMaximized ] = useState(false);
+    // this is just to true if the window is over a certain amount of pixels otherwise it is false for styling purposes 
+    const [ isWindowWide, setIsWindowWide ] = useState(false);
     
 
     const mouseStart = e => {
@@ -35,11 +37,14 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
         setMove(false)
     };
 
+    
+
     const divStyle = {
         left: pimComponentMaximized ? 0 : pimPosition.x ,
         top: pimComponentMaximized ? 0 : pimPosition.y,
         width: pimComponentMaximized ? '100%' : '35vw',
         minWidth: '350px',
+        minHeight: '550px',
         height: pimComponentMaximized ? 'calc(100% - 40px)' : '50vw',
         zIndex: pimZIndex,
     }
