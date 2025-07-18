@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './frontPage.css';
+import LogoutIcon from '@mui/icons-material/Logout';
 
-function frontPage() {
+function frontPage({ setSessionToken }) {
 
   const [ searchUsersInput, setSearchedUsersInput ] = useState('');
   const [ listOfSearchedUsers, setListOfSearchedUsers ] = useState([]);
@@ -49,6 +50,15 @@ function frontPage() {
 
   return (
     <div id='front-page-component'>
+      <button id='logout-button'>
+        <LogoutIcon 
+          id='logout-icon'
+          onClick={() => 
+                    {localStorage.clear()
+                      setSessionToken(undefined)
+                    }
+        }/>
+      </button>
 
       <div id='friend-search-parent'>
         <input

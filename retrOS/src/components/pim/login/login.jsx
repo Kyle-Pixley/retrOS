@@ -130,6 +130,7 @@ function login({ updateLocalStorage }) {
 
               <div id='register-login-button-parent'>
                 <button
+                  type='button'
                   id='toggle-register-button' 
                   onClick={e => toggleRegister(e)}>
                     {isRegister 
@@ -140,6 +141,7 @@ function login({ updateLocalStorage }) {
                 </button>
 
                 <button 
+                  type='submit'
                   onClick={handleFormSubmit}
                   id='submit-form-button'>
                     <img src={TextBubbleIcon}/>

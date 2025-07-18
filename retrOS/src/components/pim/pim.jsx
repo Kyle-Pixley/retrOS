@@ -42,7 +42,7 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
     const divStyle = {
         left: pimComponentMaximized ? 0 : pimPosition.x ,
         top: pimComponentMaximized ? 0 : pimPosition.y,
-        width: pimComponentMaximized ? '100%' : '35vw',
+        width: pimComponentMaximized ? '100%' : '350px',
         minWidth: '350px',
         minHeight: '550px',
         height: pimComponentMaximized ? 'calc(100% - 40px)' : '50vw',

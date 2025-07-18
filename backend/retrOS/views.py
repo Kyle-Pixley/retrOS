@@ -232,6 +232,25 @@ def get_friend_requests(request):
     else:
         return JsonResponse({'error' : 'Only GET method allowed'}, status=405)
     
+# Get all Friends 
+@csrf_exempt
+def get_all_friends(request):
+    if request.method == "GET":
+        try:
+            payload = decode_jwt_token(request)
+            user_id = payload.get('user_id')
+            user = User.objects.get(id=user_id)
+
+            requests = user.friends.all()
+            request_data = [{'id' : u.id, 'username' : u.username} for u in requests]
+
+            return JsonResponse({'Friends' : request_data}, status=200)
+        
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Only GET method allowed'}, status=405 )
+    
 
 ## MESSAGES
 # Create New Message

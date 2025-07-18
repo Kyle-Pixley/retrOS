@@ -43,9 +43,11 @@ input {
     border-bottom: 2px solid gray;
     border-right: 2px solid gray;
     box-shadow: 1px 1px 1px white, inset 1px 1px 1px black;
-    color: white;
     height: 22px;
     width: 60%;
+    font-weight: 600;
+    font-size: 18px;
+    text-indent: 3px;
 }
 #register-login-button-parent {
     height: 70px;

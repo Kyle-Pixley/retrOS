@@ -22,7 +22,9 @@ function pimDashboard() {
   return (
     <div id='pim-dashboard-component'>
         { sessionToken 
-          ? <FrontPage /> 
+          ? <FrontPage 
+              sessionToken={sessionToken}
+              setSessionToken={setSessionToken}/> 
           : <Login updateLocalStorage={updateLocalStorage} /> }
     </div>
   )
