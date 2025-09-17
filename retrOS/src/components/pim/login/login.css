@@ -63,17 +63,18 @@ input {
     border: none;
     background: none;
     font-weight: 600;
-    text-shadow: 1px -1px 1px white ;
+    text-shadow: 1px -1px 1px white;
+    height: 100%;
+    width: 35%;
 }
+
 #toggle-register-button > img, #submit-form-button > img {
     height: 100%;
-    width: 100%;
 }
 #toggle-register-button {
     text-indent: -22px;
     margin-left: 2px;
 }
-#toggle-register-button, #submit-form-button {
-    /* border: 1px solid black; */
-    height: 90%;
+#toggle-register-button:active, #submit-form-button:active {
+    box-shadow: inset 4px 4px 4px #333333, 2px 2px 1px #b3b3b3;
 }
