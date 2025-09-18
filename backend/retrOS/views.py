@@ -212,6 +212,50 @@ def send_friend_request(request):
     else: 
         return JsonResponse({'error' : 'Only POST method allowed'}, status=405)
     
+    # Accept the friend request
+@csrf_exempt
+def accept_friend_request(request):
+    if request.method == "POST":
+        try:
+            payload = decode_jwt_token(request)
+            sender_id = payload.get("user_id")
+            print('sender id ', sender_id)
+            data = json.loads(request.body)
+            receiver_id = data.get("receiver_id")
+
+            if not receiver_id:
+                return JsonResponse({"error" : "No Reciever_id"}, status=400)
+            
+            try:
+                sender = User.objects.get(id=sender_id)
+                receiver = User.objects.get(id=receiver_id)
+            except User.DoesNotExist:
+                return JsonResponse({'error' : 'No sender or receiver'}, status=404)
+            
+            if sender == receiver:
+                return JsonResponse({'error' : 'Cannot send friend requests to self'}, status=400)
+            
+            if sender in receiver.friends.all():
+                return JsonResponse({'error' : 'User already Friend'}, status=400)
+            
+            receiver.friends.add(sender)
+            sender.friends.add(receiver)
+
+            receiver.save()
+            sender.save()
+
+            return JsonResponse({'message' : f"{sender.username} is now friends with {receiver.username}"})
+        
+        except json.JSONDecodeError:
+            return JsonResponse({'error' : 'Invalid JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error' : str(e)}, status=500)
+
+    else:
+        return JsonResponse({'error' : 'Only Post method allowed'}, status=405)
+    
+    # Delete Friend Request // make sure accept friend request triggers this also 
+    
     # Get all the friend request sent to the user that is logged in/has a token
 @csrf_exempt
 def get_friend_requests(request):

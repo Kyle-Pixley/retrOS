@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './frontPage.css';
 import FriendRequests from './friendRequests/friendRequests';
+import FriendsList from './friendslist/friendslist';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 function frontPage({ setSessionToken }) {
@@ -85,7 +86,7 @@ function frontPage({ setSessionToken }) {
 
 
       <div>
-        this will be a list of all your friends
+        <FriendsList />
       </div>
       <FriendRequests />
     </div>
