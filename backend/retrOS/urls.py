@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/send_friend_request/', views.send_friend_request),
     path('api/get_friend_requests/', views.get_friend_requests),
     path('api/accept_friend_request/', views.accept_friend_request),
+    path('api/delete_friend_request/', views.delete_friend_request),
     path('api/get_all_friends/',views.get_all_friends),
     path('api/create_message/', views.create_message),
 ]

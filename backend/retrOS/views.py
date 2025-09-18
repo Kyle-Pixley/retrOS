@@ -255,6 +255,40 @@ def accept_friend_request(request):
         return JsonResponse({'error' : 'Only Post method allowed'}, status=405)
     
     # Delete Friend Request // make sure accept friend request triggers this also 
+@csrf_exempt
+def delete_friend_request(request):
+    if request.method == "DELETE":
+        try:
+            payload = decode_jwt_token(request)
+            user_id = payload.get("user_id")
+            data = json.loads(request.body)
+            sender_id = data.get("sender_id")
+
+            if not sender_id:
+                return JsonResponse({"error" : "No sender id"}, status= 400)
+
+            try:
+                user = User.objects.get(id=user_id)
+                sender = User.objects.get(id=sender_id)
+            except User.DoesNotExist:
+                return JsonResponse({"error" : "User not found"}, status=404)
+        
+            if sender not in user.friend_requests.all():
+                return JsonResponse({"error" : "No friend request found"}, status=400)
+            
+            user.friend_requests.remove(sender)
+            user.save()
+
+
+            return JsonResponse({'message' : f"Friend request from {sender.username} deleted"})
+        
+        except json.JSONDecodeError:
+            return JsonResponse({"error" : "Invalid json"}, status=400)
+        except Exception as e:
+            return JsonResponse({"error" : str(e)}, status=500)
+    else: 
+        return JsonResponse({'error' : 'Only DELETE methog allowed'}, status=405)
+    
     
     # Get all the friend request sent to the user that is logged in/has a token
 @csrf_exempt
