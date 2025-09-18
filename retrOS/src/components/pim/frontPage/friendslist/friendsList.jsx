@@ -4,7 +4,7 @@ import './friendsList.css';
 function friendsList() {
 
     const [ friendsList, setFriendsList ] = useState([]);
-    const [ friendsListError, setFriendsListError ] = useState('');
+    const [ friendsListError, setFriendsListError ] = useState('No Friends');
 
     useEffect(() => {
         const getFriendsList = async () => {
@@ -30,7 +30,7 @@ function friendsList() {
                     setFriendsListError("There is an issue with the server")
                     return;
                 }
-                setFriendsListError("");
+                setFriendsListError("No Friends");
                 console.log(data.Friends)
                 setFriendsList(Array.isArray(data.Friends) ? data.Friends : []);
 
@@ -43,6 +43,7 @@ function friendsList() {
 
   return (
     <div>
+        {friendsList.length > 0 ? null : friendsListError}
         {friendsList.map((friend) =>(
             <button>{friend.username}</button>
         ))}

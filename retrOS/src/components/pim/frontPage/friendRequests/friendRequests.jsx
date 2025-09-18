@@ -4,6 +4,7 @@ import './friendRequests.css';
 function friendRequests() {
 
   const [ friendRequests, setFriendRequests ] = useState([]);
+  const [ friendRequestDeleted, setFriendRequestDeleted ] = useState(false);
 
 
   
@@ -42,7 +43,33 @@ useEffect(() => {
 
   getFriendRequests();
 
-}, [])
+}, [friendRequestDeleted])
+
+const deleteFriendRequest = async (sender) => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    console.error("Missing token");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/delete_friend_request/", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({ sender_id: sender })
+    });
+
+    const data = await response.json();
+    setFriendRequestDeleted(!friendRequestDeleted)
+    console.log(data);
+  } catch (err) {
+    console.error("Error:", err);
+  }
+}
 
 
 
@@ -57,7 +84,13 @@ useEffect(() => {
       <ul className='friend-request-list'>
         {friendRequests.map((user) => (
           <li key={user.id} className='friend-requests'>
-            <p>{user.username}</p><button>Accept</button><button>Decline</button>
+            <p>{user.username}</p>
+            <button
+              onClick={() => console.log("something")}
+              >Accept</button>
+            <button
+              onClick={() => deleteFriendRequest(user.id)}
+              >Decline</button>
           </li>
         ))}
       </ul>

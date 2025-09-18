@@ -238,6 +238,9 @@ def accept_friend_request(request):
             if sender in receiver.friends.all():
                 return JsonResponse({'error' : 'User already Friend'}, status=400)
             
+            if sender in receiver.friend_requests.all():
+                receiver.friend_requests.remove(sender)
+            
             receiver.friends.add(sender)
             sender.friends.add(receiver)
 
@@ -289,7 +292,7 @@ def delete_friend_request(request):
     else: 
         return JsonResponse({'error' : 'Only DELETE methog allowed'}, status=405)
     
-    
+
     # Get all the friend request sent to the user that is logged in/has a token
 @csrf_exempt
 def get_friend_requests(request):

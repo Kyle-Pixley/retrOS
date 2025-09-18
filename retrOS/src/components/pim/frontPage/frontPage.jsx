@@ -47,6 +47,7 @@ function frontPage({ setSessionToken }) {
   };
 
   const sendFriendRequest = id => {
+    //! need to add frend request fetch
     console.log(id);
   }
 
