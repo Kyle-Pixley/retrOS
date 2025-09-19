@@ -9,6 +9,7 @@ function frontPage({ setSessionToken }) {
   const [ searchUsersInput, setSearchedUsersInput ] = useState('');
   const [ listOfSearchedUsers, setListOfSearchedUsers ] = useState([]);
   const [ searchTimer, setSearchTimer ] = useState(null);
+  const [ friendRequestSent, setFriendRequestSent ] = useState(false);
 
   const handleSearchUsersChange = e => {
     const value = e.target.value;
@@ -46,9 +47,31 @@ function frontPage({ setSessionToken }) {
     }
   };
 
-  const sendFriendRequest = id => {
-    //! need to add frend request fetch
-    console.log(id);
+  const sendFriendRequest = async id => {
+    const token = localStorage.getItem("token")
+
+    if(!token) {
+      console.error("Missing Token")
+      localStorage.clear()
+      setSessionToken(undefined)
+      return;
+    };
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/send_friend_request/", {
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json",
+          "Authorization" : `Bearer ${token}`
+        },
+        body: JSON.stringify({ receiver_id: id })
+      });
+      const data = await response.json();
+      console.log(data)
+      setFriendRequestSent(true)
+    } catch (err) {
+      console.error("error", err)
+    }
   }
 
   return (
@@ -70,19 +93,27 @@ function frontPage({ setSessionToken }) {
           onChange={handleSearchUsersChange}
           placeholder='Search users'>
         </input>
+
         {listOfSearchedUsers ? (
           <div>
             {listOfSearchedUsers.map((user) => (
               <div key={user.id}>
                 <p>{user.username}</p>
-                <button
+                {friendRequestSent ? (
+                  <p>Friend Request Sent</p>
+                ) : (
+                  <button
                   onClick={() => sendFriendRequest(user.id)}>
-                    Send Friend Request</button>
+                    Send Friend Request
+                </button>
+                  )}
+
               </div>
             ))}
           </div>
 
         ) : null}
+
       </div>
 
 
