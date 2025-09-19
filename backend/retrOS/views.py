@@ -292,6 +292,29 @@ def delete_friend_request(request):
     else: 
         return JsonResponse({'error' : 'Only DELETE methog allowed'}, status=405)
     
+    # get all the friend request the user has already sent
+@csrf_exempt
+def get_sent_friend_requests(request):
+    if request.method == "GET":
+        try:
+            payload = decode_jwt_token(request)
+            user_id = payload.get('user_id')
+
+            if not user_id:
+                return JsonResponse({ "error" : "Invalid token" }, status=401)
+            
+            user = User.objects.get(id=user_id)
+           
+            from_user_ids = list(User.objects.filter(friend_requests=user).values_list('id', flat=True))
+
+            return JsonResponse({ "from_user_ids": from_user_ids}, status=200)
+
+        
+        except Exception as e:
+            return JsonResponse({ "error" : "couldnt get friends requests"}, status=500)
+    else: 
+        return JsonResponse({ 'error' : "Only GET method allowed" }, status=405)
+    
 
     # Get all the friend request sent to the user that is logged in/has a token
 @csrf_exempt

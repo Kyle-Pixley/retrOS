@@ -9,8 +9,47 @@ function frontPage({ setSessionToken }) {
   const [ searchUsersInput, setSearchedUsersInput ] = useState('');
   const [ listOfSearchedUsers, setListOfSearchedUsers ] = useState([]);
   const [ searchTimer, setSearchTimer ] = useState(null);
-  const [ friendRequestSent, setFriendRequestSent ] = useState(false);
+  const [ sendingFriendRequest, setSendingFriendRequest ] = useState(false);
+  const [ friendRequestsSent, setFriendRequestsSent ] = useState([]);
+  //friend requests sent to from friendRequests.jsx 
+  const [ friendRequests, setFriendRequests ] = useState([]);
 
+
+// gets the friend requests that the logged in user has already sent and returns just the id of the user it was sent to
+  useEffect(() => {
+    const getSentFriendRequests = async () => {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        console.error("Issue with Login Credentials")
+        setSessionToken(undefined)
+        localStorage.clear()
+      }
+
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/get_sent_friend_requests/", {
+          headers: {
+            'Content-Type' : 'application/json',
+            'Authorization' : `Bearer ${token}`
+          },
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+          console.error("Error", data.error);
+          setFriendRequestSent([])
+          return;
+        }
+        setFriendRequestsSent(Array.isArray(data.from_user_ids) ? data.from_user_ids : []);
+      } catch (err) {
+        console.error("Fetch Error", err);
+      }
+    }
+    getSentFriendRequests()
+  },[ sendingFriendRequest ])
+
+
+  // searches users in the data base when the input changes and is stagnant for .3 seconds 
   const handleSearchUsersChange = e => {
     const value = e.target.value;
     setSearchedUsersInput(value);
@@ -47,6 +86,7 @@ function frontPage({ setSessionToken }) {
     }
   };
 
+// sends a friend request to another user
   const sendFriendRequest = async id => {
     const token = localStorage.getItem("token")
 
@@ -67,10 +107,21 @@ function frontPage({ setSessionToken }) {
         body: JSON.stringify({ receiver_id: id })
       });
       const data = await response.json();
-      console.log(data)
-      setFriendRequestSent(true)
+      setSendingFriendRequest(!sendingFriendRequest);
     } catch (err) {
       console.error("error", err)
+    }
+  };
+
+
+// Checks to see if you have sent another user a request or if they sent you one or neither
+  const friendRequestSentOrRecived = (user) => {
+    if (friendRequestsSent.includes(user.id)) {
+      return <p>Friend Request Pending</p>
+    } else if (friendRequests.some(obj => obj.id === user.id)) {
+      return <p>This user sent you a request</p>
+    } else {
+      return <button onClick={() => sendFriendRequest(user.id)}>Send Friend Request</button>
     }
   }
 
@@ -99,14 +150,12 @@ function frontPage({ setSessionToken }) {
             {listOfSearchedUsers.map((user) => (
               <div key={user.id}>
                 <p>{user.username}</p>
-                {friendRequestSent ? (
-                  <p>Friend Request Sent</p>
-                ) : (
-                  <button
-                  onClick={() => sendFriendRequest(user.id)}>
-                    Send Friend Request
-                </button>
-                  )}
+
+
+
+                {friendRequestSentOrRecived(user)}
+
+
 
               </div>
             ))}
@@ -120,7 +169,9 @@ function frontPage({ setSessionToken }) {
       <div>
         <FriendsList />
       </div>
-      <FriendRequests />
+      <FriendRequests 
+        friendRequests={friendRequests}
+        setFriendRequests={setFriendRequests}/>
     </div>
   )
 }

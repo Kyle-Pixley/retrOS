@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './friendRequests.css';
 
-function friendRequests() {
+function friendRequests({ friendRequests, setFriendRequests }) {
 
-  const [ friendRequests, setFriendRequests ] = useState([]);
   const [ friendRequestDeleted, setFriendRequestDeleted ] = useState(false);
-
-
   
 
 useEffect(() => {
@@ -36,11 +33,13 @@ useEffect(() => {
 
       setFriendRequests(Array.isArray(data.friend_requests) ? data.friend_requests : []);
 
+      console.log(data.friend_requests)
+      
     } catch (err) {
       console.error("fetch error", err);
     }
   };
-
+  
   getFriendRequests();
 
 }, [friendRequestDeleted])
@@ -93,6 +92,9 @@ const deleteFriendRequest = async (sender) => {
               >Decline</button>
           </li>
         ))}
+        {
+  console.log('this is friend', friendRequests)
+        }
       </ul>
     </div>
   )
