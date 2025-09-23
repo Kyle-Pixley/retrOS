@@ -202,6 +202,7 @@ function frontPage({ setSessionToken, clickedOutside, setClickedOutside }) {
       </button>
         <div id='tab-buttons-parent'>
           <button
+            className='tab-buttons'
             onClick={() => {
               setIsSearchUsersTab(false)
               setIsFriendRequestsTab(false)}}>
@@ -209,6 +210,7 @@ function frontPage({ setSessionToken, clickedOutside, setClickedOutside }) {
           </button>
 
           <button
+            className='tab-buttons'
             onClick={() => {
               setIsSearchUsersTab(true)
               setIsFriendRequestsTab(false)}}>
@@ -216,6 +218,7 @@ function frontPage({ setSessionToken, clickedOutside, setClickedOutside }) {
           </button>
 
           <button
+            className='tab-buttons'
             onClick={() => {
               setIsSearchUsersTab(false)
               setIsFriendRequestsTab(true)}}>

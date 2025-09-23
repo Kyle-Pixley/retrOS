@@ -57,7 +57,6 @@ function login({ updateLocalStorage }) {
       }
 
       const data = await response.json();
-      console.log('This is the data', data)
       updateLocalStorage(data.token);
       setErrorMessage("");
       setIsError(false);

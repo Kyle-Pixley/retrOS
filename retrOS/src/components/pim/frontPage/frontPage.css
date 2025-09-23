@@ -5,9 +5,10 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    /* border: 1px solid black; */
+    height: 91%;
     width: 97%;
     overflow-y: scroll;
+    padding-top: 5.5%;
 }
 #logout-button {
     position: absolute;
@@ -21,12 +22,18 @@
     align-items: center;
     padding-right: 1px;
 }
-#logout-icon {
-    /* margin-top: 2px; */
-}
 #friend-search-parent {
     margin-top: 6px;
 }
 #tab-buttons-parent {
     display: flex;
+    margin: auto auto 0 2.5%;
+    padding: 0;;
+}
+.tab-buttons {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom: 0;
 }
