@@ -50,7 +50,7 @@
     color: white;
     margin: auto 0;
     font-size: 18px;
-
+    cursor: default;
 }
 #top-bar-button-parent {
     display: flex;

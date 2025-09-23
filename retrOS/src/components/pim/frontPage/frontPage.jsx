@@ -3,6 +3,7 @@ import './frontPage.css';
 import FriendRequests from './friendRequests/friendRequests';
 import FriendsList from './friendslist/friendslist';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { jwtDecode } from 'jwt-decode';
 
 function frontPage({ setSessionToken }) {
 
@@ -18,6 +19,7 @@ function frontPage({ setSessionToken }) {
   const [ isSearchUsersTab, setIsSearchUsersTab ] = useState(false);
   const [ isFriendsListTab, setIsFriendsListTab ] = useState(false);
   const [ isFriendRequestsTab, setIsFriendRequestsTab ] = useState(false);
+  const [ currentUsersId, setCurrentUsersId ] = useState('');
 
 // gets the friend requests that the logged in user has already sent and returns just the id of the user it was sent to
   useEffect(() => {
@@ -68,6 +70,19 @@ function frontPage({ setSessionToken }) {
     }, 300));
   };
 
+  //Get the ID of the user that is logged in
+  useEffect(() => {
+
+    const getCurrentUsersId = () => {
+      let token = localStorage.getItem('token')
+      let decodedToken = jwtDecode(token)
+      setCurrentUsersId(decodedToken.user_id)
+    }
+
+    getCurrentUsersId();
+  }, [])
+
+  // Search Users by User Name
   const searchUsers = async (username) => {
     try {
       const response = await fetch('http://127.0.0.1:8000/api/findusername/', {
@@ -80,7 +95,7 @@ function frontPage({ setSessionToken }) {
 
       const data = await response.json();
       if(response.ok) {
-        setListOfSearchedUsers(data.data);
+        setListOfSearchedUsers(data.data);        
       } else {
         console.error("Error", data.error);
         setListOfSearchedUsers([]);
@@ -129,6 +144,8 @@ function frontPage({ setSessionToken }) {
     }
   };
 
+
+  // Displays what Tab is clicked: Friends, Search Users, or Friend Requests Tab
   const setCurrentTabVeiw = () => {
     if(isSearchUsersTab) {
       return (
@@ -142,14 +159,16 @@ function frontPage({ setSessionToken }) {
 
         {listOfSearchedUsers ? (
           <div>
-            {listOfSearchedUsers.map((user) => (
-              <div key={user.id}>
-                <p>{user.username}</p>
-
-                {friendRequestSentOrRecived(user)}
-
-              </div>
-            ))}
+            {listOfSearchedUsers.map((user) => {
+              if(user.id != currentUsersId) {
+                return (
+                  <div key={user.id}>
+                  <p>{user.username}</p>
+                  {friendRequestSentOrRecived(user)}
+                </div>
+                )
+              }})}
+              
           </div>
 
         ) : null}
@@ -182,17 +201,18 @@ function frontPage({ setSessionToken }) {
         <div id='tab-buttons-parent'>
           <button
             onClick={() => {
+              setIsSearchUsersTab(false)
+              setIsFriendRequestsTab(false)}}>
+                Friends 
+          </button>
+
+          <button
+            onClick={() => {
               setIsSearchUsersTab(true)
               setIsFriendRequestsTab(false)}}>
                 Search Users
           </button>
 
-          <button
-            onClick={() => {
-              setIsSearchUsersTab(false)
-              setIsFriendRequestsTab(false)}}>
-                Friends 
-          </button>
           <button
             onClick={() => {
               setIsSearchUsersTab(false)
