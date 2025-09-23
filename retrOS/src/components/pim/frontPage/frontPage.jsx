@@ -10,10 +10,14 @@ function frontPage({ setSessionToken }) {
   const [ listOfSearchedUsers, setListOfSearchedUsers ] = useState([]);
   const [ searchTimer, setSearchTimer ] = useState(null);
   const [ sendingFriendRequest, setSendingFriendRequest ] = useState(false);
+
+  //friend requests sent to friendRequests.jsx 
   const [ friendRequestsSent, setFriendRequestsSent ] = useState([]);
-  //friend requests sent to from friendRequests.jsx 
   const [ friendRequests, setFriendRequests ] = useState([]);
 
+  const [ isSearchUsersTab, setIsSearchUsersTab ] = useState(false);
+  const [ isFriendsListTab, setIsFriendsListTab ] = useState(false);
+  const [ isFriendRequestsTab, setIsFriendRequestsTab ] = useState(false);
 
 // gets the friend requests that the logged in user has already sent and returns just the id of the user it was sent to
   useEffect(() => {
@@ -123,21 +127,12 @@ function frontPage({ setSessionToken }) {
     } else {
       return <button onClick={() => sendFriendRequest(user.id)}>Send Friend Request</button>
     }
-  }
+  };
 
-  return (
-    <div id='front-page-component'>
-      <button id='logout-button'>
-        <LogoutIcon 
-          id='logout-icon'
-          onClick={() => 
-                    {localStorage.clear()
-                      setSessionToken(undefined)
-                    }
-        }/>
-      </button>
-
-      <div id='friend-search-parent'>
+  const setCurrentTabVeiw = () => {
+    if(isSearchUsersTab) {
+      return (
+        <div id='friend-search-parent'>
         <input
           type='text'
           value={searchUsersInput}
@@ -151,11 +146,7 @@ function frontPage({ setSessionToken }) {
               <div key={user.id}>
                 <p>{user.username}</p>
 
-
-
                 {friendRequestSentOrRecived(user)}
-
-
 
               </div>
             ))}
@@ -164,14 +155,55 @@ function frontPage({ setSessionToken }) {
         ) : null}
 
       </div>
-
-
-      <div>
-        <FriendsList />
-      </div>
-      <FriendRequests 
+      )
+    } else if(isFriendRequestsTab) {
+      return (
+        <FriendRequests 
         friendRequests={friendRequests}
         setFriendRequests={setFriendRequests}/>
+      )
+    } else 
+      return (
+        <FriendsList />
+      )
+  } 
+
+  return (
+    <div id='front-page-component'>
+      <button id='logout-button'>
+        <LogoutIcon 
+          id='logout-icon'
+          onClick={() => 
+                    {localStorage.clear()
+                      setSessionToken(undefined)
+                    }
+        }/>
+      </button>
+        <div id='tab-buttons-parent'>
+          <button
+            onClick={() => {
+              setIsSearchUsersTab(true)
+              setIsFriendRequestsTab(false)}}>
+                Search Users
+          </button>
+
+          <button
+            onClick={() => {
+              setIsSearchUsersTab(false)
+              setIsFriendRequestsTab(false)}}>
+                Friends 
+          </button>
+          <button
+            onClick={() => {
+              setIsSearchUsersTab(false)
+              setIsFriendRequestsTab(true)}}>
+                Friend Requests 
+          </button>
+
+        </div>
+
+        {setCurrentTabVeiw()}
+    
     </div>
   )
 }

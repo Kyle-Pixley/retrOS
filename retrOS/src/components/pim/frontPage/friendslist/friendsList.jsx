@@ -31,7 +31,6 @@ function friendsList() {
                     return;
                 }
                 setFriendsListError("No Friends");
-                console.log(data.Friends)
                 setFriendsList(Array.isArray(data.Friends) ? data.Friends : []);
 
             } catch (err) {
@@ -42,7 +41,7 @@ function friendsList() {
     }, [])
 
   return (
-    <div>
+    <div id='friends-list-component'>
         {friendsList.length > 0 ? null : friendsListError}
         {friendsList.map((friend) =>(
             <button>{friend.username}</button>

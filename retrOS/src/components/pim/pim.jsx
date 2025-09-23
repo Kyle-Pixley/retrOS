@@ -97,7 +97,7 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
                             >X</button>
                 </div>
             </div>
-        < PimDashboard />
+                < PimDashboard />
         </div>
     </div>
   )

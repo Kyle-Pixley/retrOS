@@ -32,8 +32,6 @@ useEffect(() => {
       }
 
       setFriendRequests(Array.isArray(data.friend_requests) ? data.friend_requests : []);
-
-      console.log(data.friend_requests)
       
     } catch (err) {
       console.error("fetch error", err);
@@ -92,9 +90,6 @@ const deleteFriendRequest = async (sender) => {
               >Decline</button>
           </li>
         ))}
-        {
-  console.log('this is friend', friendRequests)
-        }
       </ul>
     </div>
   )

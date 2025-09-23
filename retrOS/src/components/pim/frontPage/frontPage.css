@@ -7,6 +7,7 @@
     align-items: flex-start;
     /* border: 1px solid black; */
     width: 97%;
+    overflow-y: scroll;
 }
 #logout-button {
     position: absolute;
@@ -25,4 +26,7 @@
 }
 #friend-search-parent {
     margin-top: 6px;
+}
+#tab-buttons-parent {
+    display: flex;
 }
