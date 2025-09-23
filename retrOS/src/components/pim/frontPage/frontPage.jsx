@@ -5,7 +5,7 @@ import FriendsList from './friendslist/friendslist';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { jwtDecode } from 'jwt-decode';
 
-function frontPage({ setSessionToken }) {
+function frontPage({ setSessionToken, clickedOutside, setClickedOutside }) {
 
   const [ searchUsersInput, setSearchedUsersInput ] = useState('');
   const [ listOfSearchedUsers, setListOfSearchedUsers ] = useState([]);
@@ -183,7 +183,9 @@ function frontPage({ setSessionToken }) {
       )
     } else 
       return (
-        <FriendsList />
+        <FriendsList 
+          clickedOutside={clickedOutside} 
+          setClickedOutside={setClickedOutside} />
       )
   } 
 

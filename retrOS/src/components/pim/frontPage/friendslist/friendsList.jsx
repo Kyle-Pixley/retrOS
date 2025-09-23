@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './friendsList.css';
 
-function friendsList() {
+function friendsList({ clickedOutside, setClickedOutside }) {
 
     const [ friendsList, setFriendsList ] = useState([]);
     const [ friendsListError, setFriendsListError ] = useState('No Friends');
+    const [ selectedFriend, setSelectedFriend ] = useState(null);
+
+    useEffect(() => {
+        if (clickedOutside) {
+            setSelectedFriend(null);
+            setClickedOutside(false);
+        }
+    }, [ clickedOutside, setClickedOutside ])
+
 
     useEffect(() => {
         const getFriendsList = async () => {
@@ -44,7 +53,16 @@ function friendsList() {
     <div id='friends-list-component'>
         {friendsList.length > 0 ? null : friendsListError}
         {friendsList.map((friend) =>(
-            <button>{friend.username}</button>
+            <p
+                onClick={e => {
+                    e.stopPropagation();
+                    setSelectedFriend(friend.id);
+                }}
+                key={friend.id}
+                className={friend.id === selectedFriend ? 'clicked-friend friend' : 'friend'}
+                >
+                {friend.username}
+            </p>
         ))}
     </div>
   )

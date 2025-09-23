@@ -38,6 +38,8 @@ function App() {
   const [ startMenu, setStartMenu ] = useState(false);
   const navStartButtonRef = useRef(null);
 
+  
+
   useEffect(() => {
     setComponentsZIndexArray([ calculatorZIndex, myComputerZIndex, cinepixZIndex ])
   }, [myComputerZIndex, calculatorZIndex, cinepixZIndex, pimZIndex ])

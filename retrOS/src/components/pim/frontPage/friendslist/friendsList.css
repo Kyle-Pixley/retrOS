@@ -4,3 +4,10 @@
     background-color: white;
     margin: 10px auto;
 }
+.friend {
+    margin-left: 11px;
+}
+.clicked-friend {
+    background-color: blue;
+    border: 1px dotted gray;
+}

@@ -4,7 +4,7 @@ import FrontPage from '../frontPage/frontPage';
 
 import './pimDashboard.css';
 
-function pimDashboard() {
+function pimDashboard({ clickedOutside, setClickedOutside }) {
 
     const [ sessionToken, setSessionToken ] = useState(undefined);
 
@@ -24,7 +24,9 @@ function pimDashboard() {
         { sessionToken 
           ? <FrontPage 
               sessionToken={sessionToken}
-              setSessionToken={setSessionToken}/> 
+              setSessionToken={setSessionToken}
+              clickedOutside={clickedOutside} 
+              setClickedOutside={setClickedOutside}/> 
           : <Login updateLocalStorage={updateLocalStorage} /> }
     </div>
   )

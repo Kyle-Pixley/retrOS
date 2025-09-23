@@ -11,7 +11,7 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
     const [ pimComponentMaximized, setPimComponentMaximized ] = useState(false);
     // this is just to true if the window is over a certain amount of pixels otherwise it is false for styling purposes 
     const [ isWindowWide, setIsWindowWide ] = useState(false);
-    
+    const [ clickedOutside, setClickedOutside ] = useState(false);
 
     const mouseStart = e => {
         const isTopBarClicked = topBar.current && topBar.current.contains(e.target)
@@ -65,8 +65,11 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
 
     //changes z-index of component based on array of z-indexes of all "windowed"(like calculator/myComputer) z-indexes that are set to an array
     const handlePimZIndex = () => {
-        setPimZIndex(Math.max(...componentsZIndexArray) + 1)
+        setPimZIndex(Math.max(...componentsZIndexArray) + 1);
+        setClickedOutside(true);
     }
+
+
 
   return (
     <div id='pim-outside-border'
@@ -97,7 +100,9 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
                             >X</button>
                 </div>
             </div>
-                < PimDashboard />
+                < PimDashboard 
+                    clickedOutside={clickedOutside}
+                    setClickedOutside={setClickedOutside}/>
         </div>
     </div>
   )
