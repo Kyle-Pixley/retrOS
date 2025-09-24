@@ -4,17 +4,16 @@ import './friendRequests.css';
 function friendRequests({ friendRequests, setFriendRequests }) {
 
   const [ friendRequestDeleted, setFriendRequestDeleted ] = useState(false);
+  const [ friendRequestAccepted, setFriendRequestAccepted ] = useState([]);
   
 
 useEffect(() => {
   const getFriendRequests = async () => {
-
     const token = localStorage.getItem("token");
 
     if (!token) {
       console.error("No token in local storage");
     }
-
 
     try {
       const response = await fetch('http://127.0.0.1:8000/api/get_friend_requests/', {
@@ -40,7 +39,36 @@ useEffect(() => {
   
   getFriendRequests();
 
-}, [friendRequestDeleted])
+}, [ friendRequestDeleted ])
+
+//! add the user id to both users friends list
+const acceptFriendRequest = async (receiver) => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    console.error("Missing token");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/accept_friend_request/", {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json",
+        "Authorization" : `Bearer ${token}`
+      },
+      body: JSON.stringify({ receiver_id: receiver })
+    });
+
+    const data = await response.json();
+    setFriendRequestAccepted([...friendRequestAccepted, receiver])
+
+    setTimeout(() => {deleteFriendRequest(receiver)}, 3000)
+
+  } catch(err) {
+    console.error("Error: ", err)
+  }
+}
 
 const deleteFriendRequest = async (sender) => {
   const token = localStorage.getItem("token");
@@ -82,14 +110,20 @@ const deleteFriendRequest = async (sender) => {
         {friendRequests.map((user) => (
           <li key={user.id} className='friend-requests'>
             <p>{user.username}</p>
+            
+            {friendRequestAccepted.includes(user.id) ? (
+              <p>Friend Request Accepted</p>
+            ) : (
               <div id='friend-request-button-parent'>
                 <button
-                  onClick={() => console.log("something")}
+                  onClick={() => acceptFriendRequest(user.id)}
                   >Accept</button>
                 <button
                   onClick={() => deleteFriendRequest(user.id)}
                   >Decline</button>
               </div>
+
+            )}
 
           </li>
         ))}
