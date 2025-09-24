@@ -7,6 +7,7 @@ import Calculator from './components/calculator/Calculator.jsx';
 import MyComputer from './components/myComputer/MyComputer.jsx';
 import Cinepix from './components/cinepix/cinepix.jsx';
 import Pim from './components/pim/pim.jsx';
+import PimChatBox from './components/pim/PimChatBox/PimChatBox.jsx';
 import './App.css';
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
   const [ navPimButton, setNavPimButton ] = useState(false);
   const [ pimPosition, setPimPosition ] = useState({ x: 170, y: 100});
   const [ pimZIndex, setPimZIndex ] = useState(0);
+
+  const [ friendChatBox, setFriendChatBox ] = useState(null);
 
   const [ componentsZIndexArray, setComponentsZIndexArray ] = useState([ calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex ]);
 
@@ -167,7 +170,12 @@ function App() {
           pimZIndex={pimZIndex}
           setPimZIndex={setPimZIndex}
           componentsZIndexArray={componentsZIndexArray}
-          setComponentZIndexArray={setComponentsZIndexArray}/> }
+          setComponentZIndexArray={setComponentsZIndexArray}
+          friendChatBox={friendChatBox}
+          setFriendChatBox={setFriendChatBox}/>}
+
+        {friendChatBox && <PimChatBox 
+          friendChatBox={friendChatBox} />}
 
     </div>
   )

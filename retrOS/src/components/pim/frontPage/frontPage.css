@@ -23,8 +23,14 @@
     padding-right: 1px;
 }
 #friend-search-parent {
-    margin-top: 6px;
     height: 100%;
+    background-color: whitesmoke;
+    width: 97%;
+    margin: 0 auto;
+    border:1px solid black;
+}
+#search-input {
+    margin: 2%;
 }
 #tab-buttons-parent {
     display: flex;

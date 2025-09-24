@@ -4,7 +4,7 @@ import FrontPage from '../frontPage/frontPage';
 
 import './pimDashboard.css';
 
-function pimDashboard({ clickedOutside, setClickedOutside }) {
+function pimDashboard({ clickedOutside, setClickedOutside, friendChatBox, setFriendChatBox }) {
 
     const [ sessionToken, setSessionToken ] = useState(undefined);
 
@@ -26,7 +26,9 @@ function pimDashboard({ clickedOutside, setClickedOutside }) {
               sessionToken={sessionToken}
               setSessionToken={setSessionToken}
               clickedOutside={clickedOutside} 
-              setClickedOutside={setClickedOutside}/> 
+              setClickedOutside={setClickedOutside}
+              friendChatBox={friendChatBox}
+              setFriendChatBox={setFriendChatBox}/> 
           : <Login updateLocalStorage={updateLocalStorage} /> }
     </div>
   )

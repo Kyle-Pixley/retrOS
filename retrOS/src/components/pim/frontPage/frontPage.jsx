@@ -5,7 +5,7 @@ import FriendsList from './friendslist/friendslist';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { jwtDecode } from 'jwt-decode';
 
-function frontPage({ setSessionToken, clickedOutside, setClickedOutside }) {
+function frontPage({ setSessionToken, clickedOutside, setClickedOutside, friendChatBox, setFriendChatBox }) {
 
   const [ searchUsersInput, setSearchedUsersInput ] = useState('');
   const [ listOfSearchedUsers, setListOfSearchedUsers ] = useState([]);
@@ -151,6 +151,7 @@ function frontPage({ setSessionToken, clickedOutside, setClickedOutside }) {
       return (
         <div id='friend-search-parent'>
         <input
+          id='search-input'
           type='text'
           value={searchUsersInput}
           onChange={handleSearchUsersChange}
@@ -185,7 +186,9 @@ function frontPage({ setSessionToken, clickedOutside, setClickedOutside }) {
       return (
         <FriendsList 
           clickedOutside={clickedOutside} 
-          setClickedOutside={setClickedOutside} />
+          setClickedOutside={setClickedOutside} 
+          friendChatBox={friendChatBox}
+          setFriendChatBox={setFriendChatBox}/>
       )
   } 
 
