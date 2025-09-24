@@ -5,9 +5,10 @@ import CinepixImage from '../../assets/cinepix-icon.png';
 import PimImage from '../../assets/pim-icon.png';
 import "./Nav.css";
 import StartMenu from '../startMenu/StartMenu.jsx';
+import Pim from '../pim/pim.jsx';
 
 function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton, myComputerComponent, setMyComputerComponent, navMyComputerButton, setNavMyComputerButton, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray, setMyComputerZIndex,
-cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex
+cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex
  }) {
 
     const [ currentTime, setCurrentTime ] = useState('');
@@ -44,6 +45,10 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
     const handleNavPimButton = () => {
         setPimComponent(!pimComponent);
         setPimZIndex(Math.max(...componentsZIndexArray) + 1);
+    }
+    const handleNavChatBoxButton = () => {
+        setFriendChatBox(!friendChatBox)
+        setChatBoxZIndex(Math.max(...componentsZIndexArray) + 1);
     }
 
 
@@ -106,6 +111,17 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
                             src={PimImage}/>
                             <p className='nav-button-texts'>PIM</p>
                         </button>
+                    </div>) : null }
+            { navChatBoxButton ? (
+                <div className='button-outer-border'>
+                    <button
+                    onClick={handleNavChatBoxButton}
+                    id='chat-box-nav-button'
+                    className={`nav-buttons ${friendChatBox ? 'button-in' : 'button-out'}`}>
+                        <img id='pim-nav-image'
+                            src={PimImage}/>
+                            <p className='nav-button-texts'>Friends Name</p>
+                    </button>
                     </div>) : null }
 
 

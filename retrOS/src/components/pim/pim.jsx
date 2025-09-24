@@ -3,7 +3,7 @@ import PimImage from '../../assets/pim-icon.png';
 import PimDashboard from './pimDashboard/pimDashboard';
 import './pim.css';
 
-function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pimZIndex, setPimZIndex, componentsZIndexArray, setComponentZIndexArray, friendChatBox, setFriendChatBox }) {
+function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pimZIndex, setPimZIndex, componentsZIndexArray, setComponentZIndexArray, friendChatBox, setFriendChatBox, setNavChatBoxButton }) {
 
     const [ move, setMove ] = useState(false);
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
@@ -104,7 +104,8 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
                     clickedOutside={clickedOutside}
                     setClickedOutside={setClickedOutside}
                     friendChatBox={friendChatBox}
-                    setFriendChatBox={setFriendChatBox}/>
+                    setFriendChatBox={setFriendChatBox}
+                    setNavChatBoxButton={setNavChatBoxButton}/>
         </div>
     </div>
   )

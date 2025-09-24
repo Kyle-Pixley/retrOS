@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './friendsList.css';
 
-function friendsList({ clickedOutside, setClickedOutside, friendChatBox, setFriendChatBox }) {
+function friendsList({ clickedOutside, setClickedOutside, friendChatBox, setFriendChatBox, setNavChatBoxButton }) {
 
     const [ friendsList, setFriendsList ] = useState([]);
     const [ friendsListError, setFriendsListError ] = useState('No Friends');
@@ -60,7 +60,8 @@ function friendsList({ clickedOutside, setClickedOutside, friendChatBox, setFrie
                 }}
                 onDoubleClick={e => {
                     e.stopPropagation();
-                    setFriendChatBox(friend.id)}}
+                    setFriendChatBox(friend.id)
+                    setNavChatBoxButton(true)}}
                 key={friend.id}
                 className={friend.id === selectedFriend ? 'clicked-friend friend' : 'friend'}
                 >

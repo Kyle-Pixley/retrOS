@@ -35,6 +35,10 @@ function App() {
   const [ pimZIndex, setPimZIndex ] = useState(0);
 
   const [ friendChatBox, setFriendChatBox ] = useState(null);
+  const [ navChatBoxButton, setNavChatBoxButton ] = useState(false);
+  const [ chatBoxPosition, setChatBoxPosition ] = useState({ x: 100, y: 40 });
+  const [ chatBoxZIndex, setChatBoxZindex ] = useState(0);
+  
 
   const [ componentsZIndexArray, setComponentsZIndexArray ] = useState([ calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex ]);
 
@@ -93,8 +97,7 @@ function App() {
           src={PimImage}
           onDoubleClick={() => handlePimShortcutClicked()}/>
           <p className='shortcut-text'>PIM</p>
-      </div>
-
+    </div>
       <Nav 
         calculatorComponent={calculatorComponent} 
         setCalculatorComponent={setCalculatorComponent}
@@ -126,6 +129,14 @@ function App() {
         setNavPimButton={setNavPimButton}
         pimZIndex={pimZIndex}
         setPimZIndex={setPimZIndex}
+
+        friendChatBox={friendChatBox}
+        setFriendChatBox={setFriendChatBox}
+        navChatBoxButton={navChatBoxButton}
+        setNavChatBoxButton={setNavChatBoxButton}
+        chatBoxZIndex={chatBoxZIndex}
+        setChatBoxZIndex={setChatBoxZindex}
+
         />
 
         {calculatorComponent && <Calculator setCalculatorComponent={setCalculatorComponent} setNavCalculatorButton={setNavCalculatorButton} 
@@ -172,10 +183,19 @@ function App() {
           componentsZIndexArray={componentsZIndexArray}
           setComponentZIndexArray={setComponentsZIndexArray}
           friendChatBox={friendChatBox}
-          setFriendChatBox={setFriendChatBox}/>}
+          setFriendChatBox={setFriendChatBox}
+          setNavChatBoxButton={setNavChatBoxButton}/>}
 
         {friendChatBox && <PimChatBox 
-          friendChatBox={friendChatBox} />}
+          friendChatBox={friendChatBox} 
+          setFriendChatBox={setFriendChatBox}
+          setNavChatBoxButton={setNavChatBoxButton}
+          chatBoxPosition={chatBoxPosition}
+          setChatBoxPosition={setChatBoxPosition}
+          chatBoxZIndex={chatBoxZIndex}
+          setChatBoxZIndex={setChatBoxZindex}
+          componentsZIndexArray={componentsZIndexArray}
+          setComponentZIndexArray={setComponentsZIndexArray}/>}
 
     </div>
   )
