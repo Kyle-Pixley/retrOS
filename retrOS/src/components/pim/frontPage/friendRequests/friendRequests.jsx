@@ -71,7 +71,7 @@ const deleteFriendRequest = async (sender) => {
 
 
   return (
-    <div>
+    <div id='friend-requests-component'>
       <h2>Friend Requests</h2>
 
       {friendRequests.length === 0 && (
@@ -82,12 +82,15 @@ const deleteFriendRequest = async (sender) => {
         {friendRequests.map((user) => (
           <li key={user.id} className='friend-requests'>
             <p>{user.username}</p>
-            <button
-              onClick={() => console.log("something")}
-              >Accept</button>
-            <button
-              onClick={() => deleteFriendRequest(user.id)}
-              >Decline</button>
+              <div id='friend-request-button-parent'>
+                <button
+                  onClick={() => console.log("something")}
+                  >Accept</button>
+                <button
+                  onClick={() => deleteFriendRequest(user.id)}
+                  >Decline</button>
+              </div>
+
           </li>
         ))}
       </ul>

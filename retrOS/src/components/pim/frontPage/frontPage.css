@@ -24,6 +24,7 @@
 }
 #friend-search-parent {
     margin-top: 6px;
+    height: 100%;
 }
 #tab-buttons-parent {
     display: flex;
