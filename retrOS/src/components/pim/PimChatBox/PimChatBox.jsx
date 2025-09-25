@@ -1,73 +1,65 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PimImage from '../../../assets/pim-icon.png';
 import './PimChatBox.css';
 
-function PimChatBox({ friendChatBox, setFriendChatBox, setNavChatBoxButton, chatBoxPosition, setChatBoxPosition, chatBoxZIndex, setChatBoxZIndex, componentsZIndexArray }) {
+function PimChatBox({ 
+    friend,
+    position,
+    setPosition,
+    zIndex,
+    bringToFront,
+    maximized,
+    setMaximized,
+    onClose,
+    onMinimize,
+ }) {
 
-    const [ move, setMove ] = useState(false);
-    const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
     const topBar = useRef(null);
-    const [ chatBoxComponentMaximized, setChatBoxComponentMaximized ] = useState(false);
+    const dragRef = useRef({ moving: false, offsetX: 0, offsetY: 0 });
+
+    const handleMouseDown = e => {
+        if(e.target.closest('.top-bar-button')) return; 
+
+        const onTopBar = topBar.current && topBar.current.contains(e.target);
+        if (!onTopBar || maximized) return;
+
+        bringToFront(friend.id);
+        
+        dragRef.current.moving = true;
+        dragRef.current.offsetX - position.x;
+        dragRef.current.offsetY - position.y;
+    };
+
+    const handleMouseMove = e => {
+        if (!dragRef.current.moving) return;
+        setPosition(friend.id, {
+            x: e.clientX - dragRef.current.offsetX,
+            y: e.clientY - dragRef.current.offsetY,
+        })
+    };
+
+    const handleMouseUp = () => {
+        dragRef.current.moving = false;
+    };
     
 
-    const mouseStart = e => {
-        const isTopBarClicked = topBar.current && topBar.current.contains(e.target)
-        if(isTopBarClicked) {
-        setMove(true);
-        setOffSet({
-            x: e.clientX - chatBoxPosition.x,
-            y: e.clientY - chatBoxPosition.y
-        })
-        }
-    };
-
-    const mouseMove = e => {
-        if (!move) 
-        return 
-        setChatBoxPosition({
-            x: e.clientX -offSet.x,
-            y: e.clientY - offSet.y
-        })
-    }
-
-    const stopMove = () => {
-        setMove(false)
-    };
-
     const divStyle = {
-        left: chatBoxComponentMaximized ? 0 : chatBoxPosition.x ,
-        top: chatBoxComponentMaximized ? 0 : chatBoxPosition.y,
-        width: chatBoxComponentMaximized ? '100%' : '35vw',
-        height: chatBoxComponentMaximized ? 'calc(100% - 40px)' : '25vw',
-        zIndex: chatBoxZIndex,
-    }
-
-    const handleXButton = () => {
-        setFriendChatBox(false);
-        setNavChatBoxButton(false);
-        setChatBoxPosition({ x: 100, y:100 });
-    }
-
-    const handleMaximizeButton = () => {
-        setChatBoxComponentMaximized(!chatBoxComponentMaximized);
-    }
-
-    const handleMinimizeButton = () => {
-        setFriendChatBox(false);
-    }
-
-    //changes z-index of component based on array of z-indexes of all "windowed"(like calculator/myComputer) z-indexes that are set to an array
-    const handleChatBoxZIndex = () => {
-        setChatBoxZIndex(Math.max(...componentsZIndexArray) + 1)
-    }
+        position: 'absolute',
+        left: maximized ? 0 : position.x ,
+        top: maximized ? 0 : position.y,
+        width: maximized ? '100%' : '35vw',
+        height: maximized ? 'calc(100% - 40px)' : '25vw',
+        zIndex,
+    };
 
   return (
     <div id='chat-box-outside-border'
         style={divStyle}
-        onMouseDown={mouseStart}
-        onMouseMove={mouseMove}
-        onMouseUp={stopMove}
-        onClick={() => handleChatBoxZIndex()}>
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onClick={() => bringToFront(friend.id)}>
         
         <div id='chat-box-parent'>
             <div id='top-bar' ref={topBar}>
@@ -75,21 +67,31 @@ function PimChatBox({ friendChatBox, setFriendChatBox, setNavChatBoxButton, chat
 
                     <img src={PimImage} id='chat-box-top-bar-image'/>
 
-                    <p id='chat-box-top-bar-text'>{friendChatBox.username}</p>
+                    <p id='chat-box-top-bar-text'>{friend.username}</p>
                 </div>
+
                 <div id='top-bar-button-parent'>
                     <button className='top-bar-button'
-                            onClick={handleMinimizeButton}>_</button>
+                            onClick={e => {
+                                e.stopPropagation();
+                                onMinimize(friend.id)
+                                }}>_</button>
 
-                    <button id='chat-box-maximize-button' className='top-bar-button' onClick={() => handleMaximizeButton()}>
+                    <button id='chat-box-maximize-button' className='top-bar-button'
+                     onClick={e => {
+                            e.stopPropagation();
+                            setMaximized(friend.id, !maximized)}}>
                         <div id='fullscreen-button-square'></div>
                     </button>
 
                     <button className='top-bar-button'
-                            onClick={handleXButton}
+                            onClick={e => 
+                                    {e.stopPropagation();
+                                    onClose(friend.id)}}
                             >X</button>
                 </div>
             </div>
+            {/* actual chat goes here form for messages and display messages  */}
         </div>
     </div>
   )

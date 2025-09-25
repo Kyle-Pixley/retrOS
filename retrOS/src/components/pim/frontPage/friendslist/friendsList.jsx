@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './friendsList.css';
 
-function friendsList({ clickedOutside, setClickedOutside, friendChatBox, setFriendChatBox, setNavChatBoxButton }) {
+function friendsList({ clickedOutside, setClickedOutside, onOpenChat, setNavChatBoxButton }) {
 
     const [ friendsList, setFriendsList ] = useState([]);
     const [ friendsListError, setFriendsListError ] = useState('Loading...');
@@ -71,8 +71,8 @@ function friendsList({ clickedOutside, setClickedOutside, friendChatBox, setFrie
                 }}
                 onDoubleClick={e => {
                     e.stopPropagation();
-                    setFriendChatBox(friend)
-                    setNavChatBoxButton(true)}}
+                    onOpenChat(friend)
+                    }}
                 key={friend.id}
                 className={friend.id === selectedFriend ? 'clicked-friend friend' : 'friend'}
                 >

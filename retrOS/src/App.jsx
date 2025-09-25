@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import ComputerIcon from './assets/my-computer-icon.png';
 import CinepixIcon from './assets/cinepix-icon.png';
 import PimImage from './assets/pim-icon.png';
@@ -34,10 +34,10 @@ function App() {
   const [ pimPosition, setPimPosition ] = useState({ x: 170, y: 100});
   const [ pimZIndex, setPimZIndex ] = useState(0);
 
-  const [ friendChatBox, setFriendChatBox ] = useState(null);
   const [ navChatBoxButton, setNavChatBoxButton ] = useState(false);
-  const [ chatBoxPosition, setChatBoxPosition ] = useState({ x: 100, y: 40 });
   const [ chatBoxZIndex, setChatBoxZindex ] = useState(0);
+
+  const [ openChats, setOpenChats ] = useState({});
   
 
   const [ componentsZIndexArray, setComponentsZIndexArray ] = useState([ calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex ]);
@@ -45,6 +45,13 @@ function App() {
   const [ startMenu, setStartMenu ] = useState(false);
   const navStartButtonRef = useRef(null);
 
+  const globalMaxZ = useMemo(() => {
+    const components = Math.max(calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex)
+    const chatWindow = Math.max(0, ...Object.values(openChats).map(w => w.zIndex));
+    return Math.max(components, chatWindow);
+  }, [calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex, openChats ]);
+
+  const nextZ = () => globalMaxZ + 1;
   
 
   useEffect(() => {
@@ -75,6 +82,70 @@ function App() {
     setPimComponent(true);
     setNavPimButton(true);
   }
+
+  const openChat = (friend) => {
+  setOpenChats(prev => {
+    if (!friend || typeof friend !== 'object' || friend.id == null) {
+      console.error('openChat called with invalid friend:', friend)
+      return prev; 
+    }
+
+    const exist = prev[friend.id];
+    if (exist) {
+      return {
+        ...prev,
+        [friend.id]: { ...exist, minimized: false, zIndex: nextZ() }
+      }
+    }
+
+    const count = Object.keys(prev).length;
+    return {
+      ...prev,
+      [friend.id]: {
+        friend,
+        position: { x: 100 + count * 30, y: 40 + count * 30 },
+        zIndex: nextZ(),
+        minimized: false,
+        maximized: false,
+      }
+    }
+  })
+};
+
+
+  const closeChat = id => {
+    console.log(id)
+    setOpenChats(prev => {
+      const { [id]: _, ...rest } = prev;
+        return rest;
+    })
+  };
+
+  const minimizeChat = id => {
+    setOpenChats(prev => ({
+      ...prev,[id]: {...prev[id], minimized: true},
+    }))
+  };
+
+  const setMaximizedChat = (id, value) => {
+    setOpenChats(prev => ({
+      ...prev,[id]: {...prev[id], maximized: value},
+    }))
+  };
+
+  const setChatPosition = (id, pos) => {
+    setOpenChats(prev => ({
+      ...prev, [id]: {...prev[id], position: pos },
+    }))
+  };
+
+  const bringChatToFront = id => {
+    setOpenChats(prev => {
+      if (!prev[id]) return prev;
+      return {...prev, [id]: {...prev[id], zIndex: nextZ()}}
+    })
+  };
+
 
   return (
     <div>
@@ -130,12 +201,12 @@ function App() {
         pimZIndex={pimZIndex}
         setPimZIndex={setPimZIndex}
 
-        friendChatBox={friendChatBox}
-        setFriendChatBox={setFriendChatBox}
         navChatBoxButton={navChatBoxButton}
         setNavChatBoxButton={setNavChatBoxButton}
         chatBoxZIndex={chatBoxZIndex}
         setChatBoxZIndex={setChatBoxZindex}
+
+        openChats={openChats}
 
         />
 
@@ -182,20 +253,26 @@ function App() {
           setPimZIndex={setPimZIndex}
           componentsZIndexArray={componentsZIndexArray}
           setComponentZIndexArray={setComponentsZIndexArray}
-          friendChatBox={friendChatBox}
-          setFriendChatBox={setFriendChatBox}
-          setNavChatBoxButton={setNavChatBoxButton}/>}
-
-        {friendChatBox && <PimChatBox 
-          friendChatBox={friendChatBox} 
-          setFriendChatBox={setFriendChatBox}
           setNavChatBoxButton={setNavChatBoxButton}
-          chatBoxPosition={chatBoxPosition}
-          setChatBoxPosition={setChatBoxPosition}
-          chatBoxZIndex={chatBoxZIndex}
-          setChatBoxZIndex={setChatBoxZindex}
-          componentsZIndexArray={componentsZIndexArray}
-          setComponentZIndexArray={setComponentsZIndexArray}/>}
+          onOpenChat={openChat}/>}
+
+          {Object.values(openChats)
+            .filter(w => w && w.friend && w.position && !w.minimized)
+            .sort((a,b) => a.zIndex - b.zIndex)
+            .map(w => (
+              <PimChatBox
+                key={w.friend.id}
+                friend={w.friend}
+                position={w.position}
+                setPosition={setChatPosition}
+                zIndex={w.zIndex}
+                bringToFront={bringChatToFront}
+                maximized={w.maximized}
+                setMaximized={setMaximizedChat}
+                onClose={closeChat}
+                onMinimize={minimizeChat}
+              />
+            ))}
 
     </div>
   )

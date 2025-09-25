@@ -3,7 +3,7 @@ import MyComputerImage from '../../assets/my-computer-icon.png';
 import MyComputerFiles from './myComputerFiles/MyComputerFiles';
 import './MyComputer.css';
 
-function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition, myComputerZIndex, setMyComputerZIndex, componentsZIndexArray, setComponentZIndexArray }) {
+function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition, myComputerZIndex, setMyComputerZIndex, componentsZIndexArray }) {
 
     const [ move, setMove ] = useState(false);
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
@@ -26,7 +26,7 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
         if (!move) 
         return 
         setMyComputerPosition({
-            x: e.clientX -offSet.x,
+            x: e.clientX - offSet.x,
             y: e.clientY - offSet.y
         })
     }

@@ -5,7 +5,7 @@ import FriendsList from './friendslist/friendslist';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { jwtDecode } from 'jwt-decode';
 
-function frontPage({ setSessionToken, clickedOutside, setClickedOutside, friendChatBox, setFriendChatBox, setNavChatBoxButton }) {
+function frontPage({ setSessionToken, clickedOutside, setClickedOutside, onOpenChat, setNavChatBoxButton }) {
 
   const [ searchUsersInput, setSearchedUsersInput ] = useState('');
   const [ listOfSearchedUsers, setListOfSearchedUsers ] = useState([]);
@@ -188,8 +188,7 @@ function frontPage({ setSessionToken, clickedOutside, setClickedOutside, friendC
         <FriendsList 
           clickedOutside={clickedOutside} 
           setClickedOutside={setClickedOutside} 
-          friendChatBox={friendChatBox}
-          setFriendChatBox={setFriendChatBox}
+          onOpenChat={onOpenChat}
           setNavChatBoxButton={setNavChatBoxButton}/>
       )
   } 
