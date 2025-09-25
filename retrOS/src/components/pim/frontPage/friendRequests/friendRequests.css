@@ -21,6 +21,10 @@
     justify-content: space-between;
     align-items: center;
 }
+.friend-requests > p {
+    font-family: 'inter', "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 20px;
+}
 #friend-request-button-parent {
     display: flex;
     justify-content: center;

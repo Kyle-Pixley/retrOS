@@ -1,11 +1,11 @@
 #friends-list-component {
     border: 1px solid black;
     width: 97%;
-    background-color: white;
+    background-color: whitesmoke;
     margin: 0 auto 10px auto;
     height: 100%;
 }
-.friend {
+.friend, #friends-list-error {
     margin: 8px auto;
     width: 90%;
     height: 28px;
@@ -14,6 +14,9 @@
     text-indent: 4px;
     box-sizing: border-box;
     cursor: default;
+    kerning: auto;
+    font-family: 'inter', "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 20px;
 }
 .clicked-friend {
     background-color: lightblue;

@@ -4,8 +4,15 @@ import './friendsList.css';
 function friendsList({ clickedOutside, setClickedOutside, friendChatBox, setFriendChatBox, setNavChatBoxButton }) {
 
     const [ friendsList, setFriendsList ] = useState([]);
-    const [ friendsListError, setFriendsListError ] = useState('No Friends');
+    const [ friendsListError, setFriendsListError ] = useState('Loading...');
     const [ selectedFriend, setSelectedFriend ] = useState(null);
+
+
+    setTimeout(()=> {
+        if(friendsListError==='Loading...') {
+            setFriendsListError("No Friends");
+        }
+    },[3000])
 
     useEffect(() => {
         if (clickedOutside) {
@@ -36,10 +43,10 @@ function friendsList({ clickedOutside, setClickedOutside, friendChatBox, setFrie
                 if(!response.ok) {
                     console.error("Error", data.error);
                     setFriendsList([])
-                    setFriendsListError("There is an issue with the server")
+                    setFriendsListError("There is an issue connecting to server")
                     return;
                 }
-                setFriendsListError("No Friends");
+
                 setFriendsList(Array.isArray(data.Friends) ? data.Friends : []);
 
             } catch (err) {
@@ -49,9 +56,13 @@ function friendsList({ clickedOutside, setClickedOutside, friendChatBox, setFrie
         getFriendsList();
     }, [])
 
+
   return (
     <div id='friends-list-component'>
-        {friendsList.length > 0 ? null : friendsListError}
+        {/* <div id='friends-list-error'> */}
+            {friendsList.length > 0 ? null : (<p id='friends-list-error'>{friendsListError}</p>)}
+        {/* </div> */}
+
         {friendsList.map((friend) =>(
             <p
                 onClick={e => {
@@ -60,7 +71,7 @@ function friendsList({ clickedOutside, setClickedOutside, friendChatBox, setFrie
                 }}
                 onDoubleClick={e => {
                     e.stopPropagation();
-                    setFriendChatBox(friend.id)
+                    setFriendChatBox(friend)
                     setNavChatBoxButton(true)}}
                 key={friend.id}
                 className={friend.id === selectedFriend ? 'clicked-friend friend' : 'friend'}

@@ -140,7 +140,8 @@ function frontPage({ setSessionToken, clickedOutside, setClickedOutside, friendC
     } else if (friendRequests.some(obj => obj.id === user.id)) {
       return <p>This user sent you a request</p>
     } else {
-      return <button onClick={() => sendFriendRequest(user.id)}>Send Friend Request</button>
+      return <button 
+      onClick={() => sendFriendRequest(user.id)}>Send Friend Request</button>
     }
   };
 
@@ -159,12 +160,12 @@ function frontPage({ setSessionToken, clickedOutside, setClickedOutside, friendC
         </input>
 
         {listOfSearchedUsers ? (
-          <div>
+          <div id='searched-users-list'>
             {listOfSearchedUsers.map((user) => {
               if(user.id != currentUsersId) {
                 return (
-                  <div key={user.id}>
-                  <p>{user.username}</p>
+                  <div key={user.id} id='searched-user-button-parent'>
+                  <p id='searched-user-names'>{user.username}</p>
                   {friendRequestSentOrRecived(user)}
                 </div>
                 )
@@ -193,6 +194,13 @@ function frontPage({ setSessionToken, clickedOutside, setClickedOutside, friendC
       )
   } 
 
+  //handles if the friend list tab is selected like isSearchUsersTab and isFriendsRequestsTab execpt I did not use useState for friendsListTab
+  const handleFriendsListTab = () => {
+    if(!isFriendRequestsTab && !isSearchUsersTab) {
+      return 'button-active'
+    }
+  }
+
   return (
     <div id='front-page-component'>
       <button id='logout-button'>
@@ -206,7 +214,7 @@ function frontPage({ setSessionToken, clickedOutside, setClickedOutside, friendC
       </button>
         <div id='tab-buttons-parent'>
           <button
-            className='tab-buttons'
+            className={`tab-buttons ${handleFriendsListTab()}`}
             onClick={() => {
               setIsSearchUsersTab(false)
               setIsFriendRequestsTab(false)}}>
@@ -214,7 +222,7 @@ function frontPage({ setSessionToken, clickedOutside, setClickedOutside, friendC
           </button>
 
           <button
-            className='tab-buttons'
+            className={`tab-buttons ${isSearchUsersTab ? 'button-active' : null}`}
             onClick={() => {
               setIsSearchUsersTab(true)
               setIsFriendRequestsTab(false)}}>
@@ -222,7 +230,7 @@ function frontPage({ setSessionToken, clickedOutside, setClickedOutside, friendC
           </button>
 
           <button
-            className='tab-buttons'
+            className={`tab-buttons ${isFriendRequestsTab ? 'button-active' : null}`}
             onClick={() => {
               setIsSearchUsersTab(false)
               setIsFriendRequestsTab(true)}}>

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import PimImage from '../../../assets/pim-icon.png';
 import './PimChatBox.css';
 
 function PimChatBox({ friendChatBox, setFriendChatBox, setNavChatBoxButton, chatBoxPosition, setChatBoxPosition, chatBoxZIndex, setChatBoxZIndex, componentsZIndexArray }) {
@@ -72,9 +73,9 @@ function PimChatBox({ friendChatBox, setFriendChatBox, setNavChatBoxButton, chat
             <div id='top-bar' ref={topBar}>
                 <div id='image-text-parent'>
 
-                    {/* <img src={ChatBoxImage} id='chat-box-top-bar-image'/> */}
+                    <img src={PimImage} id='chat-box-top-bar-image'/>
 
-                    <p id='chat-box-top-bar-text'>Friends Name</p>
+                    <p id='chat-box-top-bar-text'>{friendChatBox.username}</p>
                 </div>
                 <div id='top-bar-button-parent'>
                     <button className='top-bar-button'

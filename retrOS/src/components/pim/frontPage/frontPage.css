@@ -32,6 +32,21 @@
 #search-input {
     margin: 2%;
 }
+#searched-users-list {
+    margin: 8px;
+}
+#searched-user-names {
+    font-family: 'Inter', "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 20px;
+}
+#searched-user-button-parent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#searched-user-button-parent > button {
+    padding: 3px;
+}
 #tab-buttons-parent {
     display: flex;
     margin: auto auto 0 2.5%;
@@ -43,4 +58,12 @@
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     border-bottom: 0;
+    background-color: lightgray;
+}
+.button-active {
+    background-color: whitesmoke;
+    box-shadow: 2px 0 0 black;
+    border-bottom: none;
+    margin-bottom: -1px;
+    z-index: 0;
 }
