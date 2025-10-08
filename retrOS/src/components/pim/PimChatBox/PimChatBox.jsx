@@ -21,7 +21,9 @@ function PimChatBox({
         if(e.target.closest('.top-bar-button')) return; 
 
         const onTopBar = topBar.current && topBar.current.contains(e.target);
-        if (!onTopBar || maximized) return;
+        if (!onTopBar) return;
+
+        console.log('handle mouse down')
 
         bringToFront(friend.id);
         

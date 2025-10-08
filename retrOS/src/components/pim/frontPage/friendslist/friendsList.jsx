@@ -71,7 +71,8 @@ function friendsList({ clickedOutside, setClickedOutside, onOpenChat, setNavChat
                 }}
                 onDoubleClick={e => {
                     e.stopPropagation();
-                    onOpenChat(friend)
+                    onOpenChat(friend);
+                    setNavChatBoxButton(true)
                     }}
                 key={friend.id}
                 className={friend.id === selectedFriend ? 'clicked-friend friend' : 'friend'}
