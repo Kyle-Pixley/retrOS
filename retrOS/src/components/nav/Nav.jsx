@@ -8,7 +8,7 @@ import StartMenu from '../startMenu/StartMenu.jsx';
 import Pim from '../pim/pim.jsx';
 
 function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton, myComputerComponent, setMyComputerComponent, navMyComputerButton, setNavMyComputerButton, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray, setMyComputerZIndex,
-cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats,
+cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats, setOpenChats
  }) {
 
     const [ currentTime, setCurrentTime ] = useState('');
@@ -50,9 +50,11 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
         setPimComponent(!pimComponent);
         setPimZIndex(Math.max(...componentsZIndexArray) + 1);
     }
-    const handleNavChatBoxButton = () => {
+    const handleNavChatBoxButton = (friend) => {
         //not friendchatbox 
-        setFriendChatBox(!friendChatBox)
+        console.log(friend)
+        // setOpenChats(Object.entries(openChats).filter(([key]) => key !== friend))
+        // setOpenChats()
         setChatBoxZIndex(Math.max(...componentsZIndexArray) + 1);
     }
 
@@ -124,7 +126,7 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
                     return (
                     <div className='button-outer-border' key={i}>
                         <button 
-                            onClick={handleNavChatBoxButton}
+                            onClick={() => handleNavChatBoxButton(name)}
                             id='chat-box-nav-button'
                             className={`nav-buttons ${friendChatBox ? 'button-in' : 'button-out'}`}>
                                 <img id='pim-nav-image'

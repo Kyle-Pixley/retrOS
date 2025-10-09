@@ -28,15 +28,15 @@ function PimChatBox({
         bringToFront(friend.id);
         
         dragRef.current.moving = true;
-        dragRef.current.offsetX - position.x;
-        dragRef.current.offsetY - position.y;
+        dragRef.current.offsetX = e.clientX - position.x;
+        dragRef.current.offsetY = e.clientY - position.y;
     };
 
     const handleMouseMove = e => {
         if (!dragRef.current.moving) return;
         setPosition(friend.id, {
-            x: e.clientX - dragRef.current.offsetX,
-            y: e.clientY - dragRef.current.offsetY,
+            x: e.clientX - (dragRef.current.offsetX ),
+            y: e.clientY - (dragRef.current.offsetY ),
         })
     };
 

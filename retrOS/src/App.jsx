@@ -212,6 +212,7 @@ function App() {
         setChatBoxZIndex={setChatBoxZindex}
 
         openChats={openChats}
+        setOpenChats={setOpenChats}
 
         />
 
