@@ -14,7 +14,7 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
     const [ currentTime, setCurrentTime ] = useState('');
 
     useEffect(() => {
-        console.log('nav chat box button', navChatBoxButton)
+        console.log(openChats)
     }, [navChatBoxButton])
 
     // gets the time
@@ -51,10 +51,25 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
         setPimZIndex(Math.max(...componentsZIndexArray) + 1);
     }
     const handleNavChatBoxButton = (friend) => {
-        //not friendchatbox 
-        console.log(friend)
-        // setOpenChats(Object.entries(openChats).filter(([key]) => key !== friend))
-        // setOpenChats()
+        
+        const currentFriend = friend?.friend?.id ?? friend?.username;
+
+        console.log(friend.friend.id)
+
+        setOpenChats(prev => {
+
+            
+            const friendsList = { ...prev };
+            console.log(friendsList)
+
+            if ( currentFriend in friendsList ) {
+                delete friendsList[currentFriend];
+            } else {
+                friendsList[currentFriend] = friend;
+            }
+            return friendsList;
+        });
+
         setChatBoxZIndex(Math.max(...componentsZIndexArray) + 1);
     }
 
@@ -122,16 +137,17 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
 
 
             { Object.keys(openChats).length > 0 ? 
-                Object.values(openChats).map((name, i) => {
+                Object.entries(openChats).map(([key, friend]) => {
                     return (
-                    <div className='button-outer-border' key={i}>
+                    <div className='button-outer-border' key={key}>
                         <button 
-                            onClick={() => handleNavChatBoxButton(name)}
+                            onClick={() => handleNavChatBoxButton(friend)}
                             id='chat-box-nav-button'
                             className={`nav-buttons ${friendChatBox ? 'button-in' : 'button-out'}`}>
-                                <img id='pim-nav-image'
-                                    src={PimImage}/>
-                                    <p className='nav-button-texts'>{name.friend.username}</p>
+                                <img id='pim-nav-image' src={PimImage}/>
+                                    <p className='nav-button-texts'>
+                                        { friend?.friend?.username ?? friend?.username ?? key}
+                                    </p>
                         </button>
                     </div> )
                 }) : null }

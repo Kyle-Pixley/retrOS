@@ -52,12 +52,6 @@ function App() {
   }, [calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex, openChats ]);
 
   const nextZ = () => globalMaxZ + 1;
-  
-  useEffect(() => {
-    if(Object.keys(openChats)) {
-      console.log(Object.keys(openChats).length)
-    }
-  }, [openChats])
 
   useEffect(() => {
     setComponentsZIndexArray([ calculatorZIndex, myComputerZIndex, cinepixZIndex ])
