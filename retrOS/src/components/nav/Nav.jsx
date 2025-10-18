@@ -11,11 +11,9 @@ function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartM
 cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats, setOpenChats
  }) {
 
-    const [ currentTime, setCurrentTime ] = useState('');
 
-    useEffect(() => {
-        console.log(openChats)
-    }, [navChatBoxButton])
+    const [ currentTime, setCurrentTime ] = useState('');
+    const [ navBarChats, setNavBarChats ] = useState(openChats);
 
     // gets the time
     useEffect(() => {
@@ -51,13 +49,12 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
         setPimZIndex(Math.max(...componentsZIndexArray) + 1);
     }
     const handleNavChatBoxButton = (friend) => {
-        
+        //fix this here =======================================================
         const currentFriend = friend?.friend?.id ?? friend?.username;
 
         console.log(friend.friend.id)
 
         setOpenChats(prev => {
-
             
             const friendsList = { ...prev };
             console.log(friendsList)
@@ -69,6 +66,7 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
             }
             return friendsList;
         });
+        // ========================================================================
 
         setChatBoxZIndex(Math.max(...componentsZIndexArray) + 1);
     }
