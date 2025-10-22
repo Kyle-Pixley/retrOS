@@ -37,7 +37,9 @@ function App() {
   const [ navChatBoxButton, setNavChatBoxButton ] = useState(false);
   const [ chatBoxZIndex, setChatBoxZindex ] = useState(0);
 
-  const [ openChats, setOpenChats ] = useState({});
+  const [ openChats, setOpenChats ] = useState([]);
+  const [ navBarChats, setNavBarChats ] = useState([]);
+  
   
 
   const [ componentsZIndexArray, setComponentsZIndexArray ] = useState([ calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex ]);
@@ -82,6 +84,17 @@ function App() {
     setNavPimButton(true);
   }
 
+  useEffect(() => {    
+    const openChatList = Object.values(openChats ?? {});
+
+    setNavBarChats((prev) => {
+      const safePrev = Array.isArray(prev) ? prev : [];
+      const newChats = openChatList.filter(chat => !safePrev.some(c => c.friend.id === chat.friend.id));
+      return [...safePrev, ...newChats];
+    })
+    
+  }, [openChats])
+
   const openChat = (friend) => {
   setOpenChats(prev => {
     if (!friend || typeof friend !== 'object' || friend.id == null) {
@@ -118,7 +131,9 @@ function App() {
       const { [id]: _, ...rest } = prev;
         return rest;
     })
+    setNavBarChats(prev => (Array.isArray(prev) ? prev.filter(c => c.friend.id !== id) : []));
   };
+
 
   const minimizeChat = id => {
     setOpenChats(prev => ({
@@ -204,9 +219,12 @@ function App() {
         setNavChatBoxButton={setNavChatBoxButton}
         chatBoxZIndex={chatBoxZIndex}
         setChatBoxZIndex={setChatBoxZindex}
+        navBarChats={navBarChats}
+        setNavBarChats={setNavBarChats}
 
         openChats={openChats}
         setOpenChats={setOpenChats}
+        onOpenChat={openChat}
 
         />
 

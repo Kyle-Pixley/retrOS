@@ -8,12 +8,11 @@ import StartMenu from '../startMenu/StartMenu.jsx';
 import Pim from '../pim/pim.jsx';
 
 function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton, myComputerComponent, setMyComputerComponent, navMyComputerButton, setNavMyComputerButton, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray, setMyComputerZIndex,
-cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats, setOpenChats
+cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats, setOpenChats, navBarChats, setNavBarChats, openChat
  }) {
 
 
     const [ currentTime, setCurrentTime ] = useState('');
-    const [ navBarChats, setNavBarChats ] = useState(openChats);
 
     // gets the time
     useEffect(() => {
@@ -48,8 +47,8 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
         setPimComponent(!pimComponent);
         setPimZIndex(Math.max(...componentsZIndexArray) + 1);
     }
+
     const handleNavChatBoxButton = (friend) => {
-        //fix this here =======================================================
         const currentFriend = friend?.friend?.id ?? friend?.username;
 
         console.log(friend.friend.id)
@@ -66,7 +65,6 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
             }
             return friendsList;
         });
-        // ========================================================================
 
         setChatBoxZIndex(Math.max(...componentsZIndexArray) + 1);
     }
@@ -134,8 +132,8 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
                     </div>) : null }
 
 
-            { Object.keys(openChats).length > 0 ? 
-                Object.entries(openChats).map(([key, friend]) => {
+            { Object.keys(navBarChats).length > 0 ? 
+                Object.entries(navBarChats).map(([key, friend]) => {
                     return (
                     <div className='button-outer-border' key={key}>
                         <button 
