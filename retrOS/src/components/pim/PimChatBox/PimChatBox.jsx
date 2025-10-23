@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PimImage from '../../../assets/pim-icon.png';
+import PimMessage from './PimMessage/PimMessage';
 import './PimChatBox.css';
 
 function PimChatBox({ 
@@ -13,6 +14,10 @@ function PimChatBox({
     onClose,
     onMinimize,
  }) {
+
+    useEffect(() => {
+        console.log(friend)
+    }, [])
 
     const topBar = useRef(null);
     const dragRef = useRef({ moving: false, offsetX: 0, offsetY: 0 });
@@ -93,6 +98,7 @@ function PimChatBox({
                             >X</button>
                 </div>
             </div>
+            <PimMessage friend={friend}/>
             {/* actual chat goes here form for messages and display messages  */}
         </div>
     </div>

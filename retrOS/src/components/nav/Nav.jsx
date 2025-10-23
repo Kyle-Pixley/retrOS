@@ -132,21 +132,26 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
                     </div>) : null }
 
 
-            { Object.keys(navBarChats).length > 0 ? 
-                Object.entries(navBarChats).map(([key, friend]) => {
+            {navBarChats.length > 0 &&
+                navBarChats.map((chat, index) => {
+                    const isOpen = !!openChats[chat.friend?.id];
+
                     return (
-                    <div className='button-outer-border' key={key}>
-                        <button 
-                            onClick={() => handleNavChatBoxButton(friend)}
-                            id='chat-box-nav-button'
-                            className={`nav-buttons ${friendChatBox ? 'button-in' : 'button-out'}`}>
-                                <img id='pim-nav-image' src={PimImage}/>
-                                    <p className='nav-button-texts'>
-                                        { friend?.friend?.username ?? friend?.username ?? key}
-                                    </p>
-                        </button>
-                    </div> )
-                }) : null }
+                        <div 
+                            className='button-outer-border'
+                            key={chat.friend?.id ?? index}>
+                                <button
+                                    id='chat-box-nav-button'
+                                    onClick={() => handleNavChatBoxButton(chat)}
+                                    className={`nav-buttons ${isOpen ? "button-in" : 'button-out'}`}>
+                                        <img id="pim-nav-image" src={PimImage} />
+                                        <p className='nav-button-texts'>
+                                            {chat.friend?.username ?? chat.username ?? "Unknown"}
+                                        </p>
+                                </button>
+                        </div>
+                    )
+                })}
 
 
         </div>
