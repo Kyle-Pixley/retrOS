@@ -402,3 +402,26 @@ def create_message(request):
         
     else:
         return JsonResponse({'error' : 'Only POST method allowed'}, status=405)
+    
+# Get Messages from and to a User by id 
+@csrf_exempt
+def get_messages(request, friend_id):
+    if request.method == 'GET':
+        try:
+            payload = decode_jwt_token(request)
+            user_id = payload.get('user_id')
+
+            if not friend_id:
+                return JsonResponse({"error" : "No friend id"}, status=400)
+            
+            request_data = list(Message.objects.filter(sender_id=user_id, receiver_id=friend_id).values())
+            
+            return JsonResponse({'Messages' : request_data}, status=200)
+            
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error' : 'Invalid JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error' : str(e)}, status=500)
+    else:
+        return JsonResponse({'error' : 'Only Get method allowd'}, status=405)

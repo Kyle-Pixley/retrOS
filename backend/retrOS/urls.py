@@ -14,5 +14,6 @@ urlpatterns = [
     path('api/delete_friend_request/', views.delete_friend_request),
     path('api/get_all_friends/',views.get_all_friends),
     path('api/create_message/', views.create_message),
+    path('api/get_messages/<int:friend_id>/', views.get_messages),
 ]
 
