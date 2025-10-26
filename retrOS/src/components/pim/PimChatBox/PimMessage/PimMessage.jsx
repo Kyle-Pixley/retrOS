@@ -19,13 +19,10 @@ function PimMessage({ friend }) {
                 localStorage.clear()
             }
 
-            // const friendParam = new URLSearchParams({ friendId, friend_id }).toString();
-
             try {
                 const response = await fetch(`http://127.0.0.1:8000/api/get_messages/${friend.id}/`, {
                     method: "GET",
                     headers: {
-                        // 'Content-Type' : 'application/json',
                         "Authorization" : `Bearer ${token}`
                     },
                 });
