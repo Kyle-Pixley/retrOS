@@ -56,7 +56,7 @@ function PimMessage({ friend }) {
 
             {messageList.map((mes, i) => {
                     return (
-                            <div key={i}>
+                            <div id='message-parent' key={i}>
                                 <p>{mes.body}</p>
                                 <p>{mes.sender_id_id}</p>
                             </div>

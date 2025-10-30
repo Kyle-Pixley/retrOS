@@ -1,0 +1,30 @@
+#pim-message-component {
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+}
+#message-parent {
+    background-color: whitesmoke;
+    border: 1px solid black;
+    box-shadow: inset 1px 1px 1px #383735;
+    margin: auto;
+    width: 96%;
+    padding: 6px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    width: 96%;
+    margin: auto;
+    height: 100%;
+}
+form > input {
+    background-color: whitesmoke;
+    padding: 6px;
+    margin: auto;
+    width: 96%;
+    box-shadow: inset 2px 2px 1px #383735;
+}
