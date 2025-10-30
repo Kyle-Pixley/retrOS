@@ -102,11 +102,12 @@ function App() {
       return prev; 
     }
 
-    const exist = prev[friend.id];
-    if (exist) {
+    const existing = prev[friend.id];
+
+    if (existing) {
       return {
         ...prev,
-        [friend.id]: { ...exist, minimized: false, zIndex: nextZ() }
+        [friend.id]: { ...existing, minimized: false, zIndex: nextZ() }
       }
     }
 
@@ -226,7 +227,8 @@ function App() {
         setOpenChats={setOpenChats}
         onOpenChat={openChat}
 
-        bringToFront={() => setPimZIndex(nextZ())}
+        bringToFront={bringChatToFront}
+        nextZ={nextZ}
 
         />
 

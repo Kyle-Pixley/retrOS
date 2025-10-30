@@ -12,12 +12,8 @@ function PimChatBox({
     maximized,
     setMaximized,
     onClose,
-    onMinimize,
+    onMinimize
  }) {
-
-    useEffect(() => {
-        console.log('here', friend.id)
-    }, [])
 
     const topBar = useRef(null);
     const dragRef = useRef({ moving: false, offsetX: 0, offsetY: 0 });
@@ -48,7 +44,9 @@ function PimChatBox({
     const handleMouseUp = () => {
         dragRef.current.moving = false;
     };
-    
+    useEffect(() => {
+        console.log('position', position)
+    }, [position])
 
     const divStyle = {
         position: 'absolute',

@@ -8,7 +8,7 @@ import StartMenu from '../startMenu/StartMenu.jsx';
 import Pim from '../pim/pim.jsx';
 
 function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton, myComputerComponent, setMyComputerComponent, navMyComputerButton, setNavMyComputerButton, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray, setMyComputerZIndex,
-cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats, setOpenChats, navBarChats, setNavBarChats, openChat, bringToFront
+cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats, setOpenChats, navBarChats, setNavBarChats, openChat, bringToFront, nextZ
  }) {
 
 
@@ -48,26 +48,36 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
         bringToFront();
     }
 
-    const handleNavChatBoxButton = (friend) => {
-        const currentFriend = friend?.friend?.id ?? friend?.username;
+    const handleNavChatBoxButton = (chat) => {
+        const id = chat?.friend?.id;
 
-        console.log(friend.friend)
         setOpenChats(prev => {
-            
-            const friendsList = { ...prev };
-            console.log(friendsList)
-            
-            if ( currentFriend in friendsList ) {
-                delete friendsList[currentFriend];
-            } else {
-                friendsList[currentFriend] = friend;
+            const window = prev[id];
+
+            if(window) {
+                return {
+                    ...prev,
+                    [id]:{
+                        ...window,
+                        minimized: !window.minimized,
+                        zIndex: nextZ(),
+                    },
+                };
             }
-            return friendsList;
-        });
-        
-        bringToFront(friend.friend)
-        setChatBoxZIndex(Math.max(...componentsZIndexArray) + 1);
-    }
+
+            const count = Object.keys(prev).length;
+            return {
+                ...prev,
+                [id]: {
+                    friend: chat.friend,
+                    position: { x: 100 + count * 30, y: 40 + count * 30},
+                    zIndex: nextZ(),
+                    minimized: false,
+                    maximized: false,
+                }
+            }
+        })
+    };
 
 
   return (

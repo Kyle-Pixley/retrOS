@@ -53,14 +53,16 @@ function PimMessage({ friend }) {
   return (
     <div id='pim-message-component'>
         <section id='messages'>
+
             {messageList.map((mes, i) => {
                     return (
-                            <>
-                                <p key={i}>{mes.body}</p>
-                                <p key={i}>{mes.sender_id_id}</p>
-                            </>
+                            <div key={i}>
+                                <p>{mes.body}</p>
+                                <p>{mes.sender_id_id}</p>
+                            </div>
                         )
             })}
+
         </section>
         <form id='message-form'>
             <input 
