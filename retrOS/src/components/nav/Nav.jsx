@@ -8,7 +8,7 @@ import StartMenu from '../startMenu/StartMenu.jsx';
 import Pim from '../pim/pim.jsx';
 
 function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton, myComputerComponent, setMyComputerComponent, navMyComputerButton, setNavMyComputerButton, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray, setMyComputerZIndex,
-cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats, setOpenChats, navBarChats, setNavBarChats, openChat
+cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats, setOpenChats, navBarChats, setNavBarChats, openChat, bringToFront
  }) {
 
 
@@ -45,19 +45,18 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
     }
     const handleNavPimButton = () => {
         setPimComponent(!pimComponent);
-        setPimZIndex(Math.max(...componentsZIndexArray) + 1);
+        bringToFront();
     }
 
     const handleNavChatBoxButton = (friend) => {
         const currentFriend = friend?.friend?.id ?? friend?.username;
 
-        console.log(friend.friend.id)
-
+        console.log(friend.friend)
         setOpenChats(prev => {
             
             const friendsList = { ...prev };
             console.log(friendsList)
-
+            
             if ( currentFriend in friendsList ) {
                 delete friendsList[currentFriend];
             } else {
@@ -65,7 +64,8 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
             }
             return friendsList;
         });
-
+        
+        bringToFront(friend.friend)
         setChatBoxZIndex(Math.max(...componentsZIndexArray) + 1);
     }
 

@@ -16,7 +16,7 @@ function PimChatBox({
  }) {
 
     useEffect(() => {
-        console.log(friend)
+        console.log('here', friend.id)
     }, [])
 
     const topBar = useRef(null);
@@ -99,7 +99,6 @@ function PimChatBox({
                 </div>
             </div>
             <PimMessage friend={friend}/>
-            {/* actual chat goes here form for messages and display messages  */}
         </div>
     </div>
   )

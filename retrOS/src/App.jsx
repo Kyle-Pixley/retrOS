@@ -226,6 +226,8 @@ function App() {
         setOpenChats={setOpenChats}
         onOpenChat={openChat}
 
+        bringToFront={() => setPimZIndex(nextZ())}
+
         />
 
         {calculatorComponent && <Calculator setCalculatorComponent={setCalculatorComponent} setNavCalculatorButton={setNavCalculatorButton} 
@@ -272,7 +274,9 @@ function App() {
           componentsZIndexArray={componentsZIndexArray}
           setComponentZIndexArray={setComponentsZIndexArray}
           setNavChatBoxButton={setNavChatBoxButton}
-          onOpenChat={openChat}/>}
+          onOpenChat={openChat}
+          nextZ={nextZ}
+          bringToFront={() => setPimZIndex(nextZ())}/>}
 
           {Object.values(openChats)
             .filter(w => w && w.friend && w.position && !w.minimized)

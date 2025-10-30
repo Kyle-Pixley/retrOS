@@ -3,7 +3,7 @@ import PimImage from '../../assets/pim-icon.png';
 import PimDashboard from './pimDashboard/pimDashboard';
 import './pim.css';
 
-function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pimZIndex, setPimZIndex, componentsZIndexArray, onOpenChat, setNavChatBoxButton }) {
+function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pimZIndex, setPimZIndex, componentsZIndexArray, onOpenChat, setNavChatBoxButton, bringToFront }) {
 
     const [ move, setMove ] = useState(false);
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
@@ -77,7 +77,7 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
         onMouseDown={mouseStart}
         onMouseMove={mouseMove}
         onMouseUp={stopMove}
-        onClick={() => handlePimZIndex()}>
+        onClick={bringToFront}>
         
         <div id='pim-parent'>
             <div id='top-bar' ref={topBar}>

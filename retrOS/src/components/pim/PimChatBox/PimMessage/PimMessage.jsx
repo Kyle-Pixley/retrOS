@@ -7,10 +7,6 @@ function PimMessage({ friend }) {
     const [ inputMessage, setInputMessage ] = useState('');
 
     useEffect(() => {
-        console.log(friend)
-    }, [])
-
-    useEffect(() => {
         const getMessages = async () => {
             const token = localStorage.getItem("token");
 
@@ -32,7 +28,6 @@ function PimMessage({ friend }) {
                     setMessageList([])
                     return
                 }
-                console.log(data)
                 
             setMessageList(Array.isArray(data.Messages) ? data.Messages : ['No Messages'])
 
