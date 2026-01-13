@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Q
 
 # Create your views here.
 import json
@@ -414,7 +415,13 @@ def get_messages(request, friend_id):
             if not friend_id:
                 return JsonResponse({"error" : "No friend id"}, status=400)
             
-            request_data = list(Message.objects.filter(sender_id=user_id, receiver_id=friend_id).values())
+            # request_data = list(Message.objects.filter(sender_id=user_id, receiver_id=friend_id).values())
+            request_data = list(
+                Message.objects.filter(
+                    Q(sender_id = user_id, receiver_id = friend_id) |
+                    Q(sender_id = friend_id, receiver_id = user_id)
+                ).order_by('timestamp').values()
+            )
             
             return JsonResponse({'Messages' : request_data}, status=200)
             

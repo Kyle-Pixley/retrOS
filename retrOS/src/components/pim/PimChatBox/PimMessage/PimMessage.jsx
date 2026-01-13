@@ -3,7 +3,7 @@ import './PimMessage.css';
 
 function PimMessage({ friend }) {
 
-    const [ messageList, setMessageList ] = useState(['hello', 'how are you', 'cheese'])
+    const [ messageList, setMessageList ] = useState([])
     const [ inputMessage, setInputMessage ] = useState('');
 
     useEffect(() => {
@@ -28,9 +28,11 @@ function PimMessage({ friend }) {
                     setMessageList([])
                     return
                 }
-                
-            setMessageList(Array.isArray(data.Messages) ? data.Messages : ['No Messages'])
+//! why is there no data
+                console.log('here', data)
 
+            setMessageList(Array.isArray(data.Messages) ? data.Messages : ['No Messages'])
+            console.log(messageList)
             } catch (err) {
                 console.error("fetch error" ,err);
             }
@@ -49,6 +51,12 @@ function PimMessage({ friend }) {
         setInputMessage('')
     }
 
+    useEffect(() => {
+        messageList.map((mes, i) => {
+            console.log(i, mes)
+        })
+    }, [messageList])
+
 
   return (
     <div id='pim-message-component'>
@@ -57,14 +65,14 @@ function PimMessage({ friend }) {
             {messageList.map((mes, i) => {
                     return (
                             <div id='message-parent' key={i}>
-                                <p>{mes.body}</p>
-                                <p>{mes.sender_id_id}</p>
+                                <p>id = {mes.sender_id_id}</p>
+                                <p>body = {mes.body}</p>
                             </div>
                         )
             })}
 
         </section>
-        <form id='message-form'>
+        <form id='message-form' onSubmit={message => submitMessage(message)}>
             <input 
                 name='message'
                 type='text'
@@ -72,8 +80,7 @@ function PimMessage({ friend }) {
                 onChange={handleMessageChange}>
             </input>
             <button 
-                type='submit' 
-                onSubmit={message => submitMessage(message)}>
+                type='submit'>
                     Send
             </button>
         </form>
