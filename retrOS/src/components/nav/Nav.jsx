@@ -11,7 +11,6 @@ function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartM
 cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats, setOpenChats, navBarChats, setNavBarChats, openChat, bringToFront, nextZ
  }) {
 
-
     const [ currentTime, setCurrentTime ] = useState('');
 
     // gets the time
@@ -79,7 +78,6 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
         })
     };
 
-
   return (
     <>
     <div id='navbar'>
@@ -141,10 +139,11 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
                         </button>
                     </div>) : null }
 
-
             {navBarChats.length > 0 &&
                 navBarChats.map((chat, index) => {
-                    const isOpen = !!openChats[chat.friend?.id];
+                    const id = chat.friend?.id;
+                    const win = openChats?.[id];
+                    const isOpen = !!win && !win.minimized;
 
                     return (
                         <div 

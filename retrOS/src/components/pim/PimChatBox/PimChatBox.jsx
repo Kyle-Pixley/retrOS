@@ -12,7 +12,7 @@ function PimChatBox({
     maximized,
     setMaximized,
     onClose,
-    onMinimize
+    onMinimize,
  }) {
 
     const topBar = useRef(null);

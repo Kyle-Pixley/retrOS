@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './frontPage.css';
 import FriendRequests from './friendRequests/friendRequests';
-import FriendsList from './friendslist/friendslist';
+import FriendsList from './friendslist/friendsList.jsx';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { jwtDecode } from 'jwt-decode';
 

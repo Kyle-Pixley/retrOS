@@ -39,6 +39,7 @@ function App() {
 
   const [ openChats, setOpenChats ] = useState([]);
   const [ navBarChats, setNavBarChats ] = useState([]);
+  const [ openChatNavButton, setOpenChatNavButton ] = useState(false);
   
   
 
@@ -295,6 +296,8 @@ function App() {
                 setMaximized={setMaximizedChat}
                 onClose={closeChat}
                 onMinimize={minimizeChat}
+                openChatNavButton={openChatNavButton}
+                setOpenChatNavButton={setOpenChatNavButton}
               />
             ))}
 
