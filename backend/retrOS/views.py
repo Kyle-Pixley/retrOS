@@ -123,7 +123,7 @@ def find_user(request):
                 return JsonResponse({'error' : 'Please Provide an ID'}, status=400)
             
             try:
-                found_user = User.objects.get(email=input_id)
+                found_user = User.objects.get(id=input_id)
             except User.DoesNotExist:
                 return JsonResponse({'error' : 'User Not Found'}, status=404)
             
@@ -172,6 +172,7 @@ def find_username(request):
     else:
         return JsonResponse({'error' : 'Only POST method allowed'}, status=405)
     
+    # Send a friend request 
 @csrf_exempt
 def send_friend_request(request):
     if request.method == "POST":
@@ -412,18 +413,28 @@ def get_messages(request, friend_id):
             payload = decode_jwt_token(request)
             user_id = payload.get('user_id')
 
-            if not friend_id:
+            if not user_id or not friend_id:
                 return JsonResponse({"error" : "No friend id"}, status=400)
-            
-            # request_data = list(Message.objects.filter(sender_id=user_id, receiver_id=friend_id).values())
-            request_data = list(
+
+            message = (
                 Message.objects.filter(
                     Q(sender_id = user_id, receiver_id = friend_id) |
                     Q(sender_id = friend_id, receiver_id = user_id)
-                ).order_by('timestamp').values()
+                )
+                .select_related("sender_id").order_by("timestamp")
             )
-            
-            return JsonResponse({'Messages' : request_data}, status=200)
+
+            data = [{
+                "id" : m.id,
+                "body" : m.body,
+                "sender_id" : m.sender_id_id,
+                "sender_username" : m.sender_id.username,
+                "timestamp" : m.timestamp,
+            } for m in message
+            ]
+
+
+            return JsonResponse({'Messages' : data}, status=200)
             
 
         except json.JSONDecodeError:

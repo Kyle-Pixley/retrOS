@@ -28,11 +28,9 @@ function PimMessage({ friend }) {
                     setMessageList([])
                     return
                 }
-//! why is there no data
-                console.log('here', data)
-
             setMessageList(Array.isArray(data.Messages) ? data.Messages : ['No Messages'])
-            console.log(messageList)
+            console.log(messageList, 'list')
+            console.log('here', messageList)
             } catch (err) {
                 console.error("fetch error" ,err);
             }
@@ -51,12 +49,6 @@ function PimMessage({ friend }) {
         setInputMessage('')
     }
 
-    useEffect(() => {
-        messageList.map((mes, i) => {
-            console.log(i, mes)
-        })
-    }, [messageList])
-
 
   return (
     <div id='pim-message-component'>
@@ -65,7 +57,7 @@ function PimMessage({ friend }) {
             {messageList.map((mes, i) => {
                     return (
                             <div id='message-parent' key={i}>
-                                <p>id = {mes.sender_id_id}</p>
+                                <p>{mes.sender_username}</p>
                                 <p>body = {mes.body}</p>
                             </div>
                         )
