@@ -39,6 +39,7 @@ function PimMessage({ friend }) {
         getMessages();
     },[])
 
+    //submits message aka inputmessage to the backend to save it in the database
     const submitMessage = async (e) => {
         e.preventDefault();
         setMessageSentError('');
@@ -48,7 +49,7 @@ function PimMessage({ friend }) {
             const url = 'http://127.0.0.1:8000/api/create_message/';
             const body = { 
                 body: inputMessage,
-                receiver_id, receiver_id
+                receiver_id
             }
             const options = {
                 method: "POST", 
