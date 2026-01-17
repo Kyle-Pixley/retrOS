@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import './PimMessage.css';
 
 function PimMessage({ friend }) {
@@ -9,7 +10,7 @@ function PimMessage({ friend }) {
     useEffect(() => {
         const getMessages = async () => {
             const token = localStorage.getItem("token");
-
+console.log(jwtDecode(token))
             if(!token) {
                 console.error("no token in local storage")
                 localStorage.clear()
@@ -29,8 +30,7 @@ function PimMessage({ friend }) {
                     return
                 }
             setMessageList(Array.isArray(data.Messages) ? data.Messages : ['No Messages'])
-            console.log(messageList, 'list')
-            console.log('here', messageList)
+
             } catch (err) {
                 console.error("fetch error" ,err);
             }
@@ -49,6 +49,15 @@ function PimMessage({ friend }) {
         setInputMessage('')
     }
 
+    // returns the color for the username in the messages box blue for you red for them
+    const usernameColor = (username) => {
+        const token = localStorage.getItem('token')
+        const loggedInUser = jwtDecode(token).username
+        if(loggedInUser === username) {
+            return 'blue'
+        } else return 'red'
+    }
+
 
   return (
     <div id='pim-message-component'>
@@ -57,8 +66,10 @@ function PimMessage({ friend }) {
             {messageList.map((mes, i) => {
                     return (
                             <div id='message-parent' key={i}>
-                                <p>{mes.sender_username}</p>
-                                <p>body = {mes.body}</p>
+                                <p className={`${usernameColor(mes.sender_username)} message-username`}>
+                                    {mes.sender_username}:
+                                </p>
+                                <p>{mes.body}</p>
                             </div>
                         )
             })}

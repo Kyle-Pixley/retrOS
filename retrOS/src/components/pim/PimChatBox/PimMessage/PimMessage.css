@@ -7,18 +7,34 @@
     justify-content: space-between;
     overflow: hidden;
 }
-#message-parent {
+#messages {
+    display: flex;
     background-color: whitesmoke;
     border: 1px solid black;
-    box-shadow: inset 1px 1px 1px #383735;
+    box-shadow: 2px 2px 3px #383735, inset 2px 2px 3px #383735;
     margin: auto;
-    width: 96%;
+    height: 70%;
+    width: 91%;
     padding: 6px;
+}
+#message-parent {
+    display: flex;
+    margin: 1%;
+}
+.message-username {
+    margin-right: 8px;
+    font-weight: 600;
+}
+.blue {
+    color: #0000FF
+}
+.red {
+    color: #FF0000
 }
 form {
     display: flex;
     width: 96%;
-    margin: auto;
+    margin: auto auto 0 auto;
     height: 20%;
 }
 form > input {
@@ -32,5 +48,5 @@ form > button {
     box-shadow: 2px 2px 1px #383735;
     width: 20%;
     height: 80%;
-    margin: auto 2px auto auto;
+    margin: 3px 2px auto auto;
 }
