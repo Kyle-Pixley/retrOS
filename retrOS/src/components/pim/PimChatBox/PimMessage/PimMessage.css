@@ -9,6 +9,7 @@
 }
 #messages {
     display: flex;
+    flex-direction: column;
     background-color: whitesmoke;
     border: 1px solid black;
     box-shadow: 2px 2px 3px #383735, inset 2px 2px 3px #383735;
@@ -16,10 +17,11 @@
     height: 70%;
     width: 91%;
     padding: 6px;
+    overflow: scroll;
 }
 #message-parent {
     display: flex;
-    margin: 1%;
+    margin: 0 .5%;
 }
 .message-username {
     margin-right: 8px;

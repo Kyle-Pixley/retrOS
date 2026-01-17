@@ -6,11 +6,11 @@ function PimMessage({ friend }) {
 
     const [ messageList, setMessageList ] = useState([])
     const [ inputMessage, setInputMessage ] = useState('');
+    const [ messageSentError, setMessageSentError ] = useState(''); 
 
     useEffect(() => {
         const getMessages = async () => {
             const token = localStorage.getItem("token");
-console.log(jwtDecode(token))
             if(!token) {
                 console.error("no token in local storage")
                 localStorage.clear()
@@ -39,14 +39,35 @@ console.log(jwtDecode(token))
         getMessages();
     },[])
 
-    const handleMessageChange = e => {
-        setInputMessage(e.target.value)
+    const submitMessage = async (e) => {
+        e.preventDefault();
+        setMessageSentError('');
+        const receiver_id = friend.id
+        if (inputMessage) {
+            const token = localStorage.getItem('token');
+            const url = 'http://127.0.0.1:8000/api/create_message/';
+            const body = { 
+                body: inputMessage,
+                receiver_id, receiver_id
+            }
+            const options = {
+                method: "POST", 
+                headers: {"Authorization" : `Bearer ${token}`},
+                body: JSON.stringify(body)
+            }
+            const response = await fetch(url,options);
+            const data = await response.json();
+            if(!response.ok) {
+                console.error("error", data.error);
+                setMessageSentError("Error Sending Message")
+                return;
+            } else console.log('message sent')
+        } else console.log('Nothing in body')
+    setInputMessage('');
     }
 
-    const submitMessage = e => {
-        e.preventDefault()
-        console.log('send message: ', inputMessage)
-        setInputMessage('')
+    const handleMessageChange = e => {
+        setInputMessage(e.target.value)
     }
 
     // returns the color for the username in the messages box blue for you red for them
