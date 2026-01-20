@@ -13,11 +13,12 @@
     background-color: whitesmoke;
     border: 1px solid black;
     box-shadow: 2px 2px 3px #383735, inset 2px 2px 3px #383735;
-    margin: auto;
+    margin: 8px auto;
     height: 70%;
     width: calc(100% - 30px);
     padding: 6px;
     overflow: scroll;
+    font-size: 18px;
 }
 #message-parent {
     display: flex;
@@ -38,15 +39,17 @@
 form {
     display: flex;
     width: calc(100% - 6px);
-    margin: auto 7px 0 auto;
-    height: 20%;
+    margin: auto 7px 8px auto;
+    height: 15%;
 }
-form > input {
+form > textarea {
     background-color: whitesmoke;
     margin: auto;
-    width: 75%;
-    height: 80%;
+    width: 73%;
+    height: calc(100% - 20px);
     box-shadow: inset 2px 2px 1px #383735;
+    font-size: 20px;
+    padding: 10px;
 }
 .bold {
     font-weight: 600;
@@ -54,6 +57,5 @@ form > input {
 form > button {
     box-shadow: 2px 2px 1px #383735;
     width: 20%;
-    height: 80%;
-    margin: 8px 2px auto auto;
+    height: 100%;
 }

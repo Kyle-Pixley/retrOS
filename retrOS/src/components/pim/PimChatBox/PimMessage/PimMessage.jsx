@@ -98,12 +98,12 @@ function PimMessage({ friend }) {
 
         </section>
         <form id='message-form' onSubmit={message => submitMessage(message)}>
-            <input 
+            <textarea
                 name='message'
                 type='text'
                 value={inputMessage}
                 onChange={handleMessageChange}>
-            </input>
+            </textarea>
             <button 
                 type='submit'>
                     Send

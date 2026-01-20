@@ -4,6 +4,7 @@ body {
 }
 .shortcut-parent {
     width: 10vw;
+    min-width: fit-content;
     height: 10vw;
     padding: 10px 20px 0 20px;
     display: flex;
