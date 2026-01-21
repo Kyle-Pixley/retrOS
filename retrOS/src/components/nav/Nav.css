@@ -27,14 +27,13 @@
 }
 .nav-button-texts {
     height: 100%;
-    margin: 4px 0;
+    margin: auto 0;
     font-size: 130%;
-    margin-left: 4px;
 }
 .nav-buttons {
     width: fit-content;
     min-width: 100px;
-    padding: 0 6px;
+    padding: 6px;
     height: 100%;
     display: flex;
 }
@@ -113,6 +112,13 @@
     #start {
         bottom: 5px;
         left: 12px;
+    }
+    .nav-button-texts {
+        margin-top: 22px;
+        font-weight: 600;
+    }
+    .nav-button-images {
+        height: .001%;
     }
     #time-parent {
         bottom: 10px;

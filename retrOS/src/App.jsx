@@ -164,7 +164,7 @@ function App() {
 
 
   return (
-    <div>
+    <div id='app'>
       <div className='shortcut-parent'>
         <img className='shortcut-icon' src={ComputerIcon}
         onDoubleClick={() => handleMyComputerShortcutClick()}

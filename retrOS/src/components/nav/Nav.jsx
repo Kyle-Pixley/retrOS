@@ -98,7 +98,9 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
                             onClick={handleNavCalculatorButton}
                             id='calculator-nav-button' 
                             className={`nav-buttons ${calculatorComponent ? 'button-in' : 'button-out'}`}>
-                                <img id='calculator-nav-image' src={CalculatorImage}/>
+                                <img id='calculator-nav-image'
+                                    className='nav-button-images'  
+                                    src={CalculatorImage}/>
                                 <p className='nav-button-texts'>Calculator</p>
                         </button> 
                     </div>) : null}
@@ -110,7 +112,8 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
                         id='my-computer-nav-button'
                         className={`nav-buttons ${myComputerComponent ? 'button-in' : 'button-out'}`}>
                             <img id='my-computer-nav-image'
-                            src={MyComputerImage}/>
+                                className='nav-button-images' 
+                                src={MyComputerImage}/>
                             <p className='nav-button-texts'>My Computer</p>
                         </button>
                         </div>) : null }
@@ -122,7 +125,8 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
                         id='cinepix-nav-button'
                         className={`nav-buttons ${cinepixComponent ? 'button-in' : 'button-out'}`}>
                             <img id='cinepix-nav-image'
-                            src={CinepixImage}/>
+                                className='nav-button-images' 
+                                src={CinepixImage}/>
                             <p className='nav-button-texts'>Cinepix</p>
                         </button>
                     </div>) : null }
@@ -134,7 +138,8 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
                         id='pim-nav-button'
                         className={`nav-buttons ${pimComponent ? 'button-in' : 'button-out'}`}>
                             <img id='pim-nav-image'
-                            src={PimImage}/>
+                                className='nav-button-images' 
+                                src={PimImage}/>
                             <p className='nav-button-texts'>PIM</p>
                         </button>
                     </div>) : null }
@@ -153,7 +158,9 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
                                     id='chat-box-nav-button'
                                     onClick={() => handleNavChatBoxButton(chat)}
                                     className={`nav-buttons ${isOpen ? "button-in" : 'button-out'}`}>
-                                        <img id="pim-nav-image" src={PimImage} />
+                                        <img id="pim-nav-image" 
+                                            className='nav-button-images' 
+                                            src={PimImage} />
                                         <p className='nav-button-texts'>
                                             {chat.friend?.username ?? chat.username ?? "Unknown"}
                                         </p>
