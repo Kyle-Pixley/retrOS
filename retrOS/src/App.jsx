@@ -8,6 +8,7 @@ import MyComputer from './components/myComputer/MyComputer.jsx';
 import Cinepix from './components/cinepix/cinepix.jsx';
 import Pim from './components/pim/pim.jsx';
 import PimChatBox from './components/pim/PimChatBox/PimChatBox.jsx';
+import isMobile from './components/isMobile/isMobile.jsx';
 import './App.css';
 
 function App() {
@@ -48,18 +49,24 @@ function App() {
   const [ startMenu, setStartMenu ] = useState(false);
   const navStartButtonRef = useRef(null);
 
+  const mobile = isMobile();
+
+
+  // Grabs the largest Z-INDEX of "windowed" components 
   const globalMaxZ = useMemo(() => {
     const components = Math.max(calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex)
     const chatWindow = Math.max(0, ...Object.values(openChats).map(w => w.zIndex));
     return Math.max(components, chatWindow);
   }, [calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex, openChats ]);
-
+  
+ // Grabs Makes the component have the largest Z-INDEX
   const nextZ = () => globalMaxZ + 1;
 
   useEffect(() => {
     setComponentsZIndexArray([ calculatorZIndex, myComputerZIndex, cinepixZIndex ])
   }, [myComputerZIndex, calculatorZIndex, cinepixZIndex, pimZIndex ])
 
+  // When user clicks anywhere outside of Start Menu the Start Menu disapears 
   useEffect(() => {
     const handleClickOutsideStartButton = (e) => {
       if (navStartButtonRef.current && !navStartButtonRef.current.contains(e.target)) {
@@ -120,7 +127,7 @@ function App() {
         position: { x: 100 + count * 30, y: 40 + count * 30 },
         zIndex: nextZ(),
         minimized: false,
-        maximized: false,
+        maximized: mobile ? true : false,
       }
     }
   })
