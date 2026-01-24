@@ -79,6 +79,7 @@ function App() {
     return () => {document.removeEventListener('click', handleClickOutsideStartButton)};
   }, []);
 
+  // handle opening windows when "Desktop" icon is clicked 
   const handleMyComputerShortcutClick = () => {
     setMyComputerComponent(true);
     setNavMyComputerButton(true);
@@ -91,7 +92,9 @@ function App() {
     setPimComponent(true);
     setNavPimButton(true);
   }
+  //=========================================
 
+  // sets chat window to be included in nav bar buttons 
   useEffect(() => {    
     const openChatList = Object.values(openChats ?? {});
 
@@ -102,7 +105,10 @@ function App() {
     })
     
   }, [openChats])
+  //==================================================
 
+
+// handles a new chat from PIM is opened via friend list and adds it to openChats to be displayed or in nav bar at bottom 
   const openChat = (friend) => {
   setOpenChats(prev => {
     if (!friend || typeof friend !== 'object' || friend.id == null) {
@@ -132,8 +138,10 @@ function App() {
     }
   })
 };
+//=========================================================================
 
 
+// handles a chat being closed
   const closeChat = id => {
     console.log(id)
     setOpenChats(prev => {
@@ -142,6 +150,7 @@ function App() {
     })
     setNavBarChats(prev => (Array.isArray(prev) ? prev.filter(c => c.friend.id !== id) : []));
   };
+//============================
 
 
   const minimizeChat = id => {
@@ -162,13 +171,15 @@ function App() {
     }))
   };
 
+// handles the zIndex of a chat window when the user clicks on it 
+//! STILL BUGGY 
   const bringChatToFront = id => {
     setOpenChats(prev => {
       if (!prev[id]) return prev;
       return {...prev, [id]: {...prev[id], zIndex: nextZ()}}
     })
   };
-
+//==============================================================
 
   return (
     <div id='app'>
@@ -240,6 +251,7 @@ function App() {
 
         />
 
+{/* !NEED TO INCORPERATE NEXTZ() INTO THESE  */}
         {calculatorComponent && <Calculator setCalculatorComponent={setCalculatorComponent} setNavCalculatorButton={setNavCalculatorButton} 
         calculatorPosition={calculatorPosition}
         setCalculatorPosition={setCalculatorPosition}
