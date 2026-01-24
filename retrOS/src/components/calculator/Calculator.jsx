@@ -12,6 +12,7 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton, calculator
     const [ calculatorComponentMaximized, setCalculatorComponentMaximized ] = useState(false);
     
 
+//handles mouse click and move for moving the window and ending moving
     const mouseStart = e => {
         const isTopBarClicked = topBar.current && topBar.current.contains(e.target)
         if(isTopBarClicked) {
@@ -22,7 +23,6 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton, calculator
         })
         }
     };
-
     const mouseMove = e => {
         if (!move) 
         return 
@@ -31,11 +31,12 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton, calculator
             y: e.clientY - offSet.y
         })
     }
-
     const stopMove = () => {
         setMove(false)
     };
+//================================================================
 
+//Styles that change things like where the window is on screen and width and hight 
     const divStyle = {
         left: calculatorComponentMaximized ? 0 : calculatorPosition.x ,
         top: calculatorComponentMaximized ? 0 : calculatorPosition.y,
@@ -43,7 +44,9 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton, calculator
         height: calculatorComponentMaximized ? 'calc(100% - 40px)' : '30vw',
         zIndex: calculatorZIndex,
     }
+//=================================================================================
 
+//handles closing the window
     const handleXButton = () => {
         setCalculatorComponent(false);
         setNavCalculatorButton(false);
@@ -51,20 +54,23 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton, calculator
         setCalculatorInput('');
         setCalculatorResult('');
     }
-
+//==============================
+//handles giving the window a width of 100% and hight of 100% minus the nav bar
     const handleMaximizeButton = () => {
         setCalculatorComponentMaximized(!calculatorComponentMaximized);
     }
-
+//=============================
+//handle minimize this essectially closes the window but keeps the nav bar button
     const handleMinimizeButton = () => {
         setCalculatorComponent(false);
     }
-
-    //todo change the z-index when component is rendered so it will render with a higher z-index than the components that are already rendered
-    //changes z-index of component based on array of z-indexes of all "windowed"(like calculator/myComputer) z-indexes that are set to an array
+//==============================
+    //todo change to nextZ ??? 
+//changes z-index of component based on array of z-indexes of all "windowed"(like calculator/myComputer) z-indexes that are set to an array
     const handleCalculatorZIndex = () => {
         setCalculatorZIndex(Math.max(...componentsZIndexArray) + 1);
     }
+//=========================================================================================================================================
 
     return (
 

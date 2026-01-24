@@ -8,7 +8,7 @@ import MyComputer from './components/myComputer/MyComputer.jsx';
 import Cinepix from './components/cinepix/cinepix.jsx';
 import Pim from './components/pim/pim.jsx';
 import PimChatBox from './components/pim/PimChatBox/PimChatBox.jsx';
-import isMobile from './components/isMobile/isMobile.jsx';
+import isMobile from './components/hooks/isMobile.jsx';
 import './App.css';
 
 function App() {
