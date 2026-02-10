@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import CalculatorImage from '../../assets/calculator.png';
 import MyComputerImage from '../../assets/my-computer-icon.png';
-import CinepixImage from '../../assets/cinepix-icon.png';
 import PimImage from '../../assets/pim-icon.png';
 import "./Nav.css";
 import StartMenu from '../startMenu/StartMenu.jsx';
 import Pim from '../pim/pim.jsx';
 
 function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton, myComputerComponent, setMyComputerComponent, navMyComputerButton, setNavMyComputerButton, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray, setMyComputerZIndex,
-cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, cinepixZIndex, setCinepixZIndex, pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats, setOpenChats, navBarChats, setNavBarChats, openChat, bringToFront, nextZ
+pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats, setOpenChats, navBarChats, setNavBarChats, openChat, bringToFront, nextZ
  }) {
 
     const [ currentTime, setCurrentTime ] = useState('');
@@ -38,10 +37,6 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
         setMyComputerZIndex(Math.max(...componentsZIndexArray) + 1)
     }
 
-    const handleNavCinepixButton = () => {
-        setCinepixComponent(!cinepixComponent);
-        setCinepixZIndex(Math.max(...componentsZIndexArray) + 1);
-    }
     const handleNavPimButton = () => {
         setPimComponent(!pimComponent);
         bringToFront();
@@ -117,19 +112,6 @@ cinepixComponent, setCinepixComponent, navCinepixButton, setNavCinepixButton, ci
                             <p className='nav-button-texts'>My Computer</p>
                         </button>
                         </div>) : null }
-
-            { navCinepixButton ? (
-                <div className='button-outer-border'>
-                    <button
-                        onClick={handleNavCinepixButton}
-                        id='cinepix-nav-button'
-                        className={`nav-buttons ${cinepixComponent ? 'button-in' : 'button-out'}`}>
-                            <img id='cinepix-nav-image'
-                                className='nav-button-images' 
-                                src={CinepixImage}/>
-                            <p className='nav-button-texts'>Cinepix</p>
-                        </button>
-                    </div>) : null }
 
             { navPimButton ? (
                 <div className='button-outer-border'>

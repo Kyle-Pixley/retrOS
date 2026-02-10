@@ -1,11 +1,9 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import ComputerIcon from './assets/my-computer-icon.png';
-import CinepixIcon from './assets/cinepix-icon.png';
 import PimImage from './assets/pim-icon.png';
 import Nav from './components/nav/Nav.jsx';
 import Calculator from './components/calculator/Calculator.jsx';
 import MyComputer from './components/myComputer/MyComputer.jsx';
-import Cinepix from './components/cinepix/cinepix.jsx';
 import Pim from './components/pim/pim.jsx';
 import PimChatBox from './components/pim/PimChatBox/PimChatBox.jsx';
 import isMobile from './components/hooks/isMobile.jsx';
@@ -24,11 +22,6 @@ function App() {
   const [ navMyComputerButton, setNavMyComputerButton ] = useState(false);
   const [ myComputerPosition, setMyComputerPosition ] = useState({ x: 150, y:150 });
   const [ myComputerZIndex, setMyComputerZIndex ] = useState(0);
-    
-  const [ navCinepixButton, setNavCinepixButton ] = useState(false);
-  const [ cinepixComponent, setCinepixComponent ] = useState(false);
-  const [ cinepixPosition, setCinepixPosition ] = useState({ x: 160, y: 160 });
-  const [ cinepixZIndex, setCinepixZIndex ] = useState(0);
 
   const [ pimComponent, setPimComponent ] = useState(false);
   const [ navPimButton, setNavPimButton ] = useState(false);
@@ -44,7 +37,7 @@ function App() {
   
   
 
-  const [ componentsZIndexArray, setComponentsZIndexArray ] = useState([ calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex ]);
+  const [ componentsZIndexArray, setComponentsZIndexArray ] = useState([ calculatorZIndex, myComputerZIndex, pimZIndex ]);
 
   const [ startMenu, setStartMenu ] = useState(false);
   const navStartButtonRef = useRef(null);
@@ -54,17 +47,17 @@ function App() {
 
   // Grabs the largest Z-INDEX of "windowed" components 
   const globalMaxZ = useMemo(() => {
-    const components = Math.max(calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex)
+    const components = Math.max(calculatorZIndex, myComputerZIndex, pimZIndex)
     const chatWindow = Math.max(0, ...Object.values(openChats).map(w => w.zIndex));
     return Math.max(components, chatWindow);
-  }, [calculatorZIndex, myComputerZIndex, cinepixZIndex, pimZIndex, openChats ]);
+  }, [calculatorZIndex, myComputerZIndex, pimZIndex, openChats ]);
   
  // Grabs Makes the component have the largest Z-INDEX
   const nextZ = () => globalMaxZ + 1;
 
   useEffect(() => {
-    setComponentsZIndexArray([ calculatorZIndex, myComputerZIndex, cinepixZIndex ])
-  }, [myComputerZIndex, calculatorZIndex, cinepixZIndex, pimZIndex ])
+    setComponentsZIndexArray([ calculatorZIndex, myComputerZIndex ])
+  }, [myComputerZIndex, calculatorZIndex, pimZIndex ])
 
   // When user clicks anywhere outside of Start Menu the Start Menu disapears 
   useEffect(() => {
@@ -83,10 +76,6 @@ function App() {
   const handleMyComputerShortcutClick = () => {
     setMyComputerComponent(true);
     setNavMyComputerButton(true);
-  }
-  const handleCinepixShortcutClicked = () => {
-    setCinepixComponent(true);
-    setNavCinepixButton(true);
   }
   const handlePimShortcutClicked = () => {
     setPimComponent(true);
@@ -190,13 +179,6 @@ function App() {
         <p className='shortcut-text'>My Computer</p>
       </div>
       <div className='shortcut-parent'>
-        <img 
-          className='shortcut-icon'
-          src={CinepixIcon}
-          onDoubleClick={() => handleCinepixShortcutClicked()}/>
-          <p className='shortcut-text'>Cinepix</p>
-      </div>
-      <div className='shortcut-parent'>
         <img
           className='shortcut-icon'
           src={PimImage}
@@ -221,12 +203,6 @@ function App() {
         componentsZIndexArray={componentsZIndexArray}
         setComponentsZIndexArray={setComponentsZIndexArray}
         setMyComputerZIndex={setMyComputerZIndex}
-        cinepixComponent={cinepixComponent}
-        setCinepixComponent={setCinepixComponent}
-        navCinepixButton={navCinepixButton}
-        setNavCinepixButton={setNavCinepixButton}
-        cinepixZIndex={cinepixZIndex}
-        setCinepixZIndex={setCinepixZIndex}
 
         pimComponent={pimComponent}
         setPimComponent={setPimComponent}
@@ -275,16 +251,6 @@ function App() {
         componentsZIndexArray={componentsZIndexArray}
         setComponentsZIndexArray={setComponentsZIndexArray}
         />}
-
-        {cinepixComponent && <Cinepix 
-          setCinepixComponent={setCinepixComponent}
-          setNavCinepixButton={setNavCinepixButton}
-          cinepixPosition={cinepixPosition}
-          setCinepixPosition={setCinepixPosition}
-          cinepixZIndex={cinepixZIndex}
-          setCinepixZIndex={setCinepixZIndex}
-          componentsZIndexArray={componentsZIndexArray}
-          setComponentZIndexArray={setComponentsZIndexArray}/>}
 
         {pimComponent && <Pim 
           setPimComponent={setPimComponent}
