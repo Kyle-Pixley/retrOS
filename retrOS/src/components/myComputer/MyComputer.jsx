@@ -91,7 +91,9 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
                             >X</button>
                 </div>
             </div>
-            <MyComputerFiles />
+            <section className='my-computer-section'>
+                <MyComputerFiles />
+            </section>
         </div>
     </div>
   )

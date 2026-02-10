@@ -1,7 +1,28 @@
 #my-computer-files-container {
-    margin-top: 3px;
-    width: calc(100% - 9px);
-    height: calc(100% - 40px);
+    margin-top: 12px;
+    width: calc(100% - 40px);
+    height: calc(100% - 50px);
     background-color: whitesmoke;
     box-shadow: inset 2px 2px 1px black, 2px 2px 1px white;
+    padding: 8px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 160px);
+    align-items: start;
+    align-content: start;
+    grid-auto-rows: max-content;
+}
+.shell-object {
+    height: auto;
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid transparent;
+}
+.shell-object > img {
+    height: 48px;
+    width: 48px;
+}
+.clicked {
+    border: 1px dotted black;
 }

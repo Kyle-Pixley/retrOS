@@ -15,6 +15,7 @@
     align-items: center;
     overflow: auto;
     resize: both;
+    overflow: hidden;
 }
 #my-computer-parent {
     background-color: #c0c0c0;
@@ -77,4 +78,10 @@
 #calculator-window-text {
     color: #c0c0c0;
     padding: 0px, 5px;
+}
+.my-computer-section {
+    height: 95%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
