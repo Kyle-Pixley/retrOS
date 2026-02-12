@@ -126,6 +126,7 @@ function login({ updateLocalStorage }) {
                   id='password-input'
                   className='input' />
               </div>
+              <section className='error-message'>{isError ? errorMessage : null}</section>
 
               <div id='register-login-button-parent'>
                 <button

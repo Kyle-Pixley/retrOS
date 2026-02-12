@@ -22,6 +22,7 @@ function App() {
   const [ navMyComputerButton, setNavMyComputerButton ] = useState(false);
   const [ myComputerPosition, setMyComputerPosition ] = useState({ x: 150, y:150 });
   const [ myComputerZIndex, setMyComputerZIndex ] = useState(0);
+  const [ myComputerIconClicked, setMyComputerIconClicked ] = useState('');
 
   const [ pimComponent, setPimComponent ] = useState(false);
   const [ navPimButton, setNavPimButton ] = useState(false);
@@ -161,7 +162,6 @@ function App() {
   };
 
 // handles the zIndex of a chat window when the user clicks on it 
-//! STILL BUGGY 
   const bringChatToFront = id => {
     setOpenChats(prev => {
       if (!prev[id]) return prev;
@@ -171,7 +171,7 @@ function App() {
 //==============================================================
 
   return (
-    <div id='app'>
+    <div id='app' onClick={() => setMyComputerIconClicked('')}>
       <div className='shortcut-parent'>
         <img className='shortcut-icon' src={ComputerIcon}
         onDoubleClick={() => handleMyComputerShortcutClick()}
@@ -250,6 +250,8 @@ function App() {
         setMyComputerZIndex={setMyComputerZIndex}
         componentsZIndexArray={componentsZIndexArray}
         setComponentsZIndexArray={setComponentsZIndexArray}
+        myComputerIconClicked={myComputerIconClicked}
+        setMyComputerIconClicked={setMyComputerIconClicked}
         />}
 
         {pimComponent && <Pim 

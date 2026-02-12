@@ -10,6 +10,8 @@
     align-items: start;
     align-content: start;
     grid-auto-rows: max-content;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 .shell-object {
     height: auto;
@@ -25,4 +27,5 @@
 }
 .clicked {
     border: 1px dotted black;
+    background-color: lightblue;
 }

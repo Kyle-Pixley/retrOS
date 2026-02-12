@@ -14,7 +14,7 @@ from .models import User, Message
 
 
 def hello_world(request):
-    return JsonResponse({'message' : 'Hello from Django!'})
+    return JsonResponse({'message' : 'Hello_World'})
 
 
 ## JWT DECODE 
@@ -89,7 +89,7 @@ def login_user(request):
             try: 
                 found_user = User.objects.get(username=input_username)
             except User.DoesNotExist:
-                return JsonResponse({'error' : 'User Not Found'}, staus=404)
+                return JsonResponse({'error' : 'Incorrect Screen Name'}, status=404)
             
             if not check_password(input_password, found_user.password):
                 return JsonResponse({'error' : 'Password incorrect'}, status=401)
