@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import MyComputerImage from '../../assets/my-computer-icon.png';
 import MyComputerFiles from './myComputerFiles/MyComputerFiles';
 import './MyComputer.css';
@@ -10,7 +10,7 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
     const topBar = useRef(null);
     const [ myComputerComponentMaximized, setMyComputerComponentMaximized ] = useState(false);
 
-    const [ depthIntoComputer, setDepthIntoComputer ] = useState(0);
+    const [ depthIntoComputer, setDepthIntoComputer ] = useState(['root']);
 
     
 
@@ -65,6 +65,10 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
         setMyComputerZIndex(Math.max(...componentsZIndexArray) + 1)
     }
 
+    useEffect(() => {
+        console.log(depthIntoComputer)
+    }, [depthIntoComputer])
+
   return (
     <div id='my-computer-outside-border'
         style={divStyle}
@@ -95,7 +99,7 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
                 </div>
             </div>
             <section>
-                <button onClick={() => setDepthIntoComputer(0)}>&#8592;</button>
+                <button onClick={() => setDepthIntoComputer(prev => prev.slice(0,1))}>&#8592;</button>
             </section>
             <section className='my-computer-section'>
                 <MyComputerFiles 

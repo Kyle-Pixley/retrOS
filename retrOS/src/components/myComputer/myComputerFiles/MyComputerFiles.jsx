@@ -12,30 +12,31 @@ function MyComputerFiles({ myComputerIconClicked, setMyComputerIconClicked, dept
   }
 
   function whatDirectory() {
-    if(depthIntoComputer === 0) {
+    if(depthIntoComputer.at(-1) === 'root'
+    ) {
       return (
         <>
           <section className={`shell-object ${myComputerIconClicked =='MyComputer' ? 'clicked' : null}`}
             onClick={e => fileIconClicked(e, 'MyComputer')}
-            onDoubleClick={() => setDepthIntoComputer(1)}>
+            onDoubleClick={() => setDepthIntoComputer( prev => [...prev, 'MyComputer'])}>
           <img src={MyComputerIcon}></img>
           <p>My Computer</p>
         </section>
         <section className={`shell-object ${myComputerIconClicked == 'D' ? 'clicked' : null}`}
           onClick={e => fileIconClicked(e, 'D')}
-          onDoubleClick={() => setDepthIntoComputer(2)}>
+          onDoubleClick={() => setDepthIntoComputer( prev => [...prev, 'D'])}>
             <img src={MyComputerIcon}></img>
             <p>{'(D:)'}</p>
           </section>
         </>
       )
-    } else if(depthIntoComputer === 1) {
+    } else if(depthIntoComputer.at(-1) === 'MyComputer') {
       return (
         <>
           <Dolphin />
         </>
       )
-    } else if(depthIntoComputer === 2) {
+    } else if(depthIntoComputer.at(-1) === 'D') {
       return (
         <>
           <section>
