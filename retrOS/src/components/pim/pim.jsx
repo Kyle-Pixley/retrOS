@@ -14,14 +14,19 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
     const [ clickedOutside, setClickedOutside ] = useState(false);
 
     const mouseStart = e => {
-        const isTopBarClicked = topBar.current && topBar.current.contains(e.target)
-        if(isTopBarClicked) {
+        const isTopBarClicked = topBar.current && topBar.current.contains(e.target);
+
+        if (!isTopBarClicked) return;
+
+        e.preventDefault();
+
+        e.currentTarget.setPointerCapture?.(e.pointerId);
+    
         setMove(true);
         setOffSet({
             x: e.clientX - pimPosition.x,
             y: e.clientY - pimPosition.y
         })
-        }
     };
 
     const mouseMove = e => {
@@ -74,9 +79,10 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
   return (
     <div id='pim-outside-border'
         style={divStyle}
-        onMouseDown={mouseStart}
-        onMouseMove={mouseMove}
-        onMouseUp={stopMove}
+        onPointerDown={mouseStart}
+        onPointerMove={mouseMove}
+        onPointerUp={stopMove}
+        onPointerCancel={stopMove}
         onClick={bringToFront}>
         
         <div id='pim-parent'>
