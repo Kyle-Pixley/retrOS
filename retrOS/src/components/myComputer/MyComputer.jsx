@@ -3,15 +3,12 @@ import MyComputerImage from '../../assets/my-computer-icon.png';
 import MyComputerFiles from './myComputerFiles/MyComputerFiles';
 import './MyComputer.css';
 
-function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition, myComputerZIndex, setMyComputerZIndex, componentsZIndexArray, myComputerIconClicked, setMyComputerIconClicked }) {
+function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition, myComputerZIndex, setMyComputerZIndex, componentsZIndexArray, myComputerIconClicked, setMyComputerIconClicked, depthIntoComputer, setDepthIntoComputer }) {
 
     const [ move, setMove ] = useState(false);
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
     const topBar = useRef(null);
     const [ myComputerComponentMaximized, setMyComputerComponentMaximized ] = useState(false);
-
-    const [ depthIntoComputer, setDepthIntoComputer ] = useState(['root']);
-
     
 
     const mouseStart = e => {
@@ -50,6 +47,7 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
         setMyComputerComponent(false);
         setNavMyComputerButton(false);
         setMyComputerPosition({ x: 100, y:100 });
+        setDepthIntoComputer(['root']);
     }
 
     const handleMaximizeButton = () => {

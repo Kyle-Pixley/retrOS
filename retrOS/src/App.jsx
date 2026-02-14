@@ -23,6 +23,7 @@ function App() {
   const [ myComputerPosition, setMyComputerPosition ] = useState({ x: 150, y:150 });
   const [ myComputerZIndex, setMyComputerZIndex ] = useState(0);
   const [ myComputerIconClicked, setMyComputerIconClicked ] = useState('');
+  const [ depthIntoComputer, setDepthIntoComputer ] = useState(['root']);
 
   const [ pimComponent, setPimComponent ] = useState(false);
   const [ navPimButton, setNavPimButton ] = useState(false);
@@ -252,6 +253,8 @@ function App() {
         setComponentsZIndexArray={setComponentsZIndexArray}
         myComputerIconClicked={myComputerIconClicked}
         setMyComputerIconClicked={setMyComputerIconClicked}
+        depthIntoComputer={depthIntoComputer}
+        setDepthIntoComputer={setDepthIntoComputer}
         />}
 
         {pimComponent && <Pim 
