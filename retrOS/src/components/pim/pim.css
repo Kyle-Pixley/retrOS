@@ -15,6 +15,7 @@
     overflow: auto;
     resize: both;
     overflow-y: hidden;
+    touch-action: none;
 }
 #pim-parent {
     background-color: #c0c0c0;
@@ -35,6 +36,7 @@
     display: flex;
     justify-content: space-between;
     padding-right: 1px;
+    touch-action: none;
 }
 #image-text-parent {
     display: flex;

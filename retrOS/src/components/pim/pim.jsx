@@ -14,6 +14,9 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
     const [ clickedOutside, setClickedOutside ] = useState(false);
 
     const mouseStart = e => {
+
+        if (e.target.closest?.("button")) return;
+
         const isTopBarClicked = topBar.current && topBar.current.contains(e.target);
 
         if (!isTopBarClicked) return;
@@ -54,17 +57,20 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
         zIndex: pimZIndex,
     }
 
-    const handleXButton = () => {
+    const handleXButton = e => {
+        e.stopPropagation();
         setPimComponent(false);
         setNavPimButton(false);
         setPimPosition({ x: 170, y: 100 });
     }
 
-    const handleMaximizeButton = () => {
+    const handleMaximizeButton = e => {
+        e.stopPropagation();
         setPimComponentMaximized(!pimComponentMaximized);
     }
 
-    const handleMinimizeButton = () => {
+    const handleMinimizeButton = e => {
+        e.stopPropagation();
         setPimComponent(false);
     }
 
@@ -95,14 +101,14 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
                 </div>
                 <div id='top-bar-button-parent'>
                     <button className='top-bar-button'
-                            onClick={handleMinimizeButton}>_</button>
+                            onPointerUp={handleMinimizeButton}>_</button>
 
-                    <button id='pim-maximize-button' className='top-bar-button' onClick={() => handleMaximizeButton()}>
+                    <button id='pim-maximize-button' className='top-bar-button' onPointerUp={handleMaximizeButton}>
                         <div id='fullscreen-button-square'></div>
                     </button>
 
                     <button className='top-bar-button'
-                            onClick={handleXButton}
+                            onPointerUp={handleXButton}
                             >X</button>
                 </div>
             </div>

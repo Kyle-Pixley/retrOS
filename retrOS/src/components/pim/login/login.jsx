@@ -7,6 +7,9 @@ import './login.css';
 
 function login({ updateLocalStorage }) {
 
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  console.log(API_BASE)
+
   const [ isRegister, setIsRegister ] = useState(false);
   const [ userInfo, setUserInfo ] = useState({
     username: '',
@@ -35,7 +38,7 @@ function login({ updateLocalStorage }) {
 
     const url = isRegister 
       ? "http://127.0.0.1:8000/api/register/"
-      : "http://127.0.0.1:8000/api/login/";
+      : "http://10.0.0.238:8000/api/login/";
 
     const { email, username, password } = userInfo;
     const body = isRegister
