@@ -4,6 +4,8 @@ import PimImage from './assets/pim-icon.png';
 import Nav from './components/nav/Nav.jsx';
 import Calculator from './components/calculator/Calculator.jsx';
 import MyComputer from './components/myComputer/MyComputer.jsx';
+import DoNotOpen from './components/myComputer/myComputerFiles/Dolphin/System32/Kernel32/DoNotOpen.jsx';
+
 import Pim from './components/pim/pim.jsx';
 import PimChatBox from './components/pim/PimChatBox/PimChatBox.jsx';
 import isMobile from './components/hooks/isMobile.jsx';
@@ -45,6 +47,9 @@ function App() {
   const navStartButtonRef = useRef(null);
 
   const mobile = isMobile();
+
+  const [ isDoNotOpen, setIsDoNotOpen ] = useState(false);
+  const [ scaryError, setScaryError ] = useState(false);
 
 
   // Grabs the largest Z-INDEX of "windowed" components 
@@ -171,8 +176,24 @@ function App() {
   };
 //==============================================================
 
+useEffect(() => {
+  if(!isDoNotOpen) return;
+  setScaryError(true)
+
+  const flickerOne = setTimeout(() => setScaryError(false), 80);
+  const flickerTwo = setTimeout(() => setScaryError(true), 140);
+  const flickerThree = setTimeout(() => setScaryError(false),200);
+
+  return () => [flickerOne, flickerTwo, flickerThree].forEach(clearTimeout);
+
+}, [isDoNotOpen])
+
   return (
     <div id='app' onClick={() => setMyComputerIconClicked('')}>
+
+    { scaryError ? <DoNotOpen /> : null }
+
+  
       <div className='shortcut-parent'>
         <img className='shortcut-icon' src={ComputerIcon}
         onDoubleClick={() => handleMyComputerShortcutClick()}
@@ -228,7 +249,6 @@ function App() {
 
         />
 
-{/* !NEED TO INCORPERATE NEXTZ() INTO THESE  */}
         {calculatorComponent && <Calculator setCalculatorComponent={setCalculatorComponent} setNavCalculatorButton={setNavCalculatorButton} 
         calculatorPosition={calculatorPosition}
         setCalculatorPosition={setCalculatorPosition}
@@ -255,6 +275,7 @@ function App() {
         setMyComputerIconClicked={setMyComputerIconClicked}
         depthIntoComputer={depthIntoComputer}
         setDepthIntoComputer={setDepthIntoComputer}
+        setIsDoNotOpen={setIsDoNotOpen}
         />}
 
         {pimComponent && <Pim 

@@ -37,8 +37,8 @@ function login({ updateLocalStorage }) {
     e.preventDefault();
 
     const url = isRegister 
-      ? "http://127.0.0.1:8000/api/register/"
-      : "http://10.0.0.238:8000/api/login/";
+      ? `${API_BASE}/api/register/`
+      : `${API_BASE}/api/login/`;
 
     const { email, username, password } = userInfo;
     const body = isRegister

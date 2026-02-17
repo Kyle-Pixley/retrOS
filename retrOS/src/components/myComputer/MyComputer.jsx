@@ -3,7 +3,7 @@ import MyComputerImage from '../../assets/my-computer-icon.png';
 import MyComputerFiles from './myComputerFiles/MyComputerFiles';
 import './MyComputer.css';
 
-function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition, myComputerZIndex, setMyComputerZIndex, componentsZIndexArray, myComputerIconClicked, setMyComputerIconClicked, depthIntoComputer, setDepthIntoComputer }) {
+function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition, myComputerZIndex, setMyComputerZIndex, componentsZIndexArray, myComputerIconClicked, setMyComputerIconClicked, depthIntoComputer, setDepthIntoComputer, setIsDoNotOpen }) {
 
     const [ move, setMove ] = useState(false);
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
@@ -97,14 +97,15 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
                 </div>
             </div>
             <section>
-                <button onClick={() => setDepthIntoComputer(prev => prev.slice(0,1))}>&#8592;</button>
+                <button onClick={() => setDepthIntoComputer(prev => prev.slice(0,-1))}>&#8592;</button>
             </section>
             <section className='my-computer-section'>
                 <MyComputerFiles 
                     myComputerIconClicked={myComputerIconClicked}
                     setMyComputerIconClicked={setMyComputerIconClicked}
                     depthIntoComputer={depthIntoComputer}
-                    setDepthIntoComputer={setDepthIntoComputer}/>
+                    setDepthIntoComputer={setDepthIntoComputer}
+                    setIsDoNotOpen={setIsDoNotOpen}/>
             </section>
         </div>
     </div>

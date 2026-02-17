@@ -1,10 +1,39 @@
 import React from 'react';
+import MyComputerIcon from '../../../../assets/my-computer-icon.png';
 import './Dolphin.css';
 
-function Dolphin() {
+function Dolphin({ fileIconClicked, setDepthIntoComputer, myComputerIconClicked }) {
   return (
-    <div>Dolphin</div>
+    <>
+      <section 
+        className={`shell-object ${myComputerIconClicked == 'System32' ? 'clicked' : null}`}
+        onClick={e => fileIconClicked(e, 'System32')}
+        onDoubleClick={() => setDepthIntoComputer( prev => [...prev, 'System32'])}
+        >
+        <img src={MyComputerIcon}></img>
+        <p>System32</p>
+      </section>
+
+      <section 
+        className={`shell-object ${myComputerIconClicked == 'ProgramFiles' ? 'clicked' : null}`}
+        onClick={e => fileIconClicked(e, 'ProgramFiles')}
+        onDoubleClick={() => setDepthIntoComputer( prev => [...prev, 'ProgramFiles'])}
+        >
+        <img src={MyComputerIcon}></img>
+        <p>Program Files</p>
+      </section>
+
+      <section 
+        className={`shell-object ${myComputerIconClicked == 'Configsys' ? 'clicked' : null}`}
+        onClick={e => fileIconClicked(e, 'Configsys')}
+        onDoubleClick={() => setDepthIntoComputer( prev => [...prev, 'Configsys'])}
+        >
+        <img src={MyComputerIcon}></img>
+        <p>config.sys</p>
+      </section>
+
+    </>
   )
 }
 
-export default Dolphin
+export default Dolphin;
