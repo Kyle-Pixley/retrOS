@@ -3,7 +3,7 @@ import MyComputerImage from '../../assets/my-computer-icon.png';
 import MyComputerFiles from './myComputerFiles/MyComputerFiles';
 import './MyComputer.css';
 
-function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition, myComputerZIndex, setMyComputerZIndex, componentsZIndexArray, myComputerIconClicked, setMyComputerIconClicked, depthIntoComputer, setDepthIntoComputer, setIsDoNotOpen }) {
+function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition, myComputerZIndex, setMyComputerZIndex, componentsZIndexArray, myComputerIconClicked, setMyComputerIconClicked, depthIntoComputer, setDepthIntoComputer, setIsDoNotOpen, mobile }) {
 
     const [ move, setMove ] = useState(false);
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
@@ -35,6 +35,12 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
         setMove(false)
     };
 
+    useEffect(() => {
+        if(mobile) {
+            setMyComputerComponentMaximized(true);
+        }
+    }, [])
+
     const divStyle = {
         left: myComputerComponentMaximized ? 0 : myComputerPosition.x ,
         top: myComputerComponentMaximized ? 0 : myComputerPosition.y,
@@ -47,7 +53,7 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
         setMyComputerComponent(false);
         setNavMyComputerButton(false);
         setMyComputerPosition({ x: 100, y:100 });
-        setDepthIntoComputer(['root']);
+        setDepthIntoComputer([]);
     }
 
     const handleMaximizeButton = () => {
@@ -63,16 +69,12 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
         setMyComputerZIndex(Math.max(...componentsZIndexArray) + 1)
     }
 
-    useEffect(() => {
-        console.log(depthIntoComputer)
-    }, [depthIntoComputer])
-
   return (
     <div id='my-computer-outside-border'
         style={divStyle}
-        onMouseDown={mouseStart}
-        onMouseMove={mouseMove}
-        onMouseUp={stopMove}
+        onPointerDown={mouseStart}
+        onPointerMove={mouseMove}
+        onPointerUp={stopMove}
         onClick={() => handleMyComputerZIndex()}>
         
         <div id='my-computer-parent'>

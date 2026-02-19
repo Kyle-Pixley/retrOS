@@ -25,7 +25,7 @@ function App() {
   const [ myComputerPosition, setMyComputerPosition ] = useState({ x: 150, y:150 });
   const [ myComputerZIndex, setMyComputerZIndex ] = useState(0);
   const [ myComputerIconClicked, setMyComputerIconClicked ] = useState('');
-  const [ depthIntoComputer, setDepthIntoComputer ] = useState(['root']);
+  const [ depthIntoComputer, setDepthIntoComputer ] = useState([]);
 
   const [ pimComponent, setPimComponent ] = useState(false);
   const [ navPimButton, setNavPimButton ] = useState(false);
@@ -47,6 +47,12 @@ function App() {
   const navStartButtonRef = useRef(null);
 
   const mobile = isMobile();
+
+  useEffect(() => {
+    console.log('is mobile????', mobile)
+    console.log('window innerwidth', window.innerWidth)
+  }, [mobile])
+
 
   const [ isDoNotOpen, setIsDoNotOpen ] = useState(false);
   const [ scaryError, setScaryError ] = useState(false);
@@ -176,6 +182,7 @@ function App() {
   };
 //==============================================================
 
+// on double clicking the Do_Not_Open "file" deep inside MyComputer just makes the screen flicker 
 useEffect(() => {
   if(!isDoNotOpen) return;
   setScaryError(true)
@@ -276,6 +283,7 @@ useEffect(() => {
         depthIntoComputer={depthIntoComputer}
         setDepthIntoComputer={setDepthIntoComputer}
         setIsDoNotOpen={setIsDoNotOpen}
+        mobile={mobile}
         />}
 
         {pimComponent && <Pim 

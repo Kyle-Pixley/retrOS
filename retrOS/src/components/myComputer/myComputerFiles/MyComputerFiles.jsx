@@ -15,8 +15,7 @@ function MyComputerFiles({ myComputerIconClicked, setMyComputerIconClicked, dept
   }
 
   function whatDirectory() {
-    if(depthIntoComputer.at(-1) === 'root'
-    ) {
+    if(depthIntoComputer.length === 0) {
       return (
         <>
           <section className={`shell-object ${myComputerIconClicked =='MyComputer' ? 'clicked' : null}`}

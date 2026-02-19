@@ -6,6 +6,7 @@
     border-left: 1px solid black;
     padding: 0;
     width: 15%;
+    min-width: 250px;
     height: 900%;
     /* this is the z-index: that is not working; */
     z-index: 100;
@@ -23,7 +24,7 @@
     writing-mode: sideways-lr;
     text-orientation: sideways;
     text-align: center;
-    font-size: 2.2vw;
+    font-size: 3.2vw;
     padding: 10px;
     color: #c0c0c0;
 }
@@ -69,8 +70,9 @@
         width: 60vw;
         height: 40vh;
         bottom: 60px;
+        max-width: 350px;
     }
     #start-name-text {
-        font-size: 10vw;
+        font-size: 275%;
     }
 }
