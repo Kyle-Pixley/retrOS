@@ -3,7 +3,7 @@ import MyComputerImage from '../../assets/my-computer-icon.png';
 import MyComputerFiles from './myComputerFiles/MyComputerFiles';
 import './MyComputer.css';
 
-function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition, myComputerZIndex, setMyComputerZIndex, componentsZIndexArray, myComputerIconClicked, setMyComputerIconClicked, depthIntoComputer, setDepthIntoComputer, setIsDoNotOpen, mobile }) {
+function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputerPosition, setMyComputerPosition, myComputerZIndex, setMyComputerZIndex, componentsZIndexArray, myComputerIconClicked, setMyComputerIconClicked, depthIntoComputer, setDepthIntoComputer, setIsDoNotOpen, mobile, bringToFront }) {
 
     const [ move, setMove ] = useState(false);
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
@@ -75,7 +75,7 @@ function MyComputer({ setMyComputerComponent, setNavMyComputerButton, myComputer
         onPointerDown={mouseStart}
         onPointerMove={mouseMove}
         onPointerUp={stopMove}
-        onClick={() => handleMyComputerZIndex()}>
+        onClick={bringToFront}>
         
         <div id='my-computer-parent'>
             <div id='top-bar' ref={topBar}>

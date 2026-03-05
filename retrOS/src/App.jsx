@@ -284,6 +284,7 @@ useEffect(() => {
         setDepthIntoComputer={setDepthIntoComputer}
         setIsDoNotOpen={setIsDoNotOpen}
         mobile={mobile}
+        bringToFront={() => setMyComputerZIndex(nextZ())}
         />}
 
         {pimComponent && <Pim 
