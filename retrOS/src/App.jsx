@@ -253,6 +253,7 @@ useEffect(() => {
 
         bringToFront={bringChatToFront}
         nextZ={nextZ}
+        mobile={mobile}
 
         />
 
@@ -299,7 +300,9 @@ useEffect(() => {
           setNavChatBoxButton={setNavChatBoxButton}
           onOpenChat={openChat}
           nextZ={nextZ}
-          bringToFront={() => setPimZIndex(nextZ())}/>}
+          bringToFront={() => setPimZIndex(nextZ())}
+          mobile={mobile}
+          />}
 
           {Object.values(openChats)
             .filter(w => w && w.friend && w.position && !w.minimized)

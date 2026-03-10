@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PimImage from '../../assets/pim-icon.png';
 import PimDashboard from './pimDashboard/pimDashboard';
 import './pim.css';
 
-function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pimZIndex, setPimZIndex, componentsZIndexArray, onOpenChat, setNavChatBoxButton, bringToFront }) {
+function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pimZIndex, setPimZIndex, componentsZIndexArray, onOpenChat, setNavChatBoxButton, bringToFront, mobile }) {
 
     const [ move, setMove ] = useState(false);
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
@@ -45,7 +45,17 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
         setMove(false)
     };
 
-    
+    useEffect(() => {
+        isWindowWide ? null : setPimComponentMaximized(true);
+    }, [])
+
+// Changes the height in divStyle depending on if the screen is mobile sized or not because the height of the nav bar is bigger on mobile 
+    const marginForNavBarHeight = () => {
+        if(mobile) {
+            return 'calc(100% - 78px)'
+        } else return 'calc(100% -40px)'
+    }
+
 
     const divStyle = {
         left: pimComponentMaximized ? 0 : pimPosition.x ,
@@ -53,7 +63,7 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
         width: pimComponentMaximized ? '100%' : '350px',
         minWidth: '350px',
         minHeight: '550px',
-        height: pimComponentMaximized ? 'calc(100% - 40px)' : '50vw',
+        height: pimComponentMaximized ? marginForNavBarHeight() : '50vw',
         zIndex: pimZIndex,
     }
 
