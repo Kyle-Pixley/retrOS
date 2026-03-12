@@ -5,6 +5,7 @@ import PimImage from '../../assets/pim-icon.png';
 import "./Nav.css";
 import StartMenu from '../startMenu/StartMenu.jsx';
 import Pim from '../pim/pim.jsx';
+import isMobile from '../hooks/isMobile.jsx';
 
 function Nav({ calculatorComponent, setCalculatorComponent, startMenu, setStartMenu, navStartButtonRef, navCalculatorButton, setNavCalculatorButton, myComputerComponent, setMyComputerComponent, navMyComputerButton, setNavMyComputerButton, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray, setMyComputerZIndex,
 pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZIndex, friendChatBox, setFriendChatBox, navChatBoxButton, setNavChatBoxButton, chatBoxZIndex, setChatBoxZIndex, openChats, setOpenChats, navBarChats, setNavBarChats, openChat, bringToFront, nextZ
@@ -96,7 +97,7 @@ pimComponent, setPimComponent, navPimButton, setNavPimButton, pimZIndex, setPimZ
                                 <img id='calculator-nav-image'
                                     className='nav-button-images'  
                                     src={CalculatorImage}/>
-                                <p className='nav-button-texts'>Calculator</p>
+                                <p className='nav-button-texts'>{isMobile ? 'Calc' : 'Calculator'}</p>
                         </button> 
                     </div>) : null}
 

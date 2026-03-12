@@ -268,6 +268,7 @@ useEffect(() => {
         setCalculatorZIndex={setCalculatorZIndex}
         componentsZIndexArray={componentsZIndexArray}
         setComponentsZIndexArray={setComponentsZIndexArray}
+        mobile={mobile}
         /> }
 
         {myComputerComponent && <MyComputer 

@@ -3,7 +3,7 @@ import CalculatorLogic from './calculatorLogic/CalculatorLogic';
 import CalculatorImage from '../../assets/calculator.png';
 import './Calculator.css';
 
-function calculator({ setCalculatorComponent, setNavCalculatorButton, calculatorPosition, setCalculatorPosition, calculatorInput, setCalculatorInput, calculatorResult, setCalculatorResult, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray }) {
+function calculator({ setCalculatorComponent, setNavCalculatorButton, calculatorPosition, setCalculatorPosition, calculatorInput, setCalculatorInput, calculatorResult, setCalculatorResult, calculatorZIndex, setCalculatorZIndex, componentsZIndexArray, setComponentsZIndexArray, mobile }) {
 
 
     const [ move, setMove ] = useState(false);
@@ -36,15 +36,31 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton, calculator
     };
 //================================================================
 
+const widthForMobile = () => {
+    if(mobile) {
+        return ('70vw')
+    } else return ('25vw')
+}
+
+const heightForMobile = () => {
+    if(mobile) {
+        return ('fit-content')
+    } else return ('40vh')
+}
+
 //Styles that change things like where the window is on screen and width and hight 
     const divStyle = {
         left: calculatorComponentMaximized ? 0 : calculatorPosition.x ,
         top: calculatorComponentMaximized ? 0 : calculatorPosition.y,
-        width: calculatorComponentMaximized ? '100%' : '25vw',
-        height: calculatorComponentMaximized ? 'calc(100% - 40px)' : '30vw',
+        width: calculatorComponentMaximized ? '100%' : widthForMobile(),
+        height: calculatorComponentMaximized ? 'calc(100% - 40px)' : heightForMobile(),
         zIndex: calculatorZIndex,
     }
 //=================================================================================
+
+    const calculatorParentStyle = {
+        padding: mobile ? '0 0 10px 0' : null,
+    }
 
 //handles closing the window
     const handleXButton = () => {
@@ -81,13 +97,15 @@ function calculator({ setCalculatorComponent, setNavCalculatorButton, calculator
         onMouseUp={stopMove}
         onClick={() => handleCalculatorZIndex()}>
         
-        <div id='calculator-parent'>
-            <div id='top-bar' ref={topBar}>
+        <div id='calculator-parent'
+            style={calculatorParentStyle}>
+            <div id='top-bar' 
+                ref={topBar}>
                 <div id='image-text-parent'>
 
                     <img src={CalculatorImage} id='calculator-top-bar-image'/>
 
-                    <p id='calculator-top-bar-text'>Calculator</p>
+                    <p id='calculator-top-bar-text'>{mobile ? 'Calc' : 'Calculator'}</p>
                 </div>
                 <div id='top-bar-button-parent'>
                     <button className='top-bar-button'

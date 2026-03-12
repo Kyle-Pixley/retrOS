@@ -4,11 +4,9 @@
     border-bottom: 2px solid #808080;
     border-right: 2px solid #808080;
     box-shadow: 3px 3px 1px black;
-    width: 25vw;
     position: fixed;
     top: 59px;
     left: 140px;
-    height: 30vw;
     background-color: #808080;
     display: flex;
     justify-content: center;
@@ -71,4 +69,9 @@
     aspect-ratio: 1 / 1;
     border: 1px solid darkgray;
     border-top: 2px solid darkgray;
+}
+@media (max-width: 800px) {
+    #top-bar {
+        margin-bottom: 10px;
+    }
 }
