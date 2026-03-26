@@ -22,16 +22,6 @@ function Dolphin({ fileIconClicked, setDepthIntoComputer, myComputerIconClicked 
         <img src={MyComputerIcon}></img>
         <p>Program Files</p>
       </section>
-
-      <section 
-        className={`shell-object ${myComputerIconClicked == 'Configsys' ? 'clicked' : null}`}
-        onClick={e => fileIconClicked(e, 'Configsys')}
-        onDoubleClick={() => setDepthIntoComputer( prev => [...prev, 'Configsys'])}
-        >
-        <img src={MyComputerIcon}></img>
-        <p>config.sys</p>
-      </section>
-
     </>
   )
 }

@@ -13,6 +13,9 @@
     overflow-x: hidden;
     overflow-y: scroll;
 }
+#c-icon, #d-icon {
+    width: 68px;
+}
 .shell-object {
     height: auto;
     width: 160px;

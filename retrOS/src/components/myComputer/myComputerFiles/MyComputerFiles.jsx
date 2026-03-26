@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Dolphin from './Dolphin/Dolphin';
 import MyComputerD from './MyComputerD/MyComputerD';
-import MyComputerIcon from '../../../assets/my-computer-icon.png';
 import System32 from './Dolphin/System32/System32';
 import Drivers from './Dolphin/System32/Drivers/Drivers';
 import Kernel32 from './Dolphin/System32/Kernel32/Kernel32';
+
+import CIcon from '../../../assets/Hard_Drive.png';
+import DIcon from '../../../assets/D_Drive.png';
 import './MyComputerFiles.css';
 
 function MyComputerFiles({ myComputerIconClicked, setMyComputerIconClicked, depthIntoComputer, setDepthIntoComputer, setIsDoNotOpen }) {
@@ -21,13 +23,13 @@ function MyComputerFiles({ myComputerIconClicked, setMyComputerIconClicked, dept
           <section className={`shell-object ${myComputerIconClicked =='MyComputer' ? 'clicked' : null}`}
             onClick={e => fileIconClicked(e, 'MyComputer')}
             onDoubleClick={() => setDepthIntoComputer( prev => [...prev, 'MyComputer'])}>
-          <img src={MyComputerIcon}></img>
+          <img id='c-icon' src={CIcon}></img>
           <p>{'(C:)'}</p>
         </section>
         <section className={`shell-object ${myComputerIconClicked == 'D' ? 'clicked' : null}`}
           onClick={e => fileIconClicked(e, 'D')}
           onDoubleClick={() => setDepthIntoComputer( prev => [...prev, 'D'])}>
-            <img src={MyComputerIcon}></img>
+            <img id='d-icon' src={DIcon}></img>
             <p>{'(D:)'}</p>
           </section>
         </>
