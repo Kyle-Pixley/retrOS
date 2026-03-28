@@ -9,8 +9,6 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
     const [ offSet, setOffSet ] = useState({x: 0, y: 0 });
     const topBar = useRef(null);
     const [ pimComponentMaximized, setPimComponentMaximized ] = useState(false);
-    // this is just to true if the window is over a certain amount of pixels otherwise it is false for styling purposes 
-    const [ isWindowWide, setIsWindowWide ] = useState(false);
     const [ clickedOutside, setClickedOutside ] = useState(false);
 
     const mouseStart = e => {
@@ -46,7 +44,7 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
     };
 
     useEffect(() => {
-        isWindowWide ? null : setPimComponentMaximized(true);
+        !mobile ? null : setPimComponentMaximized(true);
     }, [])
 
 // Changes the height in divStyle depending on if the screen is mobile sized or not because the height of the nav bar is bigger on mobile 
@@ -55,6 +53,10 @@ function Pim({ setPimComponent, setNavPimButton, pimPosition, setPimPosition, pi
             return 'calc(100% - 78px)'
         } else return 'calc(100% -40px)'
     }
+
+    useEffect(() => {
+        console.log(pimComponentMaximized)
+    },[])
 
 
     const divStyle = {
